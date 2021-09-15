@@ -20,16 +20,6 @@ public class MovieTest {
         Assertions.assertEquals(new Movie("Planet of the Apes").getName(), movie2.getName());
     }
 
-    @Test
-    public void GetMovieByGenreTest()
-    {
-        FakeDataMovies manager = new FakeDataMovies();
-        Movie movie1 = new Movie(("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
-        var genre = movie1.getGenre();
-        manager.GetMoviesBasedOnGenre(movie1.getGenre().toString());
-
-        Assertions.assertEquals(movie1.getGenre(),genre);
-    }
 
     @Test
     public void NewMovie()
