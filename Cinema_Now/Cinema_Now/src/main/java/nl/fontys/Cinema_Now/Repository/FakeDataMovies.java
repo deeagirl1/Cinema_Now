@@ -15,9 +15,9 @@ public class FakeDataMovies implements IMovieData {
 
     public FakeDataMovies()
     {
-//        Movie avengers = new Movie("Avengers", Genre.ACTION,180, "05/05/2012","Earth's mightiest heroes are shown a difficult task to save New York from Loki.", Format._4DX);
-//
-//        movies.add(avengers);
+        Movie avengers = new Movie("Avengers", Genre.ACTION,180, "05/05/2012","Earth's mightiest heroes are shown a difficult task to save New York from Loki.", Format._4DX);
+
+        movies.add(avengers);
 
     }
 

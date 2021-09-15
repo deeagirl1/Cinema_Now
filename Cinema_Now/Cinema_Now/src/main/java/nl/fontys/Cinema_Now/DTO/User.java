@@ -2,6 +2,9 @@ package nl.fontys.Cinema_Now.DTO;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public  class User {
 
     private static  int id = 100;
@@ -12,7 +15,8 @@ public  class User {
     @Getter private String email;
     @Getter private String address;
     @Getter private int age;
-    @Getter private boolean hasTicket;
+   // @Getter private boolean hasTicket;
+    @Getter private List<Ticket> ticketList;
 
     public User(String firstName, String lastName, String email, String address, int age)
     {
@@ -22,7 +26,7 @@ public  class User {
         this.email = email;
         this.address = address;
         this.age = age;
-        this.hasTicket = false;
+        this.ticketList = new ArrayList<>();
     }
 
 

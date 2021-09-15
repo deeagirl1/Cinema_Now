@@ -1,23 +1,18 @@
 package nl.fontys.Cinema_Now;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import nl.fontys.Cinema_Now.DTO.Enums.Format;
 import nl.fontys.Cinema_Now.DTO.Enums.Genre;
 import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.Logic.MovieManager;
 
 import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Collection;
 
 public class MovieTest {
 
     @Test
     public void AddNewMovieTest()
     {
-        FakeDataMovies manager = new FakeDataMovies();
         Movie movie1 = new Movie("Cruella");
         Movie movie2 = new Movie("Planet of the Apes");
 
