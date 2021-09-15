@@ -47,6 +47,21 @@ import java.util.Locale;
             }
 
         }
+        @GetMapping("{fullName}")
+        public ResponseEntity getComplaintByLastName(@PathVariable(value = "lastName")  String lastName) {
+            List<Complaint> complaints = null;
+            complaints = fakeData.GetComplaintsByLastName(lastName);
+
+            if(complaints != null)
+            {
+                return ResponseEntity.ok().body(complaints);
+            }
+            else
+            {
+                return ResponseEntity.notFound().build();
+            }
+
+    }
         //POST at http://localhost:8080/movies
         @PostMapping()
         public ResponseEntity<Complaint> createComplaint(@RequestBody Complaint complaint) {

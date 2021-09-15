@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class MovieTest {
 
     @Test
-    public void AddNewMovieTest()
+    public void CreateMovieObjectTest()
     {
         Movie movie1 = new Movie("Cruella");
         Movie movie2 = new Movie("Planet of the Apes");

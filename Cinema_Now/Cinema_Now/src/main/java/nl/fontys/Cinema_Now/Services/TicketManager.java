@@ -2,20 +2,19 @@ package nl.fontys.Cinema_Now.Services;
 
 import nl.fontys.Cinema_Now.DTO.Ticket;
 import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Interfaces.Data.ITicketData;
 import nl.fontys.Cinema_Now.Interfaces.Managers.ITicketManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 public class TicketManager implements ITicketManager {
 
-        private Ticket ticket;
-        private User user;
+        private ITicketData data;
 
         @Autowired
-        public TicketManager(Ticket ticket, User user)
+        public TicketManager(ITicketData data)
         {
-            this.ticket = ticket;
-            this.user = user;
+            this.data = data;
         }
 
 

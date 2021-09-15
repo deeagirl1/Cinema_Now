@@ -17,12 +17,14 @@ public  class User {
     @Getter private int age;
    // @Getter private boolean hasTicket;
     @Getter private List<Ticket> ticketList;
+    @Getter private String fullName;
 
     public User(String firstName, String lastName, String email, String address, int age)
     {
         this.ID = this.id ++;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = this.firstName + this.lastName;
         this.email = email;
         this.address = address;
         this.age = age;
