@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.Repository;
 import nl.fontys.Cinema_Now.DTO.User;
 import nl.fontys.Cinema_Now.Interfaces.Data.IUserData;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IUserManager;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.List;
 
 @Repository
 public class FakeDataUsers implements IUserData {
+
     private final List<User> users = new ArrayList<>();
 
 
@@ -49,6 +49,32 @@ public class FakeDataUsers implements IUserData {
         users.add((user));
         return true;
     }
+
+    @Override
+    public boolean editUser(User user) {
+        User old = this.GetUserByID(user.getID());
+        if(old == null)
+        { return false;}
+        old.setFirstName(user.getFirstName());
+        old.setLastName(user.getLastName());
+        old.setEmail(user.getEmail());
+        old.setAddress(user.getAddress());
+
+        return true;
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        User user = GetUserByID(id);
+
+        if(user != null)
+        {
+            users.remove(user);
+        }
+
+        return false;
+    }
+
 }
 
 

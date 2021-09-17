@@ -6,7 +6,9 @@ import nl.fontys.Cinema_Now.DTO.News;
 import java.util.List;
 
 public interface INewsData {
-    List<News> GetAllNewst();
-    News GetNews(int id);
-    boolean CreateNews(Complaint complaint);
+    List<News> getAllNews();
+    News getANewsById(int id);
+    boolean createNewPost(News news);
+    boolean editPost(News news);
+    boolean deletePost(int id);
 }

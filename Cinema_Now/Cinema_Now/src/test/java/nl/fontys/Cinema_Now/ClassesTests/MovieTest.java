@@ -1,10 +1,8 @@
-package nl.fontys.Cinema_Now;
+package nl.fontys.Cinema_Now.ClassesTests;
 
 import nl.fontys.Cinema_Now.DTO.Enums.Format;
 import nl.fontys.Cinema_Now.DTO.Enums.Genre;
 import nl.fontys.Cinema_Now.DTO.Movie;
-
-import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +22,9 @@ public class MovieTest {
     @Test
     public void NewMovie()
     {
-        Movie movie1 = new Movie(("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
+        Movie movie1 = new Movie(1,("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
 
+        Assertions.assertEquals(1,movie1.getID());
         Assertions.assertEquals("Cars",movie1.getName());
         Assertions.assertEquals(Genre.ANIMATION,movie1.getGenre());
         Assertions.assertEquals(180, movie1.getDuration());
@@ -36,10 +35,9 @@ public class MovieTest {
     @Test
     public void MovieInfo()
     {
-        Movie movie1 = new Movie(("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
+        Movie movie1 = new Movie(1,("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
         String info = movie1.toString();
         Assertions.assertEquals("Movie {" +
-//                "id =" + movie1.getID() +
                 "name='" + movie1.getName()  + '\'' +
                 ", genre='" + movie1.getGenre() + '\'' +
                 ", duration='" + movie1.getDuration() + '\'' +

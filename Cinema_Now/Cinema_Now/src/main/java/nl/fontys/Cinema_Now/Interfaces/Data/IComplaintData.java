@@ -10,5 +10,5 @@ public interface IComplaintData {
     List<Complaint> GetAllComplaint();
     Complaint GetComplaint(int id);
     boolean CreateComplaint(Complaint complaint);
-    List<Complaint> GetComplaintsByLastName(String userName);
+    List<Complaint> GetComplaintsByFullName(String fullname);
 }

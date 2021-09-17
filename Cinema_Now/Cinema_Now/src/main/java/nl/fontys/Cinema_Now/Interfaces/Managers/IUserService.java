@@ -1,11 +1,10 @@
-package nl.fontys.Cinema_Now.Interfaces.Data;
+package nl.fontys.Cinema_Now.Interfaces.Managers;
 
-import nl.fontys.Cinema_Now.DTO.News;
 import nl.fontys.Cinema_Now.DTO.User;
 
 import java.util.List;
 
-public interface IUserData {
+public interface IUserService {
     List<User> GetAllUsers();
     User GetUserByID(int id);
     boolean AddUser(User user);

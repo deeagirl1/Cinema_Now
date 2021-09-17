@@ -1,13 +1,10 @@
-package nl.fontys.Cinema_Now.Interfaces.Data;
+package nl.fontys.Cinema_Now.Interfaces.Managers;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
 import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
 
 import java.util.List;
 
-public interface IMovieData {
+public interface IMovieService {
     List<Movie> GetAllMovies();
     Movie GetMovie(int id);
     boolean AddMovie(Movie movie);

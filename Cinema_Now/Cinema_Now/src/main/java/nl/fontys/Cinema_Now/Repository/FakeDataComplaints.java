@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class FakeDataComplaints implements IComplaintData {
+
     private final List<Complaint> complaints = new ArrayList<>();
 
     public FakeDataComplaints() {
-        User user = new User("Andreea", "Sindrilaru", "a.sindrilaru@gmail.ccom", "Boschdijk 42", 20);
-        Complaint complaint1 = new Complaint(user, "Test", "Lorem Ipsum");
-        Complaint complaint2 = new Complaint(user, "Test", "Lorem Ipsum");
+        User user1 = new User("Andreea", "Sindrilaru", "a.sindrilaru@gmail.ccom", "Boschdijk 42", 20);
+
+        Complaint complaint1 = new Complaint(user1, "Test", "Lorem Ipsum");
 
         complaints.add(complaint1);
-        complaints.add(complaint2);
 
     }
 
@@ -33,8 +34,10 @@ public class FakeDataComplaints implements IComplaintData {
 
     @Override
     public Complaint GetComplaint(int id) {
-        for (Complaint complaint : complaints) {
-            if (complaint.getID() == id) {
+        for (Complaint complaint : complaints)
+        {
+            if(complaint.getID() == id)
+            {
                 return complaint;
             }
         }
@@ -51,10 +54,10 @@ public class FakeDataComplaints implements IComplaintData {
     }
 
     @Override
-    public List<Complaint> GetComplaintsByLastName(String userName) {
+    public List<Complaint> GetComplaintsByFullName(String fullName) {
         List<Complaint> temp = new ArrayList<>();
         for (Complaint complaint : complaints) {
-            if (userName.contains(complaint.getSender().getLastName())) {
+            if (fullName.contains(complaint.getSender())) {
                 temp.add(complaint);
             }
         }

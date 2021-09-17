@@ -2,6 +2,7 @@ package nl.fontys.Cinema_Now.Controllers;
 
 import nl.fontys.Cinema_Now.DTO.Complaint;
 import nl.fontys.Cinema_Now.DTO.Movie;
+import nl.fontys.Cinema_Now.DTO.User;
 import nl.fontys.Cinema_Now.Repository.FakeDataComplaints;
 import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import java.util.Locale;
 
         private static final FakeDataComplaints fakeData = new FakeDataComplaints();
 
-        //GET at /movies
+        //GET at /complaints
         @GetMapping
         public ResponseEntity getAllComplaints()
         {
@@ -35,22 +36,22 @@ import java.util.Locale;
             }
 
         }
-        //GET at movies/action e…g
+         //GET at http://localhost:8080/complaint/1000
         @GetMapping("{id}")
-        public ResponseEntity getComplaintByID(@PathVariable(value = "id")  int id) {
-            Complaint complaint=fakeData.GetComplaint(id);
+        public ResponseEntity<Complaint> getComplaintPath(@PathVariable(value = "id") int id) {
+        Complaint complaint = fakeData.GetComplaint(id);
 
-            if (complaint != null) {
-                return ResponseEntity.ok().body(complaint);
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-
+        if(complaint != null) {
+            return ResponseEntity.ok().body(complaint);
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        @GetMapping("{fullName}")
-        public ResponseEntity getComplaintByLastName(@PathVariable(value = "lastName")  String lastName) {
+    }
+
+        @GetMapping("{fullname}")
+        public ResponseEntity getComplaintsByLastName(@PathVariable(value = "fullname")  String fullname) {
             List<Complaint> complaints = null;
-            complaints = fakeData.GetComplaintsByLastName(lastName);
+            complaints = fakeData.GetComplaintsByFullName(fullname);
 
             if(complaints != null)
             {
@@ -62,14 +63,14 @@ import java.util.Locale;
             }
 
     }
-        //POST at http://localhost:8080/movies
+        //POST at http://localhost:8080/complaints
         @PostMapping()
         public ResponseEntity<Complaint> createComplaint(@RequestBody Complaint complaint) {
             if (!fakeData.CreateComplaint(complaint)){
                 String entity =  "Complaint  " + complaint.getID()+ " already exists.";
                 return new ResponseEntity(entity, HttpStatus.CONFLICT);
             } else {
-                String url = "movie" + "/" + complaint.getID(); // url of the created student
+                String url = "complaint" + "/" + complaint.getID(); // url of the created student
                 URI uri = URI.create(url);
                 return new ResponseEntity(uri,HttpStatus.CREATED);
             }

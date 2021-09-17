@@ -8,16 +8,16 @@ import java.util.Date;
 public class Complaint {
 
     private static int id = 1000;
-    @Getter private int ID;
-    @Getter private String Title;
-    @Getter private String Container;
-    @Getter private String Email;
-    @Getter private User Sender;
+    @Getter public int ID;
+    @Getter public String Title;
+    @Getter public String Container;
+    @Getter public String Email;
+    @Getter public String Sender;
 
     public Complaint(User user, String title, String container)
     {
         this.ID = id++;
-        this.Sender = user;
+        this.Sender = user.getLastName() ;
         this.Title = title;
         this.Container = container;;
         this.Email = user.getEmail();
@@ -27,9 +27,12 @@ public class Complaint {
     @Override
     public String toString() {
         return  "Complaint {" +
-                "title='" + Title + '\'' +
+                 "email='" + Email + '\'' +
+
+                ",title='" + Title + '\'' +
+
                 ",description='" + Container + '\'' +
-                ", email='" + Email + '\'' +
+
                 '}';
     }
 }

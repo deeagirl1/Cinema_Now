@@ -1,6 +1,7 @@
 package nl.fontys.Cinema_Now.DTO;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,31 +11,41 @@ public  class User {
     private static  int id = 100;
 
     @Getter private int ID;
-    @Getter private String firstName;
-    @Getter private String lastName;
-    @Getter private String email;
-    @Getter private String address;
-    @Getter private int age;
-   // @Getter private boolean hasTicket;
-    @Getter private List<Ticket> ticketList;
-    @Getter private String fullName;
+    @Getter @Setter public String firstName;
+    @Getter @Setter public String lastName;
+    @Getter @Setter public String email;
+    @Getter @Setter public String address;
+    @Getter @Setter public int age;
+    // @Getter public boolean hasTicket;
+  //  @Getter public List<Ticket> ticketList;
+  //  @Getter public List<Complaint> complaintList;
+
+
 
     public User(String firstName, String lastName, String email, String address, int age)
     {
-        this.ID = this.id ++;
+        this.ID = id++;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.fullName = this.firstName + this.lastName;
         this.email = email;
         this.address = address;
         this.age = age;
-        this.ticketList = new ArrayList<>();
+       // ticketList = new ArrayList<>();
+       // complaintList = new ArrayList<>();
+
+    }
+
+    public User(String firstName, String lastName)
+    {
+        this.ID = id++;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
     }
 
 
-
     @Override
-    public String toString() {
+     public String toString() {
         return  "User {" +
                 "firstName='" + firstName + '\'' +
                 ", lastname='" + lastName + '\'' +
@@ -43,4 +54,5 @@ public  class User {
                 ", age='" + age + '\'' +
                 '}';
     }
+
 }

@@ -1,22 +1,23 @@
 package nl.fontys.Cinema_Now.DTO;
 
 import lombok.Getter;
+import lombok.Setter;
 import nl.fontys.Cinema_Now.DTO.Enums.Format;
 import nl.fontys.Cinema_Now.DTO.Enums.Genre;
 
-public class Movie {
-    private  static int id = 10;
-    @Getter private int ID;
-    @Getter private String name;
-    @Getter private Genre genre;
-    @Getter private int duration;
-    @Getter private String releaseDate;
-    @Getter private String description;
-    @Getter private Format format;
+public class Movie  {
+    //private static int id = 10;
+    @Getter public int ID;
+    @Getter @Setter public String name;
+    @Getter @Setter public Genre genre;
+    @Getter @Setter public int duration;
+    @Getter @Setter public String releaseDate;
+    @Getter @Setter public String description;
+    @Getter @Setter public Format format;
 
-   public Movie(String name, Genre genre, int duration, String releaseDate, String description, Format format)
+   public Movie(int id,String name, Genre genre, int duration, String releaseDate, String description, Format format)
     {
-        this.ID = this.id ++;
+        this.ID = id;
         this.name = name;
         this.genre = genre;
         this.duration = duration;
@@ -24,9 +25,12 @@ public class Movie {
         this.description = description;
         this.format = format;
     }
+    public Movie(int id)
+    {
+        this.ID = id;
+    }
     public Movie(String name)
     {
-        this.id = this.ID++;
         this.name = name;
     }
 
@@ -35,13 +39,12 @@ public class Movie {
     public String toString() {
 
         return  "Movie {" +
-//                "id =" + id +
                 "name='" + name  + '\'' +
                 ", genre='" + genre + '\'' +
                 ", duration='" + duration + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 ", description='" + description + '\'' +
-                 ", format='" + format.toString() + '\'' +
+                ", format='" + format.toString() + '\'' +
                 '}';
     }
 
