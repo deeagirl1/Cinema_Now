@@ -24,12 +24,12 @@ public class FakeDataUsers implements IUserData {
     }
 
     @Override
-    public List<User> GetAllUsers() {
+    public List<User> getAllUsers() {
         return users;
     }
 
     @Override
-    public User GetUserByID(int id) {
+    public User getUserByID(int id) {
         for (User user : users)
         {
             if(user.getID() == id)
@@ -41,8 +41,8 @@ public class FakeDataUsers implements IUserData {
     }
 
     @Override
-    public boolean AddUser(User user) {
-        if(this.GetUserByID(user.getID()) != null)
+    public boolean addUser(User user) {
+        if(this.getUserByID(user.getID()) != null)
         {
             return  false;
         }
@@ -52,7 +52,7 @@ public class FakeDataUsers implements IUserData {
 
     @Override
     public boolean editUser(User user) {
-        User old = this.GetUserByID(user.getID());
+        User old = this.getUserByID(user.getID());
         if(old == null)
         { return false;}
         old.setFirstName(user.getFirstName());
@@ -65,7 +65,7 @@ public class FakeDataUsers implements IUserData {
 
     @Override
     public boolean deleteUser(int id) {
-        User user = GetUserByID(id);
+        User user = getUserByID(id);
 
         if(user != null)
         {

@@ -19,18 +19,18 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> GetAllUsers() {
-        return userData.GetAllUsers();
+    public List<User> getAllUsers() {
+        return userData.getAllUsers();
     }
 
     @Override
-    public User GetUserByID(int id) {
-        return userData.GetUserByID(id);
+    public User getUserByID(int id) {
+        return userData.getUserByID(id);
     }
 
     @Override
-    public boolean AddUser(User user) {
-        return userData.AddUser(user);
+    public boolean addUser(User user) {
+        return userData.addUser(user);
     }
 
     @Override

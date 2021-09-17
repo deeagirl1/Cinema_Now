@@ -19,21 +19,20 @@ public class FakeDataComplaints implements IComplaintData {
     private final List<Complaint> complaints = new ArrayList<>();
 
     public FakeDataComplaints() {
-        User user1 = new User("Andreea", "Sindrilaru", "a.sindrilaru@gmail.ccom", "Boschdijk 42", 20);
-
-        Complaint complaint1 = new Complaint(user1, "Test", "Lorem Ipsum");
+        User user = new User("Andreea", "Sindrilaru","a.sindrilaru@gmail.ccom","Boschdijk 42", 20);
+        Complaint complaint1 = new Complaint(user,"Test", "Lorem Ipsum");
 
         complaints.add(complaint1);
 
     }
 
     @Override
-    public List<Complaint> GetAllComplaint() {
+    public List<Complaint> getAllComplaint() {
         return complaints;
     }
 
     @Override
-    public Complaint GetComplaint(int id) {
+    public Complaint getComplaint(int id) {
         for (Complaint complaint : complaints)
         {
             if(complaint.getID() == id)
@@ -45,8 +44,8 @@ public class FakeDataComplaints implements IComplaintData {
     }
 
     @Override
-    public boolean CreateComplaint(Complaint complaint) {
-        if (this.GetComplaint(complaint.getID()) != null) {
+    public boolean createComplaint(Complaint complaint) {
+        if (this.getComplaint(complaint.getID()) != null) {
             return false;
         }
         complaints.add(complaint);
@@ -54,10 +53,12 @@ public class FakeDataComplaints implements IComplaintData {
     }
 
     @Override
-    public List<Complaint> GetComplaintsByFullName(String fullName) {
-        List<Complaint> temp = new ArrayList<>();
-        for (Complaint complaint : complaints) {
-            if (fullName.contains(complaint.getSender())) {
+    public List<Complaint> getComplaintByUser(User user) {
+        List<Complaint>  temp = new ArrayList<>();
+        for(Complaint complaint : complaints)
+        {
+            if(complaint.getSender() == user)
+            {
                 temp.add(complaint);
             }
         }

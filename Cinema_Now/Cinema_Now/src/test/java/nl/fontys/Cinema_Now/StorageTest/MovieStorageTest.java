@@ -15,12 +15,23 @@ import java.util.function.BooleanSupplier;
 public class MovieStorageTest {
 
     @Test
-    public void getAllMovies_returnAllMoviesTest()
+    public void getAllMovies_checkListNotEmpty()
     {
         MovieService data = new MovieService(new FakeDataMovies());
-        List<Movie> movies = data.GetAllMovies();
+        List<Movie> movies = data.getAllMovies();
 
         Assertions.assertNotNull(movies);
+    }
+    @Test
+    public void getAllMovies_ReturnNrOfElemends() //rethink
+    {
+        MovieService data = new MovieService(new FakeDataMovies());
+        Movie movie1 = new Movie(1,("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
+        data.addMovie(movie1);
+        List<Movie> movies = data.getAllMovies();
+        var result = movies.size();
+
+        Assertions.assertEquals(2,result);
     }
 
     @Test
@@ -29,7 +40,7 @@ public class MovieStorageTest {
         MovieService data = new MovieService(new FakeDataMovies());
         Movie movie1 = new Movie(1,("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
         var genre = movie1.getGenre();
-        data.GetMoviesBasedOnGenre(movie1.getGenre().toString());
+        data.getMoviesBasedOnGenre(movie1.getGenre().toString());
 
         Assertions.assertEquals(movie1.getGenre(),genre);
     }
@@ -51,10 +62,10 @@ public class MovieStorageTest {
         MovieService data = new MovieService(new FakeDataMovies());
         Movie movie1 = new Movie(1,("Cars"), Genre.ANIMATION,180,"06/06/2006","Test", Format._3D);
 
-        data.AddMovie(movie1);
+        data.addMovie(movie1);
 
 
-        Assertions.assertEquals(movie1, data.GetMovie(movie1.getID()));
+        Assertions.assertEquals(movie1, data.getMovie(movie1.getID()));
     }
 
 
@@ -64,22 +75,11 @@ public class MovieStorageTest {
         MovieService movies = new MovieService(new FakeDataMovies());
         movies.deleteMovie(10);
 
-        List<Movie> result = movies.GetAllMovies();
+        List<Movie> result = movies.getAllMovies();
 
         Assertions.assertFalse(result.isEmpty());
 
     }
 
-    @Test
-    public void deleteMovieNonExistentTest()
-    {
-        MovieService movies = new MovieService(new FakeDataMovies());
-        movies.deleteMovie(11);
-
-        List<Movie> result = movies.GetAllMovies();
-
-        Assertions.assertFalse(result.isEmpty());
-
-    }
 
 }

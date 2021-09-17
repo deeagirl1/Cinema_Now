@@ -25,12 +25,12 @@ public class FakeDataMovies implements IMovieData {
     }
 
     @Override
-    public List<Movie> GetAllMovies() {
+    public List<Movie> getAllMovies() {
         return movies;
     }
 
     @Override
-    public Movie GetMovie(int id) {
+    public Movie getMovie(int id) {
         for (Movie movie : movies) {
             if (movie.getID() == id) {
                 return movie;
@@ -40,8 +40,8 @@ public class FakeDataMovies implements IMovieData {
     }
 
     @Override
-    public boolean AddMovie(Movie movie) {
-        if (this.GetMovie(movie.getID()) != null) {
+    public boolean addMovie(Movie movie) {
+        if (this.getMovie(movie.getID()) != null) {
             return false;
         }
         movies.add((movie));
@@ -49,7 +49,7 @@ public class FakeDataMovies implements IMovieData {
     }
 
     @Override
-    public List<Movie> GetMoviesBasedOnGenre(String genre) {
+    public List<Movie> getMoviesBasedOnGenre(String genre) {
         List<Movie> temp = new ArrayList<>();
         for (Movie movie : movies) {
             if (genre.contains(movie.getGenre().toString().toLowerCase(Locale.ROOT))) {
@@ -62,7 +62,7 @@ public class FakeDataMovies implements IMovieData {
     @Override
     public boolean editMovieDetails(Movie movie)
     {
-        Movie old = this.GetMovie(movie.getID());
+        Movie old = this.getMovie(movie.getID());
         if (old == null) {
             return false;
         }
@@ -79,7 +79,7 @@ public class FakeDataMovies implements IMovieData {
 
     @Override
     public boolean deleteMovie(int id) {
-        Movie movie = GetMovie(id);
+        Movie movie = getMovie(id);
 
         if (movie != null) {
             movies.remove(movie);

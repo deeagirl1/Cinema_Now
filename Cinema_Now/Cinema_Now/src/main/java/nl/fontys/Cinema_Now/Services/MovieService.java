@@ -21,23 +21,23 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public List<Movie> GetAllMovies() {
-        return movieData.GetAllMovies();
+    public List<Movie> getAllMovies() {
+        return movieData.getAllMovies();
     }
 
     @Override
-    public Movie GetMovie(int id) {
-        return movieData.GetMovie(id);
+    public Movie getMovie(int id) {
+        return movieData.getMovie(id);
     }
 
     @Override
-    public boolean AddMovie(Movie movie) {
-        return movieData.AddMovie(movie);
+    public boolean addMovie(Movie movie) {
+        return movieData.addMovie(movie);
     }
 
     @Override
-    public List<Movie> GetMoviesBasedOnGenre(String genre) {
-        return movieData.GetMoviesBasedOnGenre(genre);
+    public List<Movie> getMoviesBasedOnGenre(String genre) {
+        return movieData.getMoviesBasedOnGenre(genre);
     }
 
 

@@ -8,18 +8,20 @@ import java.util.Date;
 public class Complaint {
 
     private static int id = 1000;
-    @Getter public int ID;
-    @Getter public String Title;
-    @Getter public String Container;
-    @Getter public String Email;
-    @Getter public String Sender;
+    @Getter private int ID;
+    @Getter private String Title;
+    @Getter private String Container;
+    @Getter private String Name;
+    @Getter private String Email;
+    @Getter private User Sender;
 
     public Complaint(User user, String title, String container)
     {
         this.ID = id++;
-        this.Sender = user.getLastName() ;
         this.Title = title;
-        this.Container = container;;
+        this.Container = container;
+        this.Sender = user;
+        this.Name = user.getFirstName() + user.getLastName();
         this.Email = user.getEmail();
 
     }
@@ -27,12 +29,10 @@ public class Complaint {
     @Override
     public String toString() {
         return  "Complaint {" +
-                 "email='" + Email + '\'' +
-
-                ",title='" + Title + '\'' +
-
+                "title='" + Title + '\'' +
                 ",description='" + Container + '\'' +
-
+                ", name='" + Name + '\'' +
+                ", email='" + Email + '\'' +
                 '}';
     }
 }

@@ -8,10 +8,10 @@ import nl.fontys.Cinema_Now.DTO.News;
 import java.util.List;
 
 public interface IMovieData {
-    List<Movie> GetAllMovies();
-    Movie GetMovie(int id);
-    boolean AddMovie(Movie movie);
-    List<Movie> GetMoviesBasedOnGenre(String genre);
+    List<Movie> getAllMovies();
+    Movie getMovie(int id);
+    boolean addMovie(Movie movie);
+    List<Movie> getMoviesBasedOnGenre(String genre);
     boolean editMovieDetails(Movie movie);
     boolean deleteMovie(int id);
 }

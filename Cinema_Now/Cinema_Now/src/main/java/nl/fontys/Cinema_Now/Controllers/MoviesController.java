@@ -37,7 +37,7 @@ public class MoviesController {
     public ResponseEntity getAllMovies()
     {
         List<Movie> movies = null;
-        movies = service.GetAllMovies();
+        movies = service.getAllMovies();
 
         if(movies != null)
         {
@@ -52,7 +52,7 @@ public class MoviesController {
     //GET at movies/action e…g
     @GetMapping("{genre}")
     public ResponseEntity getAllMoviesBasedOnGenre(@PathVariable(value = "genre")  String genre) {
-        List<Movie> movies = service.GetMoviesBasedOnGenre(genre.toLowerCase(Locale.ROOT));
+        List<Movie> movies = service.getMoviesBasedOnGenre(genre.toLowerCase(Locale.ROOT));
 
         if (movies != null) {
             return ResponseEntity.ok().body(movies);
@@ -64,7 +64,7 @@ public class MoviesController {
     //POST at http://localhost:8080/movies
     @PostMapping()
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        if (!service.AddMovie(movie)){
+        if (!service.addMovie(movie)){
             String entity =  "Movie  " + movie.getName()+ " already exists.";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {

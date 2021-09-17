@@ -7,8 +7,8 @@ import nl.fontys.Cinema_Now.DTO.User;
 import java.util.List;
 
 public interface IComplaintData {
-    List<Complaint> GetAllComplaint();
-    Complaint GetComplaint(int id);
-    boolean CreateComplaint(Complaint complaint);
-    List<Complaint> GetComplaintsByFullName(String fullname);
+    List<Complaint> getAllComplaint();
+    Complaint getComplaint(int id);
+    boolean createComplaint(Complaint complaint);
+    List<Complaint> getComplaintByUser(User user);
 }

@@ -28,7 +28,7 @@ public class UsersController {
     @GetMapping
     public ResponseEntity<List<User>> getUsers()
     {
-        List<User> users = service.GetAllUsers();
+        List<User> users = service.getAllUsers();
 
         if(users != null) {
             return ResponseEntity.ok().body(users);
@@ -40,7 +40,7 @@ public class UsersController {
     @GetMapping("{id}")
     //GET at http://localhost:8080/users/100
     public ResponseEntity<User> getUserPath(@PathVariable(value = "id") int id) {
-        User user = service.GetUserByID(id);
+        User user = service.getUserByID(id);
 
         if(user != null) {
             return ResponseEntity.ok().body(user);
@@ -52,7 +52,7 @@ public class UsersController {
     @PostMapping()
     //POST at http://localhost:XXXX/users/
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        if (!service.AddUser(user)){
+        if (!service.addUser(user)){
             String entity =  "User  " + user.getEmail()+ " already exists.";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
@@ -65,7 +65,7 @@ public class UsersController {
 
     @DeleteMapping()
     //DELETE at http://localhost:XXXX/users/
-    public ResponseEntity<User> deleteUser(@RequestBody int id) {
+    public ResponseEntity<User> deleteUser(@PathVariable("id") int id) {
         service.deleteUser(id);
         return ResponseEntity.ok().build();
 
@@ -75,7 +75,7 @@ public class UsersController {
     //PUT at http://localhost:XXXX/users/102
     public ResponseEntity<User> updateUser(@PathVariable("id") int id, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName)
     {
-        User user = service.GetUserByID(id);
+        User user = service.getUserByID(id);
         if(user == null)
         {
             return new ResponseEntity("Please provide a valid id", HttpStatus.NOT_FOUND);
