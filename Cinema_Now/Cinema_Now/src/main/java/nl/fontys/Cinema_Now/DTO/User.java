@@ -9,16 +9,78 @@ import java.util.List;
 public  class User {
 
     private static  int id = 100;
+    private int ID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String address;
+    private int age;
+    private List<Integer> ticketList = new ArrayList<>();
+    private List<Complaint> complaintList = new ArrayList<>();
 
-    @Getter private int ID;
-    @Getter @Setter public String firstName;
-    @Getter @Setter public String lastName;
-    @Getter @Setter public String email;
-    @Getter @Setter public String address;
-    @Getter @Setter public int age;
-    // @Getter public boolean hasTicket;
-  //  @Getter public List<Ticket> ticketList;
-  //  @Getter public List<Complaint> complaintList;
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public List<Integer> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(List<Integer> ticketList) {
+        this.ticketList = ticketList;
+    }
+
+    public List<Complaint> getComplaintList() {
+        return complaintList;
+    }
+
+    public void setComplaintList(List<Complaint> complaintList) {
+        this.complaintList = complaintList;
+    }
 
 
 
@@ -30,8 +92,6 @@ public  class User {
         this.email = email;
         this.address = address;
         this.age = age;
-       // ticketList = new ArrayList<>();
-       // complaintList = new ArrayList<>();
 
     }
 
@@ -52,6 +112,7 @@ public  class User {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", age='" + age + '\'' +
+                ", ticketList='" + ticketList + '\'' +
                 '}';
     }
 

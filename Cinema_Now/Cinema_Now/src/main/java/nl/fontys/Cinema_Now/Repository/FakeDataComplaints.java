@@ -21,7 +21,6 @@ public class FakeDataComplaints implements IComplaintData {
     public FakeDataComplaints() {
         User user = new User("Andreea", "Sindrilaru","a.sindrilaru@gmail.ccom","Boschdijk 42", 20);
         Complaint complaint1 = new Complaint(user,"Test", "Lorem Ipsum");
-
         complaints.add(complaint1);
 
     }

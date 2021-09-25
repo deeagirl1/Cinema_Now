@@ -46,6 +46,7 @@ public class MovieTest {
                 ", format='" + movie1.getFormat() + '\'' +
                 '}',info);
 
+
     }
 
 

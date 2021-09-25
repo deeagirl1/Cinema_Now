@@ -8,31 +8,82 @@ import java.util.Date;
 public class Complaint {
 
     private static int id = 1000;
-    @Getter private int ID;
-    @Getter private String Title;
-    @Getter private String Container;
-    @Getter private String Name;
-    @Getter private String Email;
-    @Getter private User Sender;
+    private int ID;
+    private String title;
+    private String container;
+    private String name;
+    private String email;
+    private User sender;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public void setContainer(String container) {
+        this.container = container;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+
+
 
     public Complaint(User user, String title, String container)
     {
         this.ID = id++;
-        this.Title = title;
-        this.Container = container;
-        this.Sender = user;
-        this.Name = user.getFirstName() + user.getLastName();
-        this.Email = user.getEmail();
+        this.title = title;
+        this.container = container;
+        this.sender = user;
+        this.name = user.getFirstName() + " " + user.getLastName();
+        this.email = user.getEmail();
 
     }
 
     @Override
     public String toString() {
         return  "Complaint {" +
-                "title='" + Title + '\'' +
-                ",description='" + Container + '\'' +
-                ", name='" + Name + '\'' +
-                ", email='" + Email + '\'' +
+                "title='" + title + '\'' +
+                ",description='" + container + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

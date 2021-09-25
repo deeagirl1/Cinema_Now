@@ -37,6 +37,7 @@ public class UserTest {
                         ", email='" + user1.getEmail() + '\'' +
                         ", address='" + user1.getAddress() + '\'' +
                         ", age='" + user1.getAge() + '\'' +
+                        ", ticketList='" + user1.getTicketList() + '\'' +
                         '}',info);
 
     }

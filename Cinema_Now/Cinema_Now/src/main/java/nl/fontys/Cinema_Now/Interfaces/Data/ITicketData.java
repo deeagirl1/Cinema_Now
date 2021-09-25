@@ -8,5 +8,6 @@ import java.util.List;
 public interface ITicketData {
     List<Ticket> getAllTickets();
     Ticket getTicketByCode(int id);
-    Ticket getTicketByUser(User user);
+    Ticket getTicketByUser(String user);
+    List<Ticket> getTicketsOfUser(String user);
 }
