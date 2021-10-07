@@ -1,6 +1,9 @@
 package nl.fontys.Cinema_Now.Repository;
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.Enums.TicketType;
+import nl.fontys.Cinema_Now.Modules.Movie;
+import nl.fontys.Cinema_Now.Modules.User;
 import nl.fontys.Cinema_Now.Interfaces.Data.IUserData;
+import nl.fontys.Cinema_Now.DTO.TicketDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,13 +14,15 @@ public class FakeDataUsers implements IUserData {
 
     private final List<User> users = new ArrayList<>();
 
-
+    FakeDataTickets tickets = new FakeDataTickets();
     public FakeDataUsers()
     {
 
         User user1 = new User("Anna", "Johnsson","a.johnsson@gmail.com","Pastor Peterstraat",24);
         User user2 = new User("Iris", "Johnsson","i.johnsson@gmail.com","Pastor Peterstraat",20);
-
+        Movie movie = new Movie("Avengers");
+        TicketDTO ticket = new TicketDTO(TicketType.ADULT,6.99,"02/10/2021",user1.getFullName(),movie.getName());
+        user1.getTicketList().add(ticket.getTicketID());
         users.add(user1);
         users.add(user2);
 

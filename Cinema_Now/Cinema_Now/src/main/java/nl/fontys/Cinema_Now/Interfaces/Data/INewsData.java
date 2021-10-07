@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.Interfaces.Data;
 
-import nl.fontys.Cinema_Now.DTO.Complaint;
-import nl.fontys.Cinema_Now.DTO.News;
+import nl.fontys.Cinema_Now.Modules.News;
 
 import java.util.List;
 
@@ -11,4 +10,5 @@ public interface INewsData {
     boolean createNewPost(News news);
     boolean editPost(News news);
     boolean deletePost(int id);
+
 }

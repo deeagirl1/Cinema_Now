@@ -1,8 +1,6 @@
 package nl.fontys.Cinema_Now.Repository;
 
-import nl.fontys.Cinema_Now.DTO.Complaint;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
+import nl.fontys.Cinema_Now.Modules.News;
 import nl.fontys.Cinema_Now.Interfaces.Data.INewsData;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +14,11 @@ public class FakeDataNews implements INewsData {
     public FakeDataNews()
     {
         News container1 = new News("Lorem Ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum","15/09/2021");
+        News container2 = new News("Lorem Ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum","24/09/2021");
+        News container3 = new News("pateus mihai", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum","29/09/2021");
         newsList.add(container1);
+        newsList.add(container2);
+        newsList.add(container3);
     }
 
     @Override

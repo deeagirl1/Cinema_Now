@@ -1,13 +1,7 @@
 package nl.fontys.Cinema_Now.Controllers;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
-import nl.fontys.Cinema_Now.DTO.User;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IMovieService;
-import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
-import nl.fontys.Cinema_Now.Services.MovieService;
+import nl.fontys.Cinema_Now.Modules.Movie;
+import nl.fontys.Cinema_Now.Interfaces.Services.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 
-
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/movies")
 public class MoviesController {

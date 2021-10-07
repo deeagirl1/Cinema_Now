@@ -1,18 +1,16 @@
 package nl.fontys.Cinema_Now.Controllers;
 
-import nl.fontys.Cinema_Now.DTO.Complaint;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IComplaintService;
-import nl.fontys.Cinema_Now.Repository.FakeDataComplaints;
-import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
+import nl.fontys.Cinema_Now.Modules.Complaint;
+import nl.fontys.Cinema_Now.Interfaces.Services.IComplaintService;
+import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Locale;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/complaints")
 public class ComplaintController {
@@ -43,7 +41,7 @@ public class ComplaintController {
     //GET at movies/action e…g
     @GetMapping("{id}")
     public ResponseEntity getComplaintByID(@PathVariable(value = "id")  int id) {
-        Complaint complaint=service.getComplaint(id);
+        ComplaintDTO complaint= service.getComplaint(id);
 
         if (complaint != null) {
             return ResponseEntity.ok().body(complaint);
@@ -54,7 +52,7 @@ public class ComplaintController {
     }
     //POST at http://localhost:8080/movies
     @PostMapping()
-    public ResponseEntity<Complaint> createComplaint(@RequestBody Complaint complaint) {
+    public ResponseEntity<Complaint> createComplaint(@RequestBody ComplaintDTO complaint) {
         if (!service.createComplaint(complaint)){
             String entity =  "Complaint  " + complaint.getID()+ " already exists.";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);

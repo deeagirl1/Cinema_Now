@@ -1,8 +1,7 @@
 package nl.fontys.Cinema_Now.Repository;
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
+import nl.fontys.Cinema_Now.Modules.Enums.Format;
+import nl.fontys.Cinema_Now.Modules.Enums.Genre;
+import nl.fontys.Cinema_Now.Modules.Movie;
 import nl.fontys.Cinema_Now.Interfaces.Data.IMovieData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

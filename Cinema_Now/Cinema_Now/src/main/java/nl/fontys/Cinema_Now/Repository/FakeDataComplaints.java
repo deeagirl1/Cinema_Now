@@ -1,17 +1,14 @@
 package nl.fontys.Cinema_Now.Repository;
 
-import nl.fontys.Cinema_Now.DTO.Complaint;
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.Complaint;
+import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
+import nl.fontys.Cinema_Now.Modules.User;
 import nl.fontys.Cinema_Now.Interfaces.Data.IComplaintData;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 @Repository
 public class FakeDataComplaints implements IComplaintData {
@@ -20,7 +17,8 @@ public class FakeDataComplaints implements IComplaintData {
 
     public FakeDataComplaints() {
         User user = new User("Andreea", "Sindrilaru","a.sindrilaru@gmail.ccom","Boschdijk 42", 20);
-        Complaint complaint1 = new Complaint(user,"Test", "Lorem Ipsum");
+        Date date = new Date();
+        ComplaintDTO complaint1 = new ComplaintDTO("Vaccine required","Dear Sir/Madam, \n From tomorrow vaccination will be required, can I enter with a PCR test?",date,user.getFullName());
         complaints.add(complaint1);
 
     }
@@ -31,19 +29,19 @@ public class FakeDataComplaints implements IComplaintData {
     }
 
     @Override
-    public Complaint getComplaint(int id) {
+    public ComplaintDTO getComplaint(int id) {
         for (Complaint complaint : complaints)
         {
             if(complaint.getID() == id)
             {
-                return complaint;
+                return (ComplaintDTO) complaint;
             }
         }
         return null;
     }
 
     @Override
-    public boolean createComplaint(Complaint complaint) {
+    public boolean createComplaint(ComplaintDTO complaint) {
         if (this.getComplaint(complaint.getID()) != null) {
             return false;
         }
@@ -52,13 +50,13 @@ public class FakeDataComplaints implements IComplaintData {
     }
 
     @Override
-    public List<Complaint> getComplaintByUser(User user) {
-        List<Complaint>  temp = new ArrayList<>();
+    public List<ComplaintDTO> getComplaintByUser(User user) {
+        List<ComplaintDTO>  temp = new ArrayList<>();
         for(Complaint complaint : complaints)
         {
-            if(complaint.getSender() == user)
+            if(((ComplaintDTO)complaint).getSender().contains(user.getFullName()))
             {
-                temp.add(complaint);
+                temp.add((ComplaintDTO) complaint);
             }
         }
         return temp;

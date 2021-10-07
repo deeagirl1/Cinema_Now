@@ -1,15 +1,13 @@
 package nl.fontys.Cinema_Now.Services;
 
-import nl.fontys.Cinema_Now.DTO.Enums.TicketType;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.Ticket;
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.Ticket;
 import nl.fontys.Cinema_Now.Interfaces.Data.ITicketData;
-import nl.fontys.Cinema_Now.Interfaces.Managers.ITicketService;
+import nl.fontys.Cinema_Now.Interfaces.Services.ITicketService;
+import nl.fontys.Cinema_Now.DTO.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
 
 @Service
 public class TicketService implements ITicketService {
@@ -23,12 +21,12 @@ public class TicketService implements ITicketService {
 
 
     @Override
-    public boolean createTicket(Ticket ticket) {
+    public boolean createTicket(TicketDTO ticket) {
 
-            if(ticket.getHolder()!=null && ticket.getMovie() !=null)
+            if(ticket.getMovie() !=null)
             {
+                data.Create(new TicketDTO(ticket.getType(),CalculateTotalTicketPrice(ticket),ticket.getDate(),ticket.getHolder(),ticket.getMovie()));
 
-                ticket.getHolder().getTicketList().add(ticket.getTicketID());
                 return true;
             }
 
@@ -37,6 +35,7 @@ public class TicketService implements ITicketService {
 
     @Override
     public double CalculateTotalTicketPrice(Ticket ticket) {
+       List<Ticket> tickets = data.getAllTickets();
         switch(ticket.getType()) {
             case ADULT:
                 ticket.setPrice(6.99);
@@ -50,7 +49,7 @@ public class TicketService implements ITicketService {
                 break;
         }
 
-        double total = ticket.getPrice() * ticket.getNrSeats().length;
+        double total = ticket.getPrice();
 
         return total;
     }
@@ -71,15 +70,15 @@ public class TicketService implements ITicketService {
         return data.getTicketByCode(id);
     }
 
-    @Override
-    public Ticket getTicketByUser(String user) {
-        return data.getTicketByUser(user);
-    }
-
-    @Override
-    public List<Ticket> getTicketsOfUser(String user) {
-       return data.getTicketsOfUser(user);
-    }
+//    @Override
+//    public Ticket getTicketByUser(String user) {
+//        return data.getTicketByUser(user);
+//    }
+//
+//    @Override
+//    public List<Ticket> getTicketsOfUser(String user) {
+//       return data.getTicketsOfUser(user);
+//    }
 
 
 

@@ -1,11 +1,8 @@
 package nl.fontys.Cinema_Now.Controllers;
 
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
-import nl.fontys.Cinema_Now.DTO.Ticket;
-import nl.fontys.Cinema_Now.DTO.User;
-import nl.fontys.Cinema_Now.Interfaces.Managers.ITicketService;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IUserService;
+import nl.fontys.Cinema_Now.Modules.Ticket;
+import nl.fontys.Cinema_Now.Interfaces.Services.ITicketService;
+import nl.fontys.Cinema_Now.DTO.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
@@ -28,24 +26,24 @@ public class TicketController {
 
 
 
-    @GetMapping("{lastName}")
-    public ResponseEntity geTicketsByUser(@PathVariable(value = "lastName") String lastName)
-    {
-        List<Ticket> ticketList = null;
-
-        ticketList = service.getTicketsOfUser((lastName));
-
-        if(ticketList != null)
-        {
-            return ResponseEntity.ok().body(ticketList);
-        }
-        else
-        {
-            return ResponseEntity.notFound().build();
-        }
-
-    }
-    @GetMapping
+//    @GetMapping("{lastName}")
+//    public ResponseEntity geTicketsByUser(@PathVariable(value = "lastName") String lastName)
+//    {
+//        List<Ticket> ticketList = null;
+//
+//        ticketList = service.getTicketsOfUser((lastName));
+//
+//        if(ticketList != null)
+//        {
+//            return ResponseEntity.ok().body(ticketList);
+//        }
+//        else
+//        {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//    }
+    @GetMapping()
     public ResponseEntity getAllTickets()
     {
         List<Ticket> ticketList = null;
@@ -64,12 +62,13 @@ public class TicketController {
     }
 
     @PostMapping()
-    public ResponseEntity<Ticket> createTicket(@RequestBody Ticket ticket) {
+    //Method for buying tickets
+    public ResponseEntity<TicketDTO> createTicket(@RequestBody TicketDTO ticket) {
         if (!service.createTicket(ticket)){
             String entity =  "Ticket  " + ticket.getTicketID()+ " already exists.";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
-            String url = "ticket" + "/" + ticket.getHolder(); // url of the created student
+            String url = "ticket" + "/" + ticket.getTicketID(); // url of the created ticket
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }

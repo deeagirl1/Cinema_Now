@@ -1,10 +1,10 @@
 package nl.fontys.Cinema_Now.Services;
 
-import nl.fontys.Cinema_Now.DTO.Complaint;
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.Complaint;
+import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
+import nl.fontys.Cinema_Now.Modules.User;
 import nl.fontys.Cinema_Now.Interfaces.Data.IComplaintData;
-import nl.fontys.Cinema_Now.Interfaces.Data.IMovieData;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IComplaintService;
+import nl.fontys.Cinema_Now.Interfaces.Services.IComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,17 +26,18 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public Complaint getComplaint(int id) {
+    public ComplaintDTO getComplaint(int id) {
         return complaintData.getComplaint(id);
     }
 
+
     @Override
-    public boolean createComplaint(Complaint complaint) {
+    public boolean createComplaint(ComplaintDTO complaint) {
         return complaintData.createComplaint(complaint);
     }
 
     @Override
-    public List<Complaint> getComplaintByUser(User user) {
+    public List<ComplaintDTO> getComplaintByUser(User user) {
         return complaintData.getComplaintByUser(user);
     }
 }

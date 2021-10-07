@@ -1,16 +1,14 @@
 package nl.fontys.Cinema_Now.StorageTest;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
+import nl.fontys.Cinema_Now.Modules.Enums.Format;
+import nl.fontys.Cinema_Now.Modules.Enums.Genre;
+import nl.fontys.Cinema_Now.Modules.Movie;
 import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
 import nl.fontys.Cinema_Now.Services.MovieService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 public class MovieStorageTest {
 

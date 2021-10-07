@@ -1,8 +1,8 @@
 package nl.fontys.Cinema_Now.Services;
 
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.User;
 import nl.fontys.Cinema_Now.Interfaces.Data.IUserData;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IUserService;
+import nl.fontys.Cinema_Now.Interfaces.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,7 @@ import java.util.List;
 
 @Service
 public class UserService implements IUserService {
-     IUserData userData;
-
+    private IUserData userData;
     @Autowired
     public UserService(IUserData userData)
     {

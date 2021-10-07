@@ -1,9 +1,6 @@
 package nl.fontys.Cinema_Now.Controllers;
-import nl.fontys.Cinema_Now.DTO.News;
-import nl.fontys.Cinema_Now.DTO.User;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IMovieService;
-import nl.fontys.Cinema_Now.Interfaces.Managers.IUserService;
-import nl.fontys.Cinema_Now.Repository.FakeDataUsers;
+import nl.fontys.Cinema_Now.Modules.User;
+import nl.fontys.Cinema_Now.Interfaces.Services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class UsersController {
     private IUserService service;
@@ -49,8 +46,8 @@ public class UsersController {
         }
     }
 
-    @PostMapping()
-    //POST at http://localhost:XXXX/users/
+    @PostMapping("/sign-up")
+    //POST at http://localhost:XXXX/users/sign-up
     public ResponseEntity<User> createUser(@RequestBody User user) {
         if (!service.addUser(user)){
             String entity =  "User  " + user.getEmail()+ " already exists.";

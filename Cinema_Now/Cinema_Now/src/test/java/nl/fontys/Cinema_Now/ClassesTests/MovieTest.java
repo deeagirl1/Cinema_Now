@@ -1,8 +1,8 @@
 package nl.fontys.Cinema_Now.ClassesTests;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
+import nl.fontys.Cinema_Now.Modules.Enums.Format;
+import nl.fontys.Cinema_Now.Modules.Enums.Genre;
+import nl.fontys.Cinema_Now.Modules.Movie;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -43,10 +43,8 @@ public class MovieTest {
                 ", duration='" + movie1.getDuration() + '\'' +
                 ", releaseDate='" + movie1.getReleaseDate() + '\'' +
                 ", description='" + movie1.getDescription() + '\'' +
-                ", format='" + movie1.getFormat() + '\'' +
+                ", format='" + movie1.getFormat().toString().replace('_',' ')+ '\'' +
                 '}',info);
-
-
     }
 
 

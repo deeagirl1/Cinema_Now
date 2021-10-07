@@ -1,12 +1,7 @@
 package nl.fontys.Cinema_Now.StorageTest;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.User;
-import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
+import nl.fontys.Cinema_Now.Modules.User;
 import nl.fontys.Cinema_Now.Repository.FakeDataUsers;
-import nl.fontys.Cinema_Now.Services.MovieService;
 import nl.fontys.Cinema_Now.Services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -47,12 +42,13 @@ public class UserStorageTest {
 
         Assertions.assertEquals(user1.getID(),id);
     }
-//    @Test
-//    public void editUserTest()
-//    {
-//        UserService data = new UserService(new FakeDataUsers());
-//        User user1 = new User("Anna", "Johnsson","a.johnsson@gmail.com","Pastor Peterstraat",24);
-//        data.editUser(user1);
-//
-//    }
+    @Test
+    public void editUserTest()
+    {
+        UserService data = new UserService(new FakeDataUsers());
+        User user1 = new User("Anna", "Johnsson","a.johnsson@gmail.com","Pastor Peterstraat",24);
+        data.editUser(user1);
+
+
+    }
 }

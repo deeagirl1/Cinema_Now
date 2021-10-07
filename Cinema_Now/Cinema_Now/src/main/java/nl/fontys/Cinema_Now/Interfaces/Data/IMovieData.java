@@ -1,9 +1,6 @@
 package nl.fontys.Cinema_Now.Interfaces.Data;
 
-import nl.fontys.Cinema_Now.DTO.Enums.Format;
-import nl.fontys.Cinema_Now.DTO.Enums.Genre;
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
+import nl.fontys.Cinema_Now.Modules.Movie;
 
 import java.util.List;
 

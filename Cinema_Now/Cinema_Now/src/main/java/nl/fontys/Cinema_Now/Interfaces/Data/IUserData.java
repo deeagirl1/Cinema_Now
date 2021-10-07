@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.Interfaces.Data;
 
-import nl.fontys.Cinema_Now.DTO.News;
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.User;
 
 import java.util.List;
 

@@ -1,30 +1,35 @@
 package nl.fontys.Cinema_Now.Controllers;
 
-import nl.fontys.Cinema_Now.DTO.Movie;
-import nl.fontys.Cinema_Now.DTO.News;
-import nl.fontys.Cinema_Now.DTO.User;
-import nl.fontys.Cinema_Now.Repository.FakeDataMovies;
-import nl.fontys.Cinema_Now.Repository.FakeDataNews;
+import nl.fontys.Cinema_Now.Modules.Movie;
+import nl.fontys.Cinema_Now.Modules.News;
+import nl.fontys.Cinema_Now.Interfaces.Services.INewsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Locale;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/news")
 public class NewsController {
 
-    private static final FakeDataNews fakeData = new FakeDataNews();
+    private INewsService service;
+
+    @Autowired
+    public NewsController(INewsService service)
+    {
+        this.service=service;
+    }
 
     //GET at /news
     @GetMapping
     public ResponseEntity getAllNews()
     {
         List<News> newsList = null;
-        newsList = fakeData.getAllNews();
+        newsList = service.getAllNews();
 
         if(newsList != null)
         {
@@ -39,7 +44,7 @@ public class NewsController {
     //GET at news/1 e…g
     @GetMapping("{id}")
     public ResponseEntity getNewsByID(@PathVariable(value = "id")  int id) {
-        News news = fakeData.getANewsById(id);
+        News news = service.getANewsById(id);
 
         if(news != null) {
             return ResponseEntity.ok().body(news);
@@ -51,7 +56,7 @@ public class NewsController {
     //POST at http://localhost:8080/news  //works
     @PostMapping()
     public ResponseEntity<Movie> createNewPost(@RequestBody News news) {
-        if (!fakeData.createNewPost(news)){
+        if (!service.createNewPost(news)){
             String entity =  "New post:  " + news.getTitle()+ " already exists.";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
@@ -63,7 +68,7 @@ public class NewsController {
     //DELETE at http://localhost:XXXX/news/
     @DeleteMapping()
     public ResponseEntity<News> deletePost(@RequestBody int id) {
-        fakeData.deletePost(id);
+        service.deletePost(id);
         return ResponseEntity.ok().build();
 
     }
@@ -71,7 +76,7 @@ public class NewsController {
     @PutMapping()
     public ResponseEntity<News> updatePost(@RequestBody News news)
     {
-        if(fakeData.editPost(news))
+        if(service.editPost(news))
         {
             return ResponseEntity.noContent().build();
         }

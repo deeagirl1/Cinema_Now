@@ -1,17 +1,17 @@
 package nl.fontys.Cinema_Now.ClassesTests;
 
-import nl.fontys.Cinema_Now.DTO.User;
+import nl.fontys.Cinema_Now.Modules.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class UserTest {
     @Test
     public void CreateNewUserObject() {
-        User user1 = new User("Johnny", "Deep");
-        User user2 = new User("Angelina", "Jolie");
+        User user1 = new User("Johnny", "Deep","j.deep@gmail.com");
+        User user2 = new User("Angelina", "Jolie","a.jolie@gmail.com");
 
-        Assertions.assertEquals(new User("Johnny", "Deep").getFirstName(), user1.getFirstName());
-        Assertions.assertEquals(new User("Angelina", "Jolie").getFirstName(), user2.getFirstName());
+        Assertions.assertEquals(new User("Johnny", "Deep","j.deep@gmail.com").getFirstName(), user1.getFirstName());
+        Assertions.assertEquals(new User("Angelina", "Jolie","a.jolie@gmail.com").getFirstName(), user2.getFirstName());
     }
     @Test
     public void NewUser()
@@ -32,13 +32,13 @@ public class UserTest {
         String info = user1.toString();
         Assertions.assertEquals(
                 "User {" +
-                        "firstName='" + user1.getFirstName() + '\'' +
-                        ", lastname='" + user1.getLastName() + '\'' +
+                        "fullName='" + user1.getFullName() + '\'' +
                         ", email='" + user1.getEmail() + '\'' +
                         ", address='" + user1.getAddress() + '\'' +
                         ", age='" + user1.getAge() + '\'' +
                         ", ticketList='" + user1.getTicketList() + '\'' +
                         '}',info);
+
 
     }
 
