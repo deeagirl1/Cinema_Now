@@ -32,7 +32,7 @@ build:
 test:
   stage: test
   script:
-    - cd TransitSpot 
+    - cd Cinema_Now
     - gradle check
   cache:
     key: "$CI_COMMIT_REF_NAME"
