@@ -36,6 +36,7 @@ test {
 
 sonarqube {
 	properties {
+		property("sonar.login", "8e7bbda81d40900640ef9c3e6fc0043bbdb6e182")
 		property "sonar.projectKey", "I453277_individual-track-assignment-andreea-indrilaru_AXxuRLQHd5WkjVOBKICs"
 		property "sonar.qualitygate.wait", true
 	}
