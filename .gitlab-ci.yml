@@ -20,7 +20,7 @@ variables:
 build:
   stage: build
   script: 
-    - cd TransitSpot
+    - cd Cinema_Now
     - gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -51,7 +51,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - cd TransitSpot 
+    - cd Cinema_Now
     - gradle sonarqube
   allow_failure: true
   only:
