@@ -53,7 +53,7 @@ sonarqube-check:
     paths:
       - .sonar/cache
   script:
-    - cd cd Cinema_Now/Cinema_Now
+    - cd Cinema_Now/Cinema_Now
     - gradle sonarqube
   allow_failure: true
   only:
