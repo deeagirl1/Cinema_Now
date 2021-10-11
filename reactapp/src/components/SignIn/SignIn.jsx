@@ -1,33 +1,32 @@
-import React, { Component } from "react";
+import React from 'react';
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 
-export default class SignIn extends Component {
-    render() {
-        return (
-            <form>
-                <h3>Sign In</h3>
+const SignIn = () => {
+    return (
+        <>
+            <Container>
+                <Row className="mt-5">
+                    <Col lg={10} md={6} sm={15} className="p-5 m-auto shadow-sm rounded-lg">
+                        <Form>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control type="email" placeholder="Enter email" />
+                            </Form.Group>
+                            <br/>
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control type="password" placeholder="Password" />
+                            </Form.Group>
+                            <br/>
+                            <Button variant="primary" size="lg" type="submit">
+                                Login
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+        </>
+    );
+};
 
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
-                <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
-                </p>
-            </form>
-        );
-    }
-}
+export default SignIn;

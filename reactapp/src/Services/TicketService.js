@@ -6,10 +6,10 @@ class TicketService{
     getTickets(){
         return axios.get(TICKETS_API_BASE_URL);
     }
-    createUser(ticket){
+    createTicket(ticket){
         return axios.post(TICKETS_API_BASE_URL, ticket);
     }
-    getUserID(ticketID){
+    getTicketByID(ticketID){
         return axios.get(TICKETS_API_BASE_URL + '/' + ticketID);
     }
     
