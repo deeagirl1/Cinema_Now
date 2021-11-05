@@ -1,8 +1,8 @@
-import React from 'react';
-import ComplaintListComponent from '../components/Complaints/ComplaintListComponent';
+import React from "react";
+import PostComplaint from "../components/Complaints/PostComplaint";
 const Complaints = () => {
   return (
-    <><div
+    <div
       style={{
         display: 'flex',
         marginTop: '10px',
@@ -11,12 +11,11 @@ const Complaints = () => {
         height: '10vh'
       }}
     >
-      <h1>Complaints</h1>
-    </div><div className="container">
-
-        <ComplaintListComponent/>
-      </div></>
- 
+      <div className="container">
+        <h1>Send a complaint!</h1>
+        <PostComplaint/>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import FormSignUp from '../components/SignUp/SignUp';
+import Register from '../components/SignIn/FormSignUp'
 const SignUp = () => {
   return (
     <div
@@ -11,7 +11,7 @@ const SignUp = () => {
       height: '5vh'
     }}
     >
-     <FormSignUp/>
+      <Register/>
     </div>
   );
 };

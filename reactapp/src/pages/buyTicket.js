@@ -1,5 +1,5 @@
 import React from 'react';
-import MoviesService from '../Services/MoviesService';
+import {Button} from "react-bootstrap";
 const BuyTicket = () => {
   return (
     <><div
@@ -11,7 +11,7 @@ const BuyTicket = () => {
         height: '10vh'
       }}
     >
-      <h1>BuyTicket</h1>
+    <Button variant="secondary" size="lg" type="submit">BuyTicket</Button>
     </div><div className="container">
 
     

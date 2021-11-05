@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NewsService from "../../Services/NewsService";
+import NewsService from "../Services/NewsService";
 import "./NewsComponent.css";
 function NewsComponent() {
     const [newsItems,setNews] = useState([]);
@@ -27,7 +27,7 @@ function NewsComponent() {
            <br/>
            <div className="date">{news.date}</div>
            </div>
-       )}
+        )}
         </div>
      </div>
     )

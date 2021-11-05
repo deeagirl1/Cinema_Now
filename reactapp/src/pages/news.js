@@ -1,22 +1,22 @@
 import React from 'react';
 import NewsComponent from '../components/News/NewsComponent';
+import Slider from '../components/Slider/Slider';
 const News = () => {
   return (
     <><div
       style={{
-        display: 'flex',
-        marginTop: '10px',
+        marginTop: '0px',
         justifyContent: 'center',
         alignItems: 'top',
-        height: '10vh'
       }}
     >
-      <h1>News</h1>
-  
     </div>
     <div className="container">
-      
+      <Slider/>
+      &nbsp;
+      <h1>News</h1>
       <NewsComponent/>
+
     </div>
     </>  
 

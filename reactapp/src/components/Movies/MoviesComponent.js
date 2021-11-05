@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MoviesService from "../../Services/MoviesService";
-import { Button } from "bootstrap";
+import MoviesService from "../Services/MoviesService";
 import './MoviesComponent.css'
 
 function MoviesComponent() {
