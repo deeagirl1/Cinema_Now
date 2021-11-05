@@ -6,9 +6,9 @@ import lombok.*;
 @NoArgsConstructor
 public class NewsDTO {
 
-        private @Getter @Setter String title;
-        private @Getter @Setter String description;
-        private @Getter @Setter String postedAt;
+        private String title;
+        private String description;
+        private String postedAt;
 }
 
 

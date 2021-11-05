@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.DALInterfaces;
 
 import nl.fontys.Cinema_Now.Model.News;
-
 import java.util.List;
 
 public interface INewsDAL {

@@ -41,11 +41,10 @@ public class TicketService implements ITicketService {
             if(user != null && movie != null)
             {
                 Ticket entity = converter.dtoToEntity(ticket);
-                user.getTicketList().add(entity.getDate());
                 entity.setMovie(movie);
                 entity.setHolder(user);
                 data.create(entity);
-
+                user.getTicketList().add(entity.getId());
                 return true;
             }
             else

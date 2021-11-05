@@ -7,7 +7,6 @@ import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 @Service

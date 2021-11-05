@@ -2,7 +2,6 @@ package nl.fontys.Cinema_Now.ServiceInterface;
 
 import nl.fontys.Cinema_Now.DTO.NewsDTO;
 import nl.fontys.Cinema_Now.Model.News;
-
 import java.util.List;
 
 public interface INewsService {

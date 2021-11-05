@@ -1,11 +1,10 @@
 package nl.fontys.Cinema_Now.Service;
 
-import nl.fontys.Cinema_Now.Controller.NewsController;
+
 import nl.fontys.Cinema_Now.Converter.NewsConverter;
 import nl.fontys.Cinema_Now.DTO.NewsDTO;
 import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.DALInterfaces.INewsDAL;
-import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.ServiceInterface.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

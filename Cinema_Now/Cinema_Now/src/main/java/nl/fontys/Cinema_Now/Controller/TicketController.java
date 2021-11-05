@@ -1,6 +1,5 @@
 package nl.fontys.Cinema_Now.Controller;
 
-import nl.fontys.Cinema_Now.Converter.TicketConverter;
 import nl.fontys.Cinema_Now.Model.Ticket;
 import nl.fontys.Cinema_Now.ServiceInterface.ITicketService;
 import nl.fontys.Cinema_Now.DTO.TicketDTO;
@@ -27,23 +26,6 @@ public class TicketController {
         this.service=service;
     }
 
-//        @GetMapping("{userID}")
-//    public ResponseEntity getTicketsByUser(@PathVariable(value = "lastName") Long userID)
-//    {
-//        List<Ticket> ticketList = null;
-//
-//        ticketList = service.getTicketsOfUser((userID));
-//
-//        if(ticketList != null)
-//        {
-//            return ResponseEntity.ok().body(ticketList);
-//        }
-//        else
-//        {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//    }
     @GetMapping()
     public ResponseEntity<List<TicketDTO>>getAllTickets()
     {

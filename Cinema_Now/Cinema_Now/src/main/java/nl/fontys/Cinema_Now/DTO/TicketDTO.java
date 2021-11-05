@@ -15,10 +15,10 @@ import java.util.UUID;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class TicketDTO{
 
-    private @Getter @Setter String holder_id;
-    private @Getter @Setter String movie_id;
-    private @Getter @Setter String date;
-    private @Getter @Setter TicketType type;
-    private @Getter @Setter double price;
+    private String holder_id;
+    private String movie_id;
+    private String date;
+    private TicketType type;
+    private double price;
 
 }

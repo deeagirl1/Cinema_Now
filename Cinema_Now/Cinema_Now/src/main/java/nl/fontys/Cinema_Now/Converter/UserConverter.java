@@ -1,8 +1,6 @@
 package nl.fontys.Cinema_Now.Converter;
 
-import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.DTO.UserDTO;
-import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

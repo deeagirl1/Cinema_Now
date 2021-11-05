@@ -2,11 +2,8 @@ package nl.fontys.Cinema_Now.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.Date;
-import java.util.UUID;
+
 
 @Entity
 @Table(name = "complaint")

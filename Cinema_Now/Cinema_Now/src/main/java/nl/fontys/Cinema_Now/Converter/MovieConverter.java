@@ -1,12 +1,8 @@
 package nl.fontys.Cinema_Now.Converter;
 
-import nl.fontys.Cinema_Now.Calculator.TicketCalculator;
+
 import nl.fontys.Cinema_Now.DTO.MovieDTO;
-import nl.fontys.Cinema_Now.DTO.TicketDTO;
-import nl.fontys.Cinema_Now.Model.Enums.Format;
-import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import nl.fontys.Cinema_Now.Model.Movie;
-import nl.fontys.Cinema_Now.Model.Ticket;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public class ComplaintDALJPA implements IComplaintDAL {
+
     @Autowired
     IComplaintRepository repo;
 
@@ -29,8 +30,11 @@ public class ComplaintDALJPA implements IComplaintDAL {
 
     @Override
     public boolean createComplaint(Complaint complaint) {
-        repo.save(complaint);
-        return true;
+        if (complaint != null) {
+            repo.save(complaint);
+            return true;
+        }
+        return false;
     }
 
     @Override

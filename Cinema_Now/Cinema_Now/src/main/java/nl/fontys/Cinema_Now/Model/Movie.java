@@ -3,11 +3,8 @@ package nl.fontys.Cinema_Now.Model;
 import nl.fontys.Cinema_Now.Model.Enums.Format;
 import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.UUID;
+
 
 @Entity
 @Table(name ="movie")

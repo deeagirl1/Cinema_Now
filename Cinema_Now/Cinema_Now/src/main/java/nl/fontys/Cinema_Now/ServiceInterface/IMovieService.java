@@ -2,9 +2,8 @@ package nl.fontys.Cinema_Now.ServiceInterface;
 
 import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.Model.Movie;
-
 import java.util.List;
-import java.util.Optional;
+
 
 public interface IMovieService {
     List<Movie> getAllMovies();

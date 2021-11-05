@@ -1,12 +1,10 @@
 package nl.fontys.Cinema_Now.Converter;
 
-import nl.fontys.Cinema_Now.DTO.MovieDTO;
+
 import nl.fontys.Cinema_Now.DTO.NewsDTO;
-import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.News;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

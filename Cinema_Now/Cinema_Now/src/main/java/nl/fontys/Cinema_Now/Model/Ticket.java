@@ -2,9 +2,7 @@ package nl.fontys.Cinema_Now.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.fontys.Cinema_Now.Model.Enums.TicketType;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 @Table(name="tickets")

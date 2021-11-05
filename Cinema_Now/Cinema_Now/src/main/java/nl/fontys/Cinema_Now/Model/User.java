@@ -1,13 +1,7 @@
 package nl.fontys.Cinema_Now.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
-import lombok.Data;
-import nl.fontys.Cinema_Now.DTO.TicketDTO;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.*;
 

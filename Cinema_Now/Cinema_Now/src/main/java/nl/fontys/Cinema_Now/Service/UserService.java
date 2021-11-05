@@ -2,15 +2,12 @@ package nl.fontys.Cinema_Now.Service;
 
 import nl.fontys.Cinema_Now.Converter.UserConverter;
 import nl.fontys.Cinema_Now.DTO.UserDTO;
-import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.DALInterfaces.IUserDAL;
 import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserService implements IUserService {

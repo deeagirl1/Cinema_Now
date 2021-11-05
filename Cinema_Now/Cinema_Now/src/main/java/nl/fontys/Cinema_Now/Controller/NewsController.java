@@ -1,15 +1,12 @@
 package nl.fontys.Cinema_Now.Controller;
 
 import nl.fontys.Cinema_Now.DTO.NewsDTO;
-import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.ServiceInterface.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")

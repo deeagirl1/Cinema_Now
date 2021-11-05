@@ -10,8 +10,8 @@ import javax.persistence.Column;
 @AllArgsConstructor
 public class UserDTO {
 
-    private @Getter @Setter String email;
-    private @Getter @Setter String firstName;
-    private @Getter @Setter String lastName;
+    private String email;
+    private String firstName;
+    private String lastName;
 
 }

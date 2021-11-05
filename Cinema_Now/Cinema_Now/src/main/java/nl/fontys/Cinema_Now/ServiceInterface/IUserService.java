@@ -2,9 +2,8 @@ package nl.fontys.Cinema_Now.ServiceInterface;
 
 import nl.fontys.Cinema_Now.DTO.UserDTO;
 import nl.fontys.Cinema_Now.Model.User;
-
 import java.util.List;
-import java.util.UUID;
+
 
 public interface IUserService {
     List<User> getAllUsers();
