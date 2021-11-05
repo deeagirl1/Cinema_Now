@@ -24,6 +24,7 @@ public  class User {
 
     @Column(name = "firstName")
     private String firstName;
+
     @Column(name = "lastName")
     private String lastName;
 
@@ -31,8 +32,10 @@ public  class User {
 
     @Column(name = "email")
     private String email;
+
     @Column(name = "address")
     private String address;
+
     @Column(name = "age")
     private int age;
 

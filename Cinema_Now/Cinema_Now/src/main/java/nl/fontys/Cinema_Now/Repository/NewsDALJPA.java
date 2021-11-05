@@ -37,7 +37,7 @@ public class NewsDALJPA implements INewsDAL {
     @Override
     public boolean editPost(News news) {
         News updatedNewsArticle= this.getANewsById(news.getID());
-        updatedNewsArticle.setDate(news.getDate());
+        updatedNewsArticle.setPostedAt(news.getPostedAt());
         updatedNewsArticle.setDescription(news.getDescription());
         updatedNewsArticle.setTitle(news.getTitle());
         repo.save(updatedNewsArticle);

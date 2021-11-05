@@ -2,11 +2,9 @@ package nl.fontys.Cinema_Now.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.fontys.Cinema_Now.Model.Enums.TicketType;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Optional;
-import java.util.UUID;
 
 @Entity
 @Table(name="tickets")
@@ -17,6 +15,7 @@ public  class Ticket {
     @GenericGenerator(name ="uuid2", strategy = "uuid2")
     @Column(length = 36)
     private String id;
+
     @Column(name = "type")
     private TicketType type;
 

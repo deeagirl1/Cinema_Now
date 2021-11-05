@@ -1,5 +1,6 @@
 package nl.fontys.Cinema_Now.Controller;
 
+import nl.fontys.Cinema_Now.DTO.NewsDTO;
 import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.ServiceInterface.INewsService;
@@ -53,28 +54,29 @@ public class NewsController {
         }
 
     }
+
     //POST at http://localhost:8080/news
     @PostMapping()
-    public ResponseEntity<Movie> createNewPost(@RequestBody News news) {
-        if (!service.createNewPost(news)){
-            String entity =  "New post:  " + news.getTitle()+ " already exists.";
-            return new ResponseEntity(entity, HttpStatus.CONFLICT);
+    public ResponseEntity createNewPost(@RequestBody NewsDTO news) {
+        if (news == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            String url = "news" + "/" + news.getID(); // url of the created container
-            URI uri = URI.create(url);
-            return new ResponseEntity(uri,HttpStatus.CREATED);
+            service.createNewPost(news);
+            return ResponseEntity.ok().build();
         }
+
     }
     //DELETE at http://localhost:XXXX/news/
-    @DeleteMapping()
-    public ResponseEntity<News> deletePost(@RequestBody String id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity deletePost(@PathVariable("id") String id) {
         service.deletePost(id);
         return ResponseEntity.ok().build();
 
     }
+
     //PUT at http://localhost:XXXX/news/
     @PutMapping()
-    public ResponseEntity<News> updatePost(@RequestBody News news)
+    public ResponseEntity updatePost(@RequestBody NewsDTO news)
     {
         if(service.editPost(news))
         {

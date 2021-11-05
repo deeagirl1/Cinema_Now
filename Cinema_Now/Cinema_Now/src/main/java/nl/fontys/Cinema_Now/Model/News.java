@@ -15,10 +15,12 @@ public class News {
 
     @Column(name = "title")
     private String title;
+
     @Column(name = "description")
     private String description;
-    @Column(name = "sentDate")
-    private String date;
+
+    @Column(name = "postedAt")
+    private String postedAt;
 
     public News() {
 
@@ -48,12 +50,12 @@ public class News {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
+    public String getPostedAt() {
+        return postedAt;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setPostedAt(String date) {
+        this.postedAt = date;
     }
 
     public News(String title, String description, String date)
@@ -61,7 +63,7 @@ public class News {
 
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.postedAt = date;
     }
 
     public News(String id, String title, String description, String date)
@@ -69,7 +71,7 @@ public class News {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.postedAt = date;
     }
 
     @Override
@@ -77,7 +79,7 @@ public class News {
         return  "News {" +
                 " title='" + title + '\'' +
                 ",description='" + description + '\'' +
-                ", date='" + date + '\'' +
+                ", date='" + postedAt + '\'' +
                 '}';
     }
 }

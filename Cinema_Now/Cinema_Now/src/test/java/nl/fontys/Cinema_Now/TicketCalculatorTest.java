@@ -19,7 +19,7 @@ public class TicketCalculatorTest {
         Ticket ticket = new Ticket(TicketType.ADULT,0,"05/11/2021");
 
         calculator = new TicketCalculator(ticket);
-        Assertions.assertEquals(calculator.CalculateTotalTicketPrice(),6.99);
+        Assertions.assertEquals(calculator.calculateTotalTicketPrice(),6.99);
     }
 
     @Test

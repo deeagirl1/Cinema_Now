@@ -28,7 +28,7 @@ public class ComplaintController {
     }
     //GET at /movies
     @GetMapping
-    public ResponseEntity<List<ComplaintDTO>> getAllComplaints()
+    public ResponseEntity getAllComplaints()
     {
         List<Complaint> complaints =this.converter.dtoToEntity(service.getAllComplaint());
 
@@ -44,7 +44,7 @@ public class ComplaintController {
     }
     //GET at movies/action e…g
     @GetMapping("{id}")
-    public ResponseEntity<ComplaintDTO> getComplaintByID(@PathVariable(value = "id") String id) {
+    public ResponseEntity getComplaintByID(@PathVariable(value = "id") String id) {
         Complaint complaint= this.converter.dtoToEntity(service.getComplaint(id));
 
         if (complaint != null) {

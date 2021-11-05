@@ -1,4 +1,5 @@
 package nl.fontys.Cinema_Now.Controller;
+import nl.fontys.Cinema_Now.DTO.UserDTO;
 import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,20 +48,15 @@ public class UsersController {
         }
     }
 
-
     @PostMapping("/sign-up")
     //POST at http://localhost:XXXX/users/sign-up
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-//        user.setID(UUID.randomUUID());
-        if (!service.addUser(user)){
-            String entity =  "User  " + user.getEmail()+ " already exists.";
-            return new ResponseEntity(entity, HttpStatus.CONFLICT);
+    public ResponseEntity<User> createUser(@RequestBody UserDTO user) {
+        if (user == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         } else {
-            String url = "user" + "/" + user.getID(); // url of the created user
-            URI uri = URI.create(url);
-            return new ResponseEntity(uri,HttpStatus.CREATED);
+            service.addUser(user);
+            return ResponseEntity.ok().build();
         }
-
     }
 
     @DeleteMapping("{id}")

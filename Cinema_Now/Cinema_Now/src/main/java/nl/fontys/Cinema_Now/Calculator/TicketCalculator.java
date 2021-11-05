@@ -1,20 +1,17 @@
 package nl.fontys.Cinema_Now.Calculator;
 
 
-import nl.fontys.Cinema_Now.Handlers.InvalidFieldException;
 import nl.fontys.Cinema_Now.Model.Ticket;
 
 
 public class TicketCalculator {
     private Ticket ticket;
-    private InvalidFieldException exception;
 
     public TicketCalculator(Ticket ticket) {
         this.ticket = ticket;
     }
 
-    public double CalculateTotalTicketPrice()  {
-        if(ticket.getType() != null) {
+    public double calculateTotalTicketPrice()  {
             switch (ticket.getType()) {
                 case ADULT:
                     ticket.setPrice(6.99);
@@ -27,11 +24,8 @@ public class TicketCalculator {
                     ticket.setPrice(4.99);
                     break;
             }
-        }
-        else
-        {
-           exception = new InvalidFieldException("Please provide a ticket type");
-        }
+
+
 
         return ticket.getPrice();
     }

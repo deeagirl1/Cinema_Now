@@ -1,6 +1,8 @@
 package nl.fontys.Cinema_Now.Service;
 
+import nl.fontys.Cinema_Now.Converter.MovieConverter;
 import nl.fontys.Cinema_Now.DALInterfaces.IMovieDAL;
+import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,13 @@ import java.util.*;
 public class MovieService implements IMovieService {
 
     private IMovieDAL dal;
+    private MovieConverter converter;
 
     @Autowired
-    public MovieService(IMovieDAL dal) {
+    public MovieService(IMovieDAL dal, MovieConverter converter) {
+
         this.dal = dal;
+        this.converter = converter;
     }
 
     @Override
@@ -29,8 +34,14 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public void addMovie(Movie movie) {
-        dal.addMovie(movie);
+    public boolean addMovie(MovieDTO movie) {
+        if(movie != null)
+        {
+            Movie entity = converter.dtoToEntity(movie);
+            dal.addMovie(entity);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -48,8 +59,8 @@ public class MovieService implements IMovieService {
 
 
     @Override
-    public boolean editMovieDetails(Movie movie) {
-        return dal.editMovie(movie);
+    public boolean editMovieDetails(MovieDTO movie) {
+        return dal.editMovie(converter.dtoToEntity(movie));
 
     }
 

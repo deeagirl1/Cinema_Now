@@ -1,5 +1,6 @@
 package nl.fontys.Cinema_Now.ServiceInterface;
 
+import nl.fontys.Cinema_Now.DTO.UserDTO;
 import nl.fontys.Cinema_Now.Model.User;
 
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.UUID;
 public interface IUserService {
     List<User> getAllUsers();
     User getUserByID(String id);
-    boolean addUser(User user);
-    boolean editUser(User user);
+    boolean addUser(UserDTO user);
+    boolean editUser(UserDTO user);
     boolean deleteUser(String id);
 
 }

@@ -1,6 +1,8 @@
 package nl.fontys.Cinema_Now.ServiceTests;
 
+import nl.fontys.Cinema_Now.Converter.UserConverter;
 import nl.fontys.Cinema_Now.DALInterfaces.IUserDAL;
+import nl.fontys.Cinema_Now.DTO.UserDTO;
 import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.Service.UserService;
 import org.junit.jupiter.api.Assertions;
@@ -43,27 +45,27 @@ public class UserServiceMockTest {
     public void getAllUserTest()
     {
         //arrange
-        UserService service = new UserService(userDAL);
+        UserService service = new UserService(userDAL,new UserConverter());
         //act
         List<User> users = service.getAllUsers();
 
         //assert
-        Assertions.assertEquals(users.get(0).getID(),"1");
-        Assertions.assertEquals(users.get(1).getID(),"2");
-        Assertions.assertEquals(users.get(2).getID(),"3");
+        Assertions.assertEquals("1",users.get(0).getID());
+        Assertions.assertEquals("2",users.get(1).getID());
+        Assertions.assertEquals("3",users.get(2).getID());
     }
     @Test
     public void getUserByID()
     {
         //arrange
-        UserService service = new UserService(userDAL);
+        UserService service = new UserService(userDAL,new UserConverter());
         User user = new User("4","Maria","Zavaranu","m.zavaranu@gmail.com","Hoogstraat 42-E",40);
         //act
         when(userDAL.getUserByID("4")).thenReturn(user);
         User userToBeChecked =service.getUserByID("4");
 
         //assert
-        Assertions.assertEquals(userToBeChecked.getFirstName(),"Maria");
+        Assertions.assertEquals("Maria",userToBeChecked.getFirstName());
     }
 
     @Test
@@ -71,7 +73,7 @@ public class UserServiceMockTest {
     {
 
         //arrange
-        UserService service = new UserService(userDAL);
+        UserService service = new UserService(userDAL,new UserConverter());
         //act
         List<User> users = service.getAllUsers();
         var result = service.deleteUser(users.get(0).getID());
@@ -84,9 +86,9 @@ public class UserServiceMockTest {
     public void addUserTest_returnTrue()
     {
         //arrange
-        UserService service = new UserService(userDAL);
+        UserService service = new UserService(userDAL,new UserConverter());
         //act
-        User user = new User("3","Maria","Zavaranu","m.zavaranu@gmail.com","Hoogstraat 42-E",40);
+        UserDTO user = new UserDTO("deeagirl1@gmail.com","Andreea","Sindrilaru");
         service.addUser(user);
 
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
@@ -95,16 +97,16 @@ public class UserServiceMockTest {
 
         User captureUser = userArgumentCaptor.getValue();
 
-        Assertions.assertEquals(user,captureUser);
+        Assertions.assertEquals(user.getEmail(),captureUser.getEmail());
 
     }
 
     @Test
     public void updateUserTest_returnTrue()
     {
-        UserService service = new UserService(userDAL);
+        UserService service = new UserService(userDAL, new UserConverter());
         //act
-        User user = new User("4","Maria","Zavaranu","m.zavaranu@gmail.com","Hoogstraat 42-E",40);
+        UserDTO user = new UserDTO("deeagirl1@gmail.com","Andreea","Sindrilaru");
         service.addUser(user);
 
         user.setEmail("Test");
@@ -112,11 +114,11 @@ public class UserServiceMockTest {
 
         ArgumentCaptor<User> userArgumentCaptor = ArgumentCaptor.forClass(User.class);
 
-        verify(userDAL).addUser(userArgumentCaptor.capture());
+        verify(userDAL).editUser(userArgumentCaptor.capture());
 
         User captureUser = userArgumentCaptor.getValue();
 
-        Assertions.assertEquals(user,captureUser);
+        Assertions.assertEquals(user.getEmail(),captureUser.getEmail());
 
     }
 

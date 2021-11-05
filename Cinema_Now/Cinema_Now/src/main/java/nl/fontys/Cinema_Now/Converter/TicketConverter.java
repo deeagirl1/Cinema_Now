@@ -19,7 +19,7 @@ public class TicketConverter {
         dto.setHolder_id(ticket.getHolder().getID());
         dto.setDate(ticket.getDate());
         dto.setType(ticket.getType());
-        dto.setPrice(calculator.CalculateTotalTicketPrice());
+        dto.setPrice(calculator.calculateTotalTicketPrice());
 
         return dto;
 
@@ -36,7 +36,7 @@ public class TicketConverter {
 
         entity.setDate(dto.getDate());
         entity.setType(dto.getType());
-        entity.setPrice(calculator.CalculateTotalTicketPrice());
+        entity.setPrice(calculator.calculateTotalTicketPrice());
 
         return entity;
 

@@ -1,6 +1,8 @@
 package nl.fontys.Cinema_Now.ServiceTests;
 
+import nl.fontys.Cinema_Now.Converter.MovieConverter;
 import nl.fontys.Cinema_Now.DALInterfaces.IMovieDAL;
+import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.Model.Enums.Format;
 import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import nl.fontys.Cinema_Now.Model.Movie;
@@ -45,45 +47,45 @@ public class MovieServiceMockTest {
     public void getMoviesBasedOnGenreTest()
     {
         //arrange
-        MovieService service = new MovieService(movieDAL);
+        MovieService service = new MovieService(movieDAL,new MovieConverter());
         //act
         List<Movie> movies = service.getMoviesBasedOnGenre("animation");
         //assert
-        Assertions.assertEquals(movies.get(0).getGenre(),Genre.ANIMATION);
-        Assertions.assertEquals(movies.get(1).getGenre(),Genre.ANIMATION);
+        Assertions.assertEquals(Genre.ANIMATION,movies.get(0).getGenre());
+        Assertions.assertEquals(Genre.ANIMATION,movies.get(1).getGenre());
     }
 
         @Test
         public void getAllMoviesTest()
         {
             //arrange
-            MovieService service = new MovieService(movieDAL);
+            MovieService service = new MovieService(movieDAL,new MovieConverter());
             //act
             List<Movie> movies = service.getAllMovies();
             //assert
-            Assertions.assertEquals(movies.get(0).getName(),"Cars");
+            Assertions.assertEquals("Cars",movies.get(0).getName());
         }
     @Test
     public void getMovieById()
     {
         //arrange
-        MovieService service = new MovieService(movieDAL);
+        MovieService service = new MovieService(movieDAL,new MovieConverter());
         //act
         Movie movie = service.getMovie("1");
         //assert
-        Assertions.assertEquals(movie.getID(),"1");
+        Assertions.assertEquals("1",movie.getID());
     }
 
         @Test
         public void deleteMovieTest()
         {
             //arrange
-            MovieService service = new MovieService(movieDAL);
+            MovieService service = new MovieService(movieDAL,new MovieConverter());
             //act
             List<Movie> movies = service.getAllMovies();
             var result = service.deleteMovie(movies.get(0).getID());
             //assert
-            Assertions.assertEquals(result, true);
+            Assertions.assertTrue(result);
 
         }
 
@@ -91,9 +93,11 @@ public class MovieServiceMockTest {
         public void addMovieTest()
         {
             //arrange
-            MovieService service = new MovieService(movieDAL);
-            Movie movie = new Movie("1","Cars", Genre.ANIMATION, 180, "06/06/2006", "Explore Radiator Spring with Lighting McQueen and Tow Mater.", Format._3D);
+            MovieService service = new MovieService(movieDAL,new MovieConverter());
+            MovieDTO movie = new MovieDTO("Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
+
             service.addMovie(movie);
+
             //when
             ArgumentCaptor<Movie> movieArgumentCaptor = ArgumentCaptor.forClass(Movie.class);
 
@@ -101,7 +105,7 @@ public class MovieServiceMockTest {
 
             Movie captureMovie = movieArgumentCaptor.getValue();
             //assert
-            Assertions.assertEquals(movie,captureMovie);
+            Assertions.assertEquals(movie.getName(),captureMovie.getName());
 
         }
 
@@ -109,16 +113,15 @@ public class MovieServiceMockTest {
     public void updateMovieTest()
     {
         //arrange
-        MovieService service = new MovieService(movieDAL);
-        Movie movie = new Movie("1","Cars", Genre.ANIMATION, 180, "06/06/2006", "Explore Radiator Spring with Lighting McQueen and Tow Mater.", Format._3D);
+        MovieService service = new MovieService(movieDAL,new MovieConverter());
+        MovieDTO movie = new MovieDTO("Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
         service.addMovie(movie);
-
         movie.setDescription("Test");
         service.editMovieDetails(movie);
         //when
         ArgumentCaptor<Movie> movieArgumentCaptor = ArgumentCaptor.forClass(Movie.class);
 
-        verify(movieDAL).addMovie(movieArgumentCaptor.capture());
+        verify(movieDAL).editMovie(movieArgumentCaptor.capture());
 
         Movie captureMovie = movieArgumentCaptor.getValue();
         //assert

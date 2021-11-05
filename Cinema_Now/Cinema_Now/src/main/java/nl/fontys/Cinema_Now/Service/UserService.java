@@ -1,5 +1,8 @@
 package nl.fontys.Cinema_Now.Service;
 
+import nl.fontys.Cinema_Now.Converter.UserConverter;
+import nl.fontys.Cinema_Now.DTO.UserDTO;
+import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.DALInterfaces.IUserDAL;
 import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
@@ -13,10 +16,12 @@ import java.util.UUID;
 public class UserService implements IUserService {
 
     private IUserDAL dal;
+    private UserConverter converter;
     @Autowired
-    public UserService(IUserDAL userData)
+    public UserService(IUserDAL userData, UserConverter converter)
     {
         this.dal = userData;
+        this.converter = converter;
     }
 
     @Override
@@ -30,13 +35,25 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean addUser(User user) {
-        return dal.addUser(user);
+    public boolean addUser(UserDTO user) {
+        if(user != null)
+        {
+            User entity = converter.dtoToEntity(user);
+            dal.addUser(entity);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean editUser(User user) {
-        return dal.editUser(user);
+    public boolean editUser(UserDTO user) {
+        if(user != null)
+        {
+            User entity = converter.dtoToEntity(user);
+            dal.editUser(entity);
+            return true;
+        }
+        return false;
     }
     @Override
     public boolean deleteUser(String id) {

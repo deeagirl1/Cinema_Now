@@ -21,9 +21,4 @@ public class TicketDTO{
     private @Getter @Setter TicketType type;
     private @Getter @Setter double price;
 
-
-
-
-
-
 }

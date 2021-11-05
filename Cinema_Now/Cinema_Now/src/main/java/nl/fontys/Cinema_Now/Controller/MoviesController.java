@@ -1,19 +1,15 @@
 package nl.fontys.Cinema_Now.Controller;
 
+import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.Model.Movie;
-import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -50,7 +46,7 @@ public class MoviesController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable(value = "id")  String id) {
+    public ResponseEntity getMovieById(@PathVariable(value = "id")  String id) {
         Movie movie = service.getMovie(id);
 
         if(movie != null) {
@@ -76,27 +72,24 @@ public class MoviesController {
     }
     //POST at http://localhost:8080/movie
     @PostMapping()
-    public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
-        service.addMovie(movie);
-        var result = service.getMovie(movie.getID());
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(result)
-                .toUri();
-
-        //Send location in response (in the header)
-        return ResponseEntity.created(location).build();
+    public ResponseEntity createMovie(@RequestBody MovieDTO dto) {
+        if (dto == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        } else {
+            service.addMovie(dto);
+            return ResponseEntity.ok().build();
+        }
     }
     @DeleteMapping("{id}")
     //DELETE at http://localhost:XXXX/movie
-    public ResponseEntity<Movie> deleteMovie(@PathVariable("id") String id) {
+    public ResponseEntity deleteMovie(@PathVariable("id") String id) {
         service.deleteMovie(id);
         return ResponseEntity.ok().build();
 
     }
    // PUT at http://localhost:XXXX/movie
     @PutMapping()
-    public ResponseEntity<Movie> updatePost(@RequestBody Movie movie)
+    public ResponseEntity updatePost(@RequestBody MovieDTO movie)
     {
         if(service.editMovieDetails(movie))
         {

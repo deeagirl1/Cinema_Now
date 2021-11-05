@@ -32,8 +32,9 @@ public class MovieDALJPA implements IMovieDAL {
     }
 
     @Override
-    public void addMovie(Movie movie) {
+    public boolean addMovie(Movie movie) {
         repo.save(movie);
+        return  true;
     }
 
     @Override
