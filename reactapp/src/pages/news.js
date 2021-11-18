@@ -1,12 +1,13 @@
 import React from 'react';
-import NewsComponent from '../components/News/NewsComponent';
-import Slider from '../components/Slider/Slider';
+import NewsComponent from '../components//user..view/News/NewsComponent';
+import Slider from '../components/user..view/Slider/Slider';
+
 const News = () => {
   return (
     <><div
       style={{
         marginTop: '0px',
-        justifyContent: 'center',
+       
         alignItems: 'top',
       }}
     >

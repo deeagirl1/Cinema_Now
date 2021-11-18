@@ -1,6 +1,6 @@
 package nl.fontys.Cinema_Now.DTO;
-
 import lombok.*;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

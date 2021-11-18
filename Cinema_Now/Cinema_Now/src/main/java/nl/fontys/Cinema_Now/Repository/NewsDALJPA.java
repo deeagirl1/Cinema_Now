@@ -6,13 +6,19 @@ import nl.fontys.Cinema_Now.RepoInterfaces.INewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
+@Repository @Transactional
 public class NewsDALJPA implements INewsDAL {
 
     @Autowired
     INewsRepository repo;
+
+    public NewsDALJPA(INewsRepository repo)
+    {
+        this.repo = repo;
+    }
 
     @Override
     public List<News> getAllNews() {

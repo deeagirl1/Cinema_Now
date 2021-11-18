@@ -1,5 +1,5 @@
 import React from 'react';
-import MoviesComponent from '../components/Movies/MoviesComponent';
+import MoviePage from '../components/user..view/Movies/MoviePage';
 const Schedule = () => {
   return (
     <><div
@@ -11,12 +11,11 @@ const Schedule = () => {
         height: '10vh'
       }}
     >
-      <h1>Schedule</h1>
+      <h1>Movies</h1>
   
     </div>
     <div className="container">
-      
-      <MoviesComponent/>
+      <MoviePage/>
     </div>
     </>  
 

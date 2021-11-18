@@ -20,25 +20,30 @@ public  class Ticket {
     @Column(name = "price")
     private double price;
 
+    @Column(name = "amountOfPeople")
+    private int amountOfPeople;
+
     @ManyToOne @JsonIgnore
-    private User holder;
+    private AppUser holder;
 
     @OneToOne @JsonIgnore
     private Movie movie;
 
+    @ManyToOne @JsonIgnore
+    private Room room;
+
     @Column(name = "date")
     private String date;
-
 
     public Ticket() {
 
     }
 
-    public User getHolder() {
+    public AppUser getHolder() {
         return holder;
     }
 
-    public void setHolder(User holder) {
+    public void setHolder(AppUser holder) {
         this.holder = holder;
     }
 
@@ -53,6 +58,7 @@ public  class Ticket {
     public String getId() {
         return id;
     }
+
     public void setId(String ID) {
         this.id = ID;
     }
@@ -60,9 +66,11 @@ public  class Ticket {
     public TicketType getType() {
         return type;
     }
+
     public void setType(TicketType type) {
         this.type = type;
     }
+
     public double getPrice() {
         return price;
     }
@@ -79,7 +87,23 @@ public  class Ticket {
         this.date = date;
     }
 
-    public Ticket(TicketType type,double price,String date)
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public int getAmountOfPeople() {
+        return amountOfPeople;
+    }
+
+    public void setAmountOfPeople(int amountOfPeople) {
+        this.amountOfPeople = amountOfPeople;
+    }
+
+    public Ticket(TicketType type, double price, String date)
     {
 
         this.type = type;

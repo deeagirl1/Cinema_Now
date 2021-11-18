@@ -6,15 +6,20 @@ import nl.fontys.Cinema_Now.Model.Ticket;
 import nl.fontys.Cinema_Now.RepoInterfaces.ITicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
+@Repository @Transactional
 public class TicketDALJPA implements ITicketDAL {
 
-    @Autowired
-    ITicketRepository repo;
 
+    private ITicketRepository repo;
+
+    @Autowired
+    public TicketDALJPA(ITicketRepository repo)
+    {
+        this.repo = repo;
+    }
 
     @Override
     public List<Ticket> getAllTickets() {

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from "react-bootstrap";
-const BuyTicket = () => {
+import QRCodeGenerator from '../components/user..view/Ticket/QRCodeGenerator';
+const buyTicket = () => {
   return (
     <><div
       style={{
@@ -11,14 +11,12 @@ const BuyTicket = () => {
         height: '10vh'
       }}
     >
-    <Button variant="secondary" size="lg" type="submit">BuyTicket</Button>
-    </div><div className="container">
-
-    
+    <div className="container">
+       <QRCodeGenerator/>
       </div>
+    </div>
       </>
- 
   );
 };
 
-export default BuyTicket;
+export default buyTicket;

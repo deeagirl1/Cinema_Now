@@ -2,19 +2,22 @@ package nl.fontys.Cinema_Now.Service;
 
 import nl.fontys.Cinema_Now.Converter.ComplaintConverter;
 import nl.fontys.Cinema_Now.DALInterfaces.IUserDAL;
+import nl.fontys.Cinema_Now.Model.AppUser;
 import nl.fontys.Cinema_Now.Model.Complaint;
 import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
-import nl.fontys.Cinema_Now.Model.User;
 import nl.fontys.Cinema_Now.DALInterfaces.IComplaintDAL;
 import nl.fontys.Cinema_Now.ServiceInterface.IComplaintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 
-@Service
+@Service @Transactional
 public class ComplaintService implements IComplaintService {
+
     private IComplaintDAL complaintData;
     private IUserDAL users;
     private ComplaintConverter converter;
@@ -39,12 +42,13 @@ public class ComplaintService implements IComplaintService {
 
 
     @Override
-    public boolean createComplaint(ComplaintDTO complaint) {
-        User user = this.users.getUserByID(complaint.getSender_id());
-        if(user != null)
+    public boolean createComplaint(ComplaintDTO dto) {
+        AppUser appUser = this.users.getUserByID(dto.getSender_id());
+        if(appUser != null)
         {
-            Complaint entity = converter.dtoToEntity(complaint);
-            entity.setSender(user);
+            Complaint entity = converter.dtoToEntity(dto);
+            entity.setSender(appUser);
+            appUser.getComplaints().add(entity);
             complaintData.createComplaint(entity);
             return true;
         }
@@ -52,7 +56,7 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public Optional<Complaint> getComplaintByUser(User user) {
-        return complaintData.getComplaintByUser(user);
+    public Optional<Complaint> getComplaintByUser(AppUser appUser) {
+        return complaintData.getComplaintByUser(appUser);
     }
 }

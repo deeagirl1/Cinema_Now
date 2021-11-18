@@ -3,11 +3,13 @@ package nl.fontys.Cinema_Now.Model;
 import nl.fontys.Cinema_Now.Model.Enums.Format;
 import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import org.hibernate.annotations.GenericGenerator;
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 
 
 @Entity
-@Table(name ="movie")
+@Table(name ="movies")
 public class Movie  {
 
     @Id
@@ -16,41 +18,45 @@ public class Movie  {
     @Column(length = 36)
     private String id;
 
+    @NotNull
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @Column(name = "genre")
     private Genre genre;
 
+    @NotNull
     @Column(name = "duration")
     private int duration;
 
+    @NotNull
     @Column(name = "releaseDate")
     private String releaseDate;
 
+    @NotNull
     @Column(name = "description")
     private String description;
 
+    @NotNull
     @Column(name = "format")
     private Format format;
 
     @Column(name = "director")
     private String director;
-//    @Column(name = "cast")
-//    private List<String> cast;
+
+    @OneToOne
+    private Room room;
 
     public Movie() {
 
     }
 
-
-
-
-    public String getID() {
+    public String getId() {
         return id;
     }
 
-    public void setID(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -108,6 +114,14 @@ public class Movie  {
 
     public void setDirector(String director) {
         this.director = director;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Movie(String name, Genre genre, int duration, String releaseDate, String description, Format format)

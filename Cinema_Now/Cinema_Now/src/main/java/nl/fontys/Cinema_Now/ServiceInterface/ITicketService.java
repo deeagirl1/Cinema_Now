@@ -9,7 +9,5 @@ public interface ITicketService {
     List<TicketDTO> getAllTickets();
     TicketDTO getTicketByCode(String id);
     boolean delete(String id);
-//    Ticket getTicketByUser(String user);
-//    List<Ticket> getTicketsOfUser(Long userID);
-//    double CalculateTotalTicketPrice(Ticket ticket);
+
 }

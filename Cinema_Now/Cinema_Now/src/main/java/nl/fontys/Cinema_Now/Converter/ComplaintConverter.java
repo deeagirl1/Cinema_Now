@@ -1,7 +1,10 @@
 package nl.fontys.Cinema_Now.Converter;
 
 import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
+import nl.fontys.Cinema_Now.DTO.MovieDTO;
 import nl.fontys.Cinema_Now.Model.Complaint;
+import nl.fontys.Cinema_Now.Model.News;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,11 +15,8 @@ import java.util.stream.Collectors;
 public class ComplaintConverter {
     public ComplaintDTO entityToDto(Complaint entity)
     {
-        ComplaintDTO dto = new ComplaintDTO();
-
-        dto.setContainer(entity.getContainer());
-        dto.setSentDate(entity.getSentDate());
-        dto.setTitle(entity.getTitle());
+        ModelMapper mapper = new ModelMapper();
+        ComplaintDTO dto = mapper.map(entity,ComplaintDTO.class);
 
         return dto;
 
@@ -28,10 +28,8 @@ public class ComplaintConverter {
     }
     public Complaint dtoToEntity(ComplaintDTO dto)
     {
-        Complaint entity = new Complaint();
-
-        entity.setContainer(dto.getContainer());
-        entity.setTitle(dto.getTitle());
+        ModelMapper mapper = new ModelMapper();
+        Complaint entity = mapper.map(dto,Complaint.class);
         entity.setSentDate(dto.getSentDate());
         return entity;
 

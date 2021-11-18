@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "complaint")
+@Table(name = "complaints")
 public class Complaint {
 
     @Id
@@ -24,17 +24,16 @@ public class Complaint {
     @Column(name = "sendDate")
     private String sentDate;
 
-
     @ManyToOne @JsonIgnore
-    private User sender;
+    private AppUser sender;
 
     public Complaint() {
 
     }
 
-    public User getSender() {return sender;}
+    public AppUser getSender() {return sender;}
 
-    public void setSender(User sender) {this.sender = sender;}
+    public void setSender(AppUser sender) {this.sender = sender;}
 
     public String getID() {
         return id;
@@ -73,7 +72,12 @@ public class Complaint {
         this.title = title;
         this.container = container;
         this.sentDate = sentDate;
-
+    }
+    public Complaint(String id, String title, String container, String sentDate)
+    {
+        this.title = title;
+        this.container = container;
+        this.sentDate = sentDate;
     }
 
     @Override
@@ -82,7 +86,6 @@ public class Complaint {
                 "title='" + title + '\'' +
                 ",description='" + container + '\'' +
                 ",sentDate='" + sentDate + '\'' +
-
                 '}';
     }
 }

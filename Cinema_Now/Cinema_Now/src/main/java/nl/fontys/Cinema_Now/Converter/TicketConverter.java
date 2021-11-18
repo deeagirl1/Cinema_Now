@@ -15,10 +15,12 @@ public class TicketConverter {
 
         TicketDTO dto  = new TicketDTO();
         TicketCalculator calculator = new TicketCalculator(ticket);
-        dto.setMovie_id(ticket.getMovie().getID());
-        dto.setHolder_id(ticket.getHolder().getID());
+        dto.setMovie_id(ticket.getMovie().getId());
+        dto.setHolder_id(ticket.getHolder().getId());
         dto.setDate(ticket.getDate());
         dto.setType(ticket.getType());
+        dto.setRoom_id(ticket.getRoom().getRoom_id());
+        dto.setAmountOfPeople(ticket.getAmountOfPeople());
         dto.setPrice(calculator.calculateTotalTicketPrice());
 
         return dto;
@@ -33,10 +35,10 @@ public class TicketConverter {
     {
         Ticket entity = new Ticket();
         TicketCalculator calculator = new TicketCalculator(entity);
-
         entity.setDate(dto.getDate());
         entity.setType(dto.getType());
         entity.setPrice(calculator.calculateTotalTicketPrice());
+        entity.setAmountOfPeople(dto.getAmountOfPeople());
 
         return entity;
 

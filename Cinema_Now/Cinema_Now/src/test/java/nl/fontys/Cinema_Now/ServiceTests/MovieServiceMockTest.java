@@ -73,7 +73,7 @@ public class MovieServiceMockTest {
         //act
         Movie movie = service.getMovie("1");
         //assert
-        Assertions.assertEquals("1",movie.getID());
+        Assertions.assertEquals("1",movie.getId());
     }
 
         @Test
@@ -83,7 +83,7 @@ public class MovieServiceMockTest {
             MovieService service = new MovieService(movieDAL,new MovieConverter());
             //act
             List<Movie> movies = service.getAllMovies();
-            var result = service.deleteMovie(movies.get(0).getID());
+            var result = service.deleteMovie(movies.get(0).getId());
             //assert
             Assertions.assertTrue(result);
 
@@ -94,7 +94,7 @@ public class MovieServiceMockTest {
         {
             //arrange
             MovieService service = new MovieService(movieDAL,new MovieConverter());
-            MovieDTO movie = new MovieDTO("Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
+            MovieDTO movie = new MovieDTO(null,"Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
 
             service.addMovie(movie);
 
@@ -114,7 +114,7 @@ public class MovieServiceMockTest {
     {
         //arrange
         MovieService service = new MovieService(movieDAL,new MovieConverter());
-        MovieDTO movie = new MovieDTO("Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
+        MovieDTO movie = new MovieDTO(null,"Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test");
         service.addMovie(movie);
         movie.setDescription("Test");
         service.editMovieDetails(movie);

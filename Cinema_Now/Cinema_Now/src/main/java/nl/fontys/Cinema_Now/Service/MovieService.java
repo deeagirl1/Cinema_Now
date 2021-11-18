@@ -7,9 +7,11 @@ import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 import java.util.*;
 
-@Service
+@Service @Transactional
 public class MovieService implements IMovieService {
 
     private IMovieDAL dal;

@@ -1,5 +1,6 @@
 import React from "react";
-import PostComplaint from "../components/Complaints/PostComplaint";
+import PostComplaint from "../components/user..view/Complaints/PostComplaint";
+
 const Complaints = () => {
   return (
     <div
