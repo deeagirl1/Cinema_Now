@@ -46,7 +46,7 @@ public class ComplaintDALJPA implements IComplaintDAL {
     @Override
     public boolean deleteComplaint(String id) {
         for (Complaint complaint : repo.findAll()) {
-            if (complaint.getID().equals(id)) {
+            if (complaint.getId().equals(id)) {
                 repo.deleteById(id);
                 return true;
             }

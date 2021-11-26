@@ -151,6 +151,7 @@ export default class Register extends Component {
           >
             {!this.state.successful && (
               <div>
+                <h1>Register now!</h1>
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
                   <Input
@@ -182,7 +183,7 @@ export default class Register extends Component {
                   <Input
                     type="text"
                     className="form-control"
-                    placeholder="Enter your username"
+                    placeholder="Enter your last name"
                     name="lastName"
                     value={this.state.lastName}
                     onChange={this.onChangeLastName}
@@ -217,7 +218,7 @@ export default class Register extends Component {
                 </div>
                 <br />
                 <div className="form-group">
-                  <label htmlFor="already-have-an-account" href="/sign-in">Already have an account?</label>
+                  <label htmlFor="already-have-an-account" href="/sign-in">Already have an account? <a href ="/sign-in">Sign In</a></label>
                 </div>
                 <br />
                 <div className="form-group">

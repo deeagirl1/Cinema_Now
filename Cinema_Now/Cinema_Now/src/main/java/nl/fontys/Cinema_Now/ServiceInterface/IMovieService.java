@@ -1,6 +1,8 @@
 package nl.fontys.Cinema_Now.ServiceInterface;
 
 import nl.fontys.Cinema_Now.DTO.MovieDTO;
+import nl.fontys.Cinema_Now.Model.Enums.Format;
+import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import nl.fontys.Cinema_Now.Model.Movie;
 import java.util.List;
 
@@ -12,4 +14,6 @@ public interface IMovieService {
     List<Movie> getMoviesBasedOnGenre(String genre);
     boolean editMovieDetails(MovieDTO movie);
     boolean deleteMovie(String id);
+    List<Genre> getAllGenres();
+    List<Format> getAllFormats();
 }

@@ -6,14 +6,11 @@ function QRCodeGenerator(){
   const [word, setWord] = useState("");
   const [size] = useState(250);
   const [qrCode, setQrCode] = useState("");
-
   const ticket = {
     title: "test",
     container : "test",
     date : "test"
   }
-  
-  
   // Changing the URL only when the user
   // changes the input
   useEffect(() => {
@@ -22,7 +19,7 @@ function QRCodeGenerator(){
   }, [word,size]);
   
   function handleClick() {
-    setWord(ticket);
+    setWord(JSON.stringify(ticket));
   }
   
   return (

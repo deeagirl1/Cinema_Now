@@ -1,11 +1,8 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.DTO.NewsDTO;
 import nl.fontys.Cinema_Now.DTO.RoomDTO;
-import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.Model.Room;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
-import nl.fontys.Cinema_Now.ServiceInterface.INewsService;
 import nl.fontys.Cinema_Now.ServiceInterface.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

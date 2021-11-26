@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.Repository;
 
 import nl.fontys.Cinema_Now.DALInterfaces.IMovieDAL;
-import nl.fontys.Cinema_Now.Model.AppUser;
 import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.RepoInterfaces.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +62,5 @@ public class MovieDALJPA implements IMovieDAL {
          return true;
 
     }
+
 }

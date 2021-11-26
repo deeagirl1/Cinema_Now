@@ -17,7 +17,7 @@ class UserService{
     editUser(user){
         return axios.post(USERS_API_BASE_URL, user, {headers: authHeader()});
     }
-    deletePost(userId){
+    deleteUser(userId){
         return axios.post(USERS_API_BASE_URL, userId, {headers: authHeader()});
     }
     

@@ -7,7 +7,7 @@ import lombok.*;
 public class ComplaintDTO {
     
     private String container;
+    private String sender;
     private String title;
     private String sentDate;
-    private String sender_id;
 }

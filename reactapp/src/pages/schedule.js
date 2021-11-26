@@ -1,5 +1,6 @@
 import React from 'react';
 import MoviePage from '../components/user..view/Movies/MoviePage';
+
 const Schedule = () => {
   return (
     <><div

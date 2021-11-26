@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import News from './pages/news';
 import Complaints from './pages/complaints';
 import Schedule from './pages/schedule';
+import Users from './pages/users';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import SignOut from './pages/signout';
@@ -15,8 +16,8 @@ import NotFound from './components/PageNotFound';
 
 function App() {
  
-
   return (
+    
     <Router>
       <Navbar/>
       <Switch>
@@ -28,13 +29,14 @@ function App() {
         <Route path='/sign-in' component={SignIn} />
         <Route path='/sign-out' component={SignOut} />
         <Route path='/buyTicket' component={buyTicket} />
+        <Route path= '/users' component ={Users}/>
         <Route path='/received-complaints' component={sentComplaints} />
         <Route component={NotFound}/>
       </Switch>
-  
       
     </Router>
 
+    
     
   );
 }

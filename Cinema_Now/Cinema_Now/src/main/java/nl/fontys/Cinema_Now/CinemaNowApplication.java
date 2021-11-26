@@ -63,7 +63,7 @@ public class CinemaNowApplication {
 
 			userService.addRoleToUser(user1.getUsername(), role1.getName());
 			userService.addRoleToUser(user3.getUsername(), role2.getName());
-			movieService.addMovie(new MovieDTO("Cars",Genre.ANIMATION,180 , "26/06/2021","test",Format._4DX,"test"));
+			movieService.addMovie(new MovieDTO("Cars",Genre.ANIMATION.toString(),180 , "26/06/2021","test",Format._4DX.toString(),"test"));
 
 			newsService.createNewPost(new NewsDTO("test","test","26/05/2021"));
 

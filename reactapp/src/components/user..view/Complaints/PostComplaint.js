@@ -42,16 +42,6 @@ import ComplaintService from "../../services/ComplaintService";
   
     let menu = '';
 
-  // if(isLoggedIn === false){
-  //     menu = (
-  //       <Fragment>
-  //       <Form.Group>
-  //       <Form.Label>Email </Form.Label>
-  //       <Form.Control type="email" placeholder="Write your email..." />
-  //       </Form.Group>
-  //       </Fragment>
-  //     )
-  // } 
   if(isLoggedIn === true) {
       menu = (
         <Fragment>

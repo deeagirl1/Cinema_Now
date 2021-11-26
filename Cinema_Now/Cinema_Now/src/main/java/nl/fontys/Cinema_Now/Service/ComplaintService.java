@@ -43,7 +43,7 @@ public class ComplaintService implements IComplaintService {
 
     @Override
     public boolean createComplaint(ComplaintDTO dto) {
-        AppUser appUser = this.users.getUserByID(dto.getSender_id());
+        AppUser appUser = this.users.getUserByID(dto.getSender());
         if(appUser != null)
         {
             Complaint entity = converter.dtoToEntity(dto);

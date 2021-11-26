@@ -3,8 +3,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import nl.fontys.Cinema_Now.Model.AppUser;
-import nl.fontys.Cinema_Now.Repository.UserDALJPA;
 import nl.fontys.Cinema_Now.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

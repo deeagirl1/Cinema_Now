@@ -1,12 +1,7 @@
 package nl.fontys.Cinema_Now.Converter;
 
-import nl.fontys.Cinema_Now.Calculator.TicketCalculator;
-import nl.fontys.Cinema_Now.DTO.NewsDTO;
 import nl.fontys.Cinema_Now.DTO.RoomDTO;
-import nl.fontys.Cinema_Now.Model.News;
 import nl.fontys.Cinema_Now.Model.Room;
-import nl.fontys.Cinema_Now.Model.Ticket;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

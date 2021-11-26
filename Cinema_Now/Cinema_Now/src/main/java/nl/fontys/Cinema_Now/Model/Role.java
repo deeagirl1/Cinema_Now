@@ -1,6 +1,5 @@
 package nl.fontys.Cinema_Now.Model;
 
-
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

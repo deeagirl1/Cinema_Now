@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import AuthService from "../components/services/AuthService";
 
 const parseJwt = (token) => {
   try {
@@ -20,14 +21,14 @@ class AuthVerify extends Component {
         const decodedJwt = parseJwt(token.accessToken);
 
         if (decodedJwt.exp * 1000 < Date.now()) {
-          props.logOut();
+          AuthService.logOut();
         }
       }
     });
   }
 
   render() {
-    return <div></div>;
+    return <div>Please sign in again.</div>;
   }
 }
 

@@ -17,6 +17,7 @@ function ComplaintListComponent(){
 
     return(
         <div>
+
         <div  class = "complaint-item-container">
        {complaints.map(
            complaint => 

@@ -1,8 +1,6 @@
 package nl.fontys.Cinema_Now.Repository;
 
-
 import nl.fontys.Cinema_Now.DALInterfaces.IRoomDAL;
-import nl.fontys.Cinema_Now.Model.AppUser;
 import nl.fontys.Cinema_Now.Model.Room;
 import nl.fontys.Cinema_Now.RepoInterfaces.IRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;

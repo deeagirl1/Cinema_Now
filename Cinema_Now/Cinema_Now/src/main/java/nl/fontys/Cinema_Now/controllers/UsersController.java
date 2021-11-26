@@ -95,17 +95,6 @@ public class UsersController {
        }
     }
 
-    @PostMapping("/role/save")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    //POST at http://localhost:XXXX/users/role/save
-    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
-        if (role == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        } else {
-            service.saveRole(role);
-            return ResponseEntity.ok().build();
-        }
-    }
     @PostMapping("/role/adduser")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     //POST at http://localhost:XXXX/users/role/addtouser

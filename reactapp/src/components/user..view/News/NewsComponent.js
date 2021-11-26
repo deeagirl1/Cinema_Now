@@ -32,8 +32,6 @@ function NewsComponent() {
          </Card>
          ))}</> 
          );
-
-  
 }
 
 export default NewsComponent

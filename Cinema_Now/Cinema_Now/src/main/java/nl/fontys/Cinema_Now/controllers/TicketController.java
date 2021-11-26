@@ -1,7 +1,6 @@
 package nl.fontys.Cinema_Now.controllers;
 
 import nl.fontys.Cinema_Now.Model.AppUser;
-import nl.fontys.Cinema_Now.Model.Ticket;
 import nl.fontys.Cinema_Now.ServiceInterface.IRoomService;
 import nl.fontys.Cinema_Now.ServiceInterface.ITicketService;
 import nl.fontys.Cinema_Now.DTO.TicketDTO;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 
@@ -55,15 +53,16 @@ public class TicketController {
 
     @PostMapping()
     //Method for buying tickets
-    public ResponseEntity<Ticket> createTicket(@RequestBody TicketDTO dto) {
+    public ResponseEntity<TicketDTO> createTicket(@RequestBody TicketDTO dto) {
         Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
         AppUser loggedInUser = this.userService.getUser(authentication.getName());
         dto.setHolder_id(loggedInUser.getId());
-        if (dto == null && !roomService.checkCapacity(dto.getRoom_id())) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        } else {
+        if (dto != null && roomService.checkCapacity(dto.getRoom_id())) {
             service.createTicket(dto);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(dto);
+
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 

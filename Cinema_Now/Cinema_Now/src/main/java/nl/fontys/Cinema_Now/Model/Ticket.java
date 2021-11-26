@@ -29,6 +29,7 @@ public  class Ticket {
     @OneToOne @JsonIgnore
     private Movie movie;
 
+
     @ManyToOne @JsonIgnore
     private Room room;
 

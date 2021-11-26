@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import UserService from "../../Services/UserService";
+import { Card } from "react-bootstrap";
+import UserService from "../services/UserService";
 
 
 function UserListComponent(){
@@ -22,15 +23,13 @@ function UserListComponent(){
        {users.map(
            user => 
          <div key={user.id}>
-           <div className="title">{user.firstName}</div>
-           <br/>
-           <div className="description">{user.lastName}</div>
-           <br/>
-           <div className="sender">{user.email}</div>
-           <div className="sender">{user.address}</div>
-           <div className="sender">{user.age}</div>
+           <div className="firstName">{user.firstName}</div>
+           <div className="lastName">{user.lastName}</div>
+       
+           <div className="email">{user.email}</div>
            </div>
        )}
+           <br/>
         </div>
      </div>
     )

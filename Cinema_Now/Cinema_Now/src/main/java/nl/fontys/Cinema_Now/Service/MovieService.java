@@ -3,6 +3,8 @@ package nl.fontys.Cinema_Now.Service;
 import nl.fontys.Cinema_Now.Converter.MovieConverter;
 import nl.fontys.Cinema_Now.DALInterfaces.IMovieDAL;
 import nl.fontys.Cinema_Now.DTO.MovieDTO;
+import nl.fontys.Cinema_Now.Model.Enums.Format;
+import nl.fontys.Cinema_Now.Model.Enums.Genre;
 import nl.fontys.Cinema_Now.Model.Movie;
 import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +70,16 @@ public class MovieService implements IMovieService {
     @Override
     public boolean deleteMovie(String id) {
         return dal.deleteMovie(id);
+    }
+
+    @Override
+    public List<Genre> getAllGenres() {
+        return Arrays.asList(Genre.values());
+    }
+
+    @Override
+    public List<Format> getAllFormats() {
+        return  Arrays.asList(Format.values());
     }
 }
 

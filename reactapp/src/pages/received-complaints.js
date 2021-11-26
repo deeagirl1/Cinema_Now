@@ -12,11 +12,11 @@ const ReceivedComplaints = () => {
         height: '10vh'
       }}
     >
-      <h1>Received complaints from clients</h1>
   
     </div>
     <div className="container">
-      <ComplaintListComponent></ComplaintListComponent>
+      <ComplaintListComponent/>
+        
     </div>
     </>  
 

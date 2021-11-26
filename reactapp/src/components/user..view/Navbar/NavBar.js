@@ -23,11 +23,18 @@ const NavBar = () => {
 
               {AuthService.getCurrentUser() !== null &&
                 AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
+                  <Fragment>
                   <Nav>
                     <Nav.Link href="/received-complaints">
                       Received Complaints
                     </Nav.Link>
                   </Nav>
+                    <Nav>
+                    <Nav.Link href="/users">
+                     Users
+                    </Nav.Link>
+                  </Nav>
+                  </Fragment>
                 )}
               {AuthService.getCurrentUser() !== null &&
                 AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (

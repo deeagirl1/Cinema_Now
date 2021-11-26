@@ -12,7 +12,6 @@ const SignUp = () => {
     }}
     >
       <div className="container">
-      <h1>Register now!</h1>
       <Register/>
       </div>
 

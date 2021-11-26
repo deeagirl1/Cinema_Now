@@ -58,6 +58,35 @@ public class MoviesController {
 
     }
 
+    @GetMapping("/genres")
+    public ResponseEntity getGenres() {
+        var genres = service.getAllGenres();
+
+        if(genres != null)
+        {
+            return ResponseEntity.ok().body(genres);
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+    @GetMapping("/formats")
+    public ResponseEntity getFormats() {
+        var formats = service.getAllFormats();
+
+        if(formats != null)
+        {
+            return ResponseEntity.ok().body(formats);
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 
 //    GET at movies/action
     @GetMapping("genre/{genre}")

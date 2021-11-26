@@ -37,11 +37,11 @@ public class ComplaintController {
     @GetMapping
     public ResponseEntity getAllComplaints()
     {
-        List<Complaint> complaints =this.converter.dtoToEntity(service.getAllComplaint());
+        List<ComplaintDTO> complaints =service.getAllComplaint();
 
         if(complaints != null)
         {
-            return ResponseEntity.ok().body(converter.entityToDto(complaints));
+            return ResponseEntity.ok().body(complaints);
         }
         else
         {
@@ -63,17 +63,18 @@ public class ComplaintController {
     }
     //POST at http://localhost:8080/movies
     @PostMapping()
-    public ResponseEntity<ComplaintDTO> createComplaintForAuthenticatedUser(@RequestBody ComplaintDTO dto) {  //If the user is logged in, then the sender_id is know, else I want to set the email as being the sender
+    public ResponseEntity<ComplaintDTO> createComplaintForAuthenticatedUser(@RequestBody ComplaintDTO dto) {
         Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
         AppUser loggedInUser = this.userService.getUser(authentication.getName());
-        dto.setSender_id(loggedInUser.getId());
+        dto.setSender(loggedInUser.getId());
         if(service.createComplaint(dto))
         {
-            return ResponseEntity.noContent().build();
+
+            return ResponseEntity.ok().body(dto);
         }
         else
         {
-            return new ResponseEntity("Please provide a movie.",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Please provide a complaint.",HttpStatus.NOT_FOUND);
         }
     }
 
