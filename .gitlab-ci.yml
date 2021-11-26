@@ -1,13 +1,3 @@
-# This file is a template, and might need editing before it works on your project.
-# To contribute improvements to CI/CD templates, please follow the Development guide at:
-# https://docs.gitlab.com/ee/development/cicd/templates.html
-# This specific template is located at:
-# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Gradle.gitlab-ci.yml
- 
-# This is the Gradle build system for JVM applications
-# https://gradle.org/
-# https://github.com/gradle/gradle
- 
 image: gradle:alpine
  
 # Disable the Gradle daemon for Continuous Integration servers as correctness
@@ -17,21 +7,9 @@ image: gradle:alpine
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
  
- 
+
 build:
   stage: build
-  script: 
-    - cd Cinema_Now/Cinema_Now
-    - gradle --build-cache assemble
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
-    paths:
-      - build
-      - .gradle
- 
-test:
-  stage: test
   script:
     - cd Cinema_Now/Cinema_Now
     - gradle check
@@ -41,7 +19,12 @@ test:
     paths:
       - build
       - .gradle
-
+ 
+test:
+  stage: test
+  script:
+    - cd Cinema_Now/Cinema_Now
+    - gradle check
 
 sonarqube-check:
   image: gradle:jre11-slim
@@ -55,6 +38,4 @@ sonarqube-check:
   script:
     - cd Cinema_Now/Cinema_Now
     - gradle sonarqube
-  allow_failure: true
-  only:
-    - main # or the name of your main branch
+
