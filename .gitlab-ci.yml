@@ -20,7 +20,7 @@ build:
       - build
       - .gradle
  
- postman_tests:
+postman_tests:
     stage: test
     script:
       - cd C:\Users\lungu\AppData\Roaming\npm
