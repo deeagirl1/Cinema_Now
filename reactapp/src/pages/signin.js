@@ -13,7 +13,6 @@ const SignIn = () => {
     >
 
       <div className="container">
-      <h1>Sign In</h1>
        <Login/>
       </div>
     </div>

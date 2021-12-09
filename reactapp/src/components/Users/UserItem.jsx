@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button} from "react-bootstrap";
+import { Card} from "react-bootstrap";
 
 function UserItem(props) {
   return (
@@ -10,7 +10,7 @@ function UserItem(props) {
               <Card.Text>
                   {props.user.firstName} {props.user.lastName}
                   <br /><br />
-                  {props.user.email}   {props.user.isLoyal}
+                  {props.user.email}   {JSON.stringify(props.user.loyal)}
                   <br /><br />
               </Card.Text>
           </Card.Body>

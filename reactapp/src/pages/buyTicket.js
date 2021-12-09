@@ -1,5 +1,5 @@
 import React from 'react';
-import QRCodeGenerator from '../components/user..view/Ticket/QRCodeGenerator';
+import TicketPage from '../components/Ticket/TicketForm';
 const buyTicket = () => {
   return (
     <><div
@@ -12,7 +12,7 @@ const buyTicket = () => {
       }}
     >
     <div className="container">
-       <QRCodeGenerator/>
+       <TicketPage/>
       </div>
     </div>
       </>

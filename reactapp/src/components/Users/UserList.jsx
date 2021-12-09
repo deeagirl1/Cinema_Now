@@ -9,7 +9,7 @@ function UserList(props){
 return(
     <ul>
         {props.users.map((user)=>(
-            <UserItem key = {user.id} user = {user} onDelete = {handleDelete}></UserItem>
+            <UserItem key = {user.username} user = {user} onDelete = {handleDelete}></UserItem>
         ))}
     </ul>
     )

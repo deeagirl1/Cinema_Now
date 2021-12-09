@@ -1,13 +1,10 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.Converter.ComplaintConverter;
-import nl.fontys.Cinema_Now.Model.AppUser;
-import nl.fontys.Cinema_Now.Model.Complaint;
-import nl.fontys.Cinema_Now.ServiceInterface.IComplaintService;
-import nl.fontys.Cinema_Now.DTO.ComplaintDTO;
-import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
+import nl.fontys.Cinema_Now.model.AppUser;
+import nl.fontys.Cinema_Now.serviceInterface.IComplaintService;
+import nl.fontys.Cinema_Now.dto.ComplaintDTO;
+import nl.fontys.Cinema_Now.serviceInterface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,22 +19,21 @@ import java.util.List;
 @RequestMapping("/complaint")
 public class ComplaintController {
 
-    private IComplaintService service;
-    private IUserService userService;
-    private ComplaintConverter converter;
+    private final IComplaintService service;
+    private final IUserService userService;
+
 
     @Autowired
-    public ComplaintController(IComplaintService service, ComplaintConverter converter, IUserService userService)
+    public ComplaintController(IComplaintService service, IUserService userService)
     {
         this.service=service;
-        this.converter = converter;
         this.userService = userService;
     }
     //GET at /movies
     @GetMapping
-    public ResponseEntity getAllComplaints()
+    public ResponseEntity<List<ComplaintDTO>> getAllComplaints()
     {
-        List<ComplaintDTO> complaints =service.getAllComplaint();
+        List<ComplaintDTO> complaints =service.getAllComplaints();
 
         if(complaints != null)
         {
@@ -51,18 +47,17 @@ public class ComplaintController {
     }
     //GET at movies/action e…g
     @GetMapping("{id}")
-    public ResponseEntity getComplaintByID(@PathVariable(value = "id") String id) {
-        Complaint complaint= this.converter.dtoToEntity(service.getComplaint(id));
-
+    public ResponseEntity<ComplaintDTO> getComplaintByID(@PathVariable(value = "id") String id) {
+        ComplaintDTO complaint= service.getComplaint(id);
         if (complaint != null) {
-            return ResponseEntity.ok().body(converter.entityToDto(complaint));
+            return ResponseEntity.ok().body(complaint);
         } else {
             return ResponseEntity.notFound().build();
         }
 
     }
     //POST at http://localhost:8080/movies
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ComplaintDTO> createComplaintForAuthenticatedUser(@RequestBody ComplaintDTO dto) {
         Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
         AppUser loggedInUser = this.userService.getUser(authentication.getName());
@@ -74,9 +69,10 @@ public class ComplaintController {
         }
         else
         {
-            return new ResponseEntity("Please provide a complaint.",HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
+
 
 }
 

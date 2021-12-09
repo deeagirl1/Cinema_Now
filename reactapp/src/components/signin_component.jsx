@@ -3,11 +3,44 @@ import { Button, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import AuthService from "./services/AuthService";
 
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+
 const SignIn = () => {
+
   const [msg, setMsg] = React.useState(null);
   const History = useHistory();
   const username = React.useRef();
   const password = React.useRef();
+
+  const notificationSuccessful = {
+    title: "Successful!",
+    message: "You have been succesfully signed in!",
+    type: "success",
+    insert: "top",
+    container: "top-center",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 1000
+    }
+  };
+  const notificationUnSuccessful = {
+    title: "Something went wrong!",
+    message: {msg},
+    type: "danger",
+    insert: "top",
+    container: "top-center",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 1000
+    }
+  };
+
+
+
+  
   const handleLogin = (e) => {
     
     e.preventDefault();
@@ -17,21 +50,26 @@ const SignIn = () => {
         .then((responseData) => {
           console.log(JSON.stringify(responseData));
           localStorage.setItem("user", JSON.stringify(responseData));
+         store.addNotification({
+          ...notificationSuccessful,
+          container: 'top-center'
+          })
           History.push("/");
           window.location.reload();
         
         })
         .catch((_err) => {
-          setMsg(_err);
+            setMsg(_err);
+            store.addNotification({
+              ...notificationUnSuccessful,
+              container: 'top-center'
+             });
         });
-    } else {
-      <div className="alert alert-danger" role="alert">
-        Provide username and password.
-      </div>;
-    }
+    } 
   };
 
   return (
+    <><h1>Sign In</h1>
     <Form onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicUsername">
       <Form.Label>Username</Form.Label>
@@ -63,8 +101,7 @@ const SignIn = () => {
       <Form.Label>
         Don't have an account? <a href="/sign-up">Register now!</a>
       </Form.Label>
-      <Form.Label>{msg}</Form.Label>
-    </Form>
+    </Form></>
   );
 };
 export default SignIn;

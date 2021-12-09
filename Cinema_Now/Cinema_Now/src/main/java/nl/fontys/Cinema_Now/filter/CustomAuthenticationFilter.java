@@ -3,7 +3,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import nl.fontys.Cinema_Now.Service.UserService;
+import nl.fontys.Cinema_Now.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +14,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -28,8 +27,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Slf4j
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private AuthenticationManager manager;
-    private UserService userService;
+    private final AuthenticationManager manager;
+    private final UserService userService;
 
     @Autowired
     public CustomAuthenticationFilter(AuthenticationManager manager, UserService userService)
@@ -48,7 +47,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         User user = (User) authResult.getPrincipal();
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         String access_token = JWT.create()
@@ -65,24 +64,16 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
 
-//        response.setHeader("access_token",access_token);
-//        response.setHeader("refresh_token",refresh_token);
+
         String username = userService.getUser(user.getUsername()).getUsername();
         Map<String, String> tokens = new HashMap<>();
         tokens.put("access_token",access_token);
         tokens.put("roles",user.getAuthorities().toString());
         tokens.put("refresh_token",refresh_token);
         tokens.put("user",username);
-//        tokens.put("firstName",firstName);
-//        tokens.put("email",email);
         response.setContentType(APPLICATION_JSON_VALUE);
 
         new ObjectMapper().writeValue(response.getOutputStream(),tokens);
     }
 
-//    @Override
-//    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-//        response.setContentType(APPLICATION_JSON_VALUE);
-//        new ObjectMapper().writeValue(response.getOutputStream(),"Username or password are invalid please try again!");
-//    }
 }

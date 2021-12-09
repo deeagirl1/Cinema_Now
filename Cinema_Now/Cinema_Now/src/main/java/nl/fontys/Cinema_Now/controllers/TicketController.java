@@ -1,12 +1,11 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.Model.AppUser;
-import nl.fontys.Cinema_Now.ServiceInterface.IRoomService;
-import nl.fontys.Cinema_Now.ServiceInterface.ITicketService;
-import nl.fontys.Cinema_Now.DTO.TicketDTO;
-import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
+import nl.fontys.Cinema_Now.model.AppUser;
+import nl.fontys.Cinema_Now.model.Enums.TicketType;
+import nl.fontys.Cinema_Now.serviceInterface.ITicketService;
+import nl.fontys.Cinema_Now.dto.TicketDTO;
+import nl.fontys.Cinema_Now.serviceInterface.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,16 +18,14 @@ import java.util.List;
 @RequestMapping("/ticket")
 public class TicketController {
 
-        private ITicketService service;
-        private IUserService userService;
-        private IRoomService roomService;
+        private final ITicketService service;
+        private final IUserService userService;
 
     @Autowired
-    public TicketController(ITicketService service, IUserService userService, IRoomService roomService)
+    public TicketController(ITicketService service, IUserService userService)
     {
         this.userService = userService;
         this.service=service;
-        this.roomService = roomService;
     }
 
     @GetMapping()
@@ -43,12 +40,36 @@ public class TicketController {
         }
 
     }
+
+    @GetMapping("{movieId}")
+    public ResponseEntity<List<TicketDTO>>getTicketsByMovieId(@PathVariable("movieId") String movieId)
+    {
+        var tickets = service.getTicketsByMovieId(movieId);
+
+        if(tickets != null) {
+            return ResponseEntity.ok().body(tickets);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/userTickets/{username}")
+    public ResponseEntity<List<TicketDTO>>getUserTickets(@PathVariable("username") String username)
+    {
+        List<TicketDTO> ticketList = service.getTicketsOfUser(username);
+
+        if(ticketList != null) {
+            return ResponseEntity.ok().body(ticketList);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
     @DeleteMapping("{id}")
     //DELETE at http://localhost:XXXX/ticket/1
     public ResponseEntity<TicketDTO> deleteTicket(@PathVariable("id") String id) {
         service.delete(id);
         return ResponseEntity.ok().build();
-
     }
 
     @PostMapping()
@@ -56,14 +77,28 @@ public class TicketController {
     public ResponseEntity<TicketDTO> createTicket(@RequestBody TicketDTO dto) {
         Authentication authentication =SecurityContextHolder.getContext().getAuthentication();
         AppUser loggedInUser = this.userService.getUser(authentication.getName());
-        dto.setHolder_id(loggedInUser.getId());
-        if (dto != null && roomService.checkCapacity(dto.getRoom_id())) {
-            service.createTicket(dto);
+        dto.setHolderId(loggedInUser.getId());
+        if (service.createTicket(dto)) {
             return ResponseEntity.ok().body(dto);
 
         } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/ticketTypes")
+    public ResponseEntity<List<TicketType>> getTicketTypes() {
+        var types = service.getAllTypes();
+
+        if(types != null)
+        {
+            return ResponseEntity.ok().body(types);
+        }
+        else
+        {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
 }

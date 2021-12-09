@@ -14,11 +14,15 @@ class RoomService{
         return axios.post(ROOM_API_BASE_URL, room, {headers: authHeader()});
     }
     editRoom(room){
-        return axios.post(ROOM_API_BASE_URL, room, {headers: authHeader()});
+        return axios.put(ROOM_API_BASE_URL, room, {headers: authHeader()});
     }
     deleteRoom(room){
-        return axios.post(ROOM_API_BASE_URL, room, {headers: authHeader()});
+        return axios.delete(ROOM_API_BASE_URL + '/' + room, {headers: authHeader()});
     }
+
+    addRoomToMovie(roomId,movieId) {
+        return axios.spread(ROOM_API_BASE_URL + '/addRoomToMovie',{headers: authHeader()})
+      }
     
 }
 

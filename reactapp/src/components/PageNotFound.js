@@ -5,7 +5,7 @@ const NotFound = () => (
   <div
     style={{
       display: "flex",
-      marginTop: "200px",
+      marginTop: "300px",
       justifyContent: "center",
       alignItems: "top",
       height: "10vh",

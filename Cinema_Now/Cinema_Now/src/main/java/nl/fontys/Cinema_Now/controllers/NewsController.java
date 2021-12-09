@@ -1,10 +1,8 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.DTO.NewsDTO;
-import nl.fontys.Cinema_Now.Model.News;
-import nl.fontys.Cinema_Now.ServiceInterface.INewsService;
+import nl.fontys.Cinema_Now.dto.NewsDTO;
+import nl.fontys.Cinema_Now.serviceInterface.INewsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
 @RequestMapping("/news")
 public class NewsController {
 
-    private INewsService service;
+    private final INewsService service;
 
     @Autowired
     public NewsController(INewsService service)
@@ -24,10 +22,9 @@ public class NewsController {
 
     //GET at /news
     @GetMapping
-    public ResponseEntity getAllNews()
+    public ResponseEntity<List<NewsDTO>> getAllNews()
     {
-        List<News> newsList = null;
-        newsList = service.getAllNews();
+        List<NewsDTO> newsList = service.getAllNews();
 
         if(newsList != null)
         {
@@ -41,8 +38,8 @@ public class NewsController {
     }
     //GET at news/1 e…g
     @GetMapping("{id}")
-    public ResponseEntity getNewsByID(@PathVariable(value = "id")  String id) {
-        News news = service.getANewsById(id);
+    public ResponseEntity<NewsDTO> getNewsByID(@PathVariable(value = "id")  String id) {
+        NewsDTO news = service.getANewsById(id);
 
         if(news != null) {
             return ResponseEntity.ok().body(news);
@@ -54,18 +51,18 @@ public class NewsController {
 
     //POST at http://localhost:8080/news
     @PostMapping()
-    public ResponseEntity createNewPost(@RequestBody NewsDTO news) {
+    public ResponseEntity<NewsDTO> createNewPost(@RequestBody NewsDTO news) {
         if (news == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         } else {
             service.createNewPost(news);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(news);
         }
 
     }
     //DELETE at http://localhost:XXXX/news/
     @DeleteMapping("{id}")
-    public ResponseEntity deletePost(@PathVariable("id") String id) {
+    public ResponseEntity<NewsDTO> deletePost(@PathVariable("id") String id) {
         service.deletePost(id);
         return ResponseEntity.ok().build();
 
@@ -73,15 +70,15 @@ public class NewsController {
 
     //PUT at http://localhost:XXXX/news/
     @PutMapping()
-    public ResponseEntity updatePost(@RequestBody NewsDTO news)
+    public ResponseEntity<NewsDTO> updatePost(@RequestBody NewsDTO news)
     {
         if(service.editPost(news))
         {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().body(news);
         }
         else
         {
-            return new ResponseEntity("Please provide a post.",HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 }

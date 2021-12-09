@@ -1,11 +1,8 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.DTO.RoomDTO;
-import nl.fontys.Cinema_Now.Model.Room;
-import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
-import nl.fontys.Cinema_Now.ServiceInterface.IRoomService;
+import nl.fontys.Cinema_Now.dto.RoomDTO;
+import nl.fontys.Cinema_Now.serviceInterface.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,21 +13,19 @@ import java.util.List;
 @RequestMapping("/rooms")
 public class RoomController {
 
-    private IRoomService service;
-    private IMovieService movieService;
+    private final IRoomService service;
 
     @Autowired
-    public RoomController(IRoomService service, IMovieService movieService)
+    public RoomController(IRoomService service)
     {
         this.service=service;
-        this.movieService = movieService;
     }
 
     //GET at /rooms
     @GetMapping
-    public ResponseEntity getAllRooms()
+    public ResponseEntity<List<RoomDTO>> getAllRooms()
     {
-        List<Room> rooms = service.getAllRooms();
+        List<RoomDTO> rooms = service.getAllRooms();
 
         if(rooms != null)
         {
@@ -44,9 +39,8 @@ public class RoomController {
     }
     //GET at news/1 e…g
     @GetMapping("{id}")
-    public ResponseEntity getRoomById(@PathVariable(value = "id")  String id) {
-        Room room = service.getRoomById(id);
-
+    public ResponseEntity<RoomDTO> getRoomById(@PathVariable(value = "id")  String id) {
+        RoomDTO room = service.getRoomById(id);
         if(room != null) {
             return ResponseEntity.ok().body(room);
         } else {
@@ -57,35 +51,40 @@ public class RoomController {
 
     //POST at http://localhost:8080/rooms
     @PostMapping()
-    public ResponseEntity createRoom(@RequestBody RoomDTO room) {
+    public ResponseEntity<RoomDTO> createRoom(@RequestBody RoomDTO room) {
 
         if (room == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         } else {
             service.createRoom(room);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(room);
         }
 
     }
     //DELETE at http://localhost:XXXX/rooms
     @DeleteMapping("{id}")
-    public ResponseEntity deletePost(@PathVariable("id") String id) {
-        service.deleteRoom(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<RoomDTO> deleteRoom(@PathVariable("id") String id) {
+        if(!id.isEmpty()) {
+            service.deleteRoom(id);
+            return ResponseEntity.ok().build();
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
 
     }
 
     //PUT at http://localhost:XXXX/rooms
     @PutMapping()
-    public ResponseEntity updateRoom(@RequestBody RoomDTO room)
+    public ResponseEntity<RoomDTO> updateRoom(@RequestBody RoomDTO room)
     {
         if(service.editRoom(room))
         {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().body(room);
         }
         else
         {
-            return new ResponseEntity("Please provide a room.",HttpStatus.NOT_FOUND);
+            return  ResponseEntity.notFound().build();
         }
     }
 }

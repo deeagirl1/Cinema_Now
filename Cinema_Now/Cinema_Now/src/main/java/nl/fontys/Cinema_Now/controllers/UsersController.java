@@ -5,14 +5,13 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nl.fontys.Cinema_Now.DTO.RoleToUserForm;
-import nl.fontys.Cinema_Now.DTO.UserDTO;
-import nl.fontys.Cinema_Now.Model.AppUser;
-import nl.fontys.Cinema_Now.Model.Role;
-import nl.fontys.Cinema_Now.ServiceInterface.IUserService;
+import nl.fontys.Cinema_Now.dto.RoleToUserForm;
+import nl.fontys.Cinema_Now.dto.UserDTO;
+import nl.fontys.Cinema_Now.model.AppUser;
+import nl.fontys.Cinema_Now.model.Role;
+import nl.fontys.Cinema_Now.serviceInterface.IUserService;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/user")
 public class UsersController {
-    private IUserService service;
+
+    private final IUserService service;
 
     @Autowired
     public UsersController(IUserService service)
@@ -50,13 +50,13 @@ public class UsersController {
         }
     }
 
-    @GetMapping("{username}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/profile/{username}")
     //GET at http://localhost:8080/users/100
-    public ResponseEntity<AppUser> getUserByName(@PathVariable(value = "username") String username) {
-        AppUser appUser = service.getUser(username);
-        if(appUser != null) {
-            return ResponseEntity.ok().body(appUser);
+    public ResponseEntity<AppUser> getUserByName(@PathVariable("username") String username) {
+        AppUser user = this.service.getUser(username);
+//        UserDTO loggedInUser = this.converter.entityToDto(user);
+        if(user != null) {
+            return ResponseEntity.ok().body(user);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -70,7 +70,7 @@ public class UsersController {
         } else {
             service.addUser(user);
             service.addRoleToUser(user.getUsername(),"ROLE_USER");
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(user);
         }
     }
 
@@ -84,14 +84,14 @@ public class UsersController {
 
     @PutMapping()
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
-    //PUT at http://localhost:XXXX/users/102
+    //PUT at http://localhost:XXXX/user
     public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO dto)
     {
-       if(this.service.editUser(dto)) {
+       if(service.editUser(dto) == null) {
            return ResponseEntity.noContent().build();
        }
        else {
-           return new ResponseEntity("Please provide a valid user ID",HttpStatus.NOT_FOUND);
+           return  ResponseEntity.ok().body(dto);
        }
     }
 
@@ -100,12 +100,13 @@ public class UsersController {
     //POST at http://localhost:XXXX/users/role/addtouser
     public ResponseEntity<Role> addRoleToUser(@RequestBody RoleToUserForm form) {
         if (form == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return  ResponseEntity.notFound().build();
         } else {
             service.addRoleToUser(form.getUsername(),form.getRoleName());
             return ResponseEntity.ok().build();
         }
     }
+
 
     @GetMapping("/token/refresh")
     //POST at http://localhost:XXXX/users/token/refresh

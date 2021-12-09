@@ -1,7 +1,7 @@
 package nl.fontys.Cinema_Now.security;
 
 import lombok.RequiredArgsConstructor;
-import nl.fontys.Cinema_Now.Service.UserService;
+import nl.fontys.Cinema_Now.service.UserService;
 import nl.fontys.Cinema_Now.filter.CustomAuthenticationFilter;
 import nl.fontys.Cinema_Now.filter.CustomAuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,13 +56,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login","user/token/refresh").permitAll();
         http.authorizeRequests().antMatchers("/user/sign-up").permitAll();
         http.authorizeRequests().antMatchers("/news").permitAll();
+        http.authorizeRequests().antMatchers("/chat/**").permitAll();
         http.authorizeRequests().antMatchers("/movie/**").permitAll();
-        http.authorizeRequests().antMatchers("/rooms").permitAll();
+        http.authorizeRequests().antMatchers("/rooms/**").permitAll();
+        http.authorizeRequests().antMatchers("/projections/**").permitAll();
 
         //POST
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/complaint").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST,"/ticket").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET,"/ticket").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/complaint").hasAnyAuthority("ROLE_USER","ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.POST,"/ticket").hasAnyAuthority("ROLE_USER","ROLE_ADMIN");
+        http.authorizeRequests().antMatchers("/ticket/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/profile/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT,"/user").hasAnyAuthority("ROLE_USER","ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/ticket/userTickets/**").hasAnyAuthority("ROLE_USER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/projections/**").hasAnyAuthority("ROLE_USER");
+
 
         //ADMIN Authorities
         //GET
@@ -71,6 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/news/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/complaint/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.GET,"/ticket/**").hasAnyAuthority("ROLE_ADMIN");
+//        http.authorizeRequests().antMatchers("/rooms/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET,"/rooms/**").hasAnyAuthority("ROLE_USER");
 
         //POST
         http.authorizeRequests().antMatchers(HttpMethod.POST,"/user/**").hasAnyAuthority("ROLE_ADMIN");
@@ -90,6 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/news/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/complaint/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/ticket/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/rooms/**").hasAnyAuthority("ROLE_ADMIN");
 
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);

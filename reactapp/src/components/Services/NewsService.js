@@ -11,10 +11,10 @@ class NewsService{
         return axios.post(NEWS_API_BASE_URL, post, {headers: authHeader()});
     }
     editPost(post){
-        return axios.post(NEWS_API_BASE_URL, post, {headers: authHeader()});
+        return axios.put(NEWS_API_BASE_URL, post, {headers: authHeader()});
     }
-    deletePost(post){
-        return axios.post(NEWS_API_BASE_URL, post, {headers: authHeader()});
+    deletePost(postId){
+        return axios.delete(NEWS_API_BASE_URL + '/' + postId, {headers: authHeader()});
     }
     getPostById(postId)
     {

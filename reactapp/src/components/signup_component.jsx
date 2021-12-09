@@ -3,8 +3,33 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-
+import { store } from 'react-notifications-component';
 import AuthService from "./services/AuthService";
+
+const notificationSuccessful = {
+  title: "Successful!",
+  message: "You have registered succesfully!",
+  type: "success",
+  insert: "top",
+  container: "top-center",
+  animationIn: ["animate__animated animate__fadeIn"],
+  animationOut: ["animate__animated animate__fadeOut"],
+  dismiss: {
+    duration: 1000
+  }
+};
+const notificationUnSuccessful = {
+  title: "Something went wrong!",
+  message: "Please try again!",
+  type: "danger",
+  insert: "top",
+  container: "top-center",
+  animationIn: ["animate__animated animate__fadeIn"],
+  animationOut: ["animate__animated animate__fadeOut"],
+  dismiss: {
+    duration: 1000
+  }
+};
 
 const required = (value) => {
   if (!value) {
@@ -46,6 +71,16 @@ const vpassword = (value) => {
   }
 };
 
+// const vconfirmpassword = (value) => {
+//   if (value != vpassword) {
+//     return (
+//       <div className="alert alert-danger" role="alert">
+//         Passwords do not match.
+//       </div>
+//     );
+//   }
+// };
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -55,11 +90,13 @@ export default class Register extends Component {
     this.onChangeFirstName = this.onChangeFirstName.bind(this);
     this.onChangeLastName = this.onChangeLastName.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
 
     this.state = {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
       firstName: "",
       lastName: "",
       successful: false,
@@ -97,6 +134,12 @@ export default class Register extends Component {
     });
   }
 
+  onChangeConfirmPassword(e) {
+    this.setState({
+      confirmPassword: e.target.value,
+    });
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -116,6 +159,10 @@ export default class Register extends Component {
         this.state.password
       ).then(
         (response) => {
+          store.addNotification({
+            ...notificationSuccessful,
+            container: 'top-center'
+            })
           this.setState({
             message: response.data.message,
             successful: true,
@@ -129,12 +176,15 @@ export default class Register extends Component {
               error.response.data.message) ||
             error.message ||
             error.toString();
-
+            store.addNotification({
+              ...notificationUnSuccessful,
+              container: 'top-center'})
           this.setState({
             successful: false,
             message: resMessage,
           });
-        }
+        },
+    
       );
     }
   }
@@ -216,6 +266,19 @@ export default class Register extends Component {
                     validations={[required, vpassword]}
                   />
                 </div>
+                {/* <br />
+                <div className="form-group">
+                  <label htmlFor="confirm-password">Confirm password</label>
+                  <Input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    placeholder="Confirm your password"
+                    value={this.state.confirmPassword}
+                    onChange={this.onChangeConfirmPassword}
+                    validations={[required, vconfirmpassword]}
+                  />
+                </div> */}
                 <br />
                 <div className="form-group">
                   <label htmlFor="already-have-an-account" href="/sign-in">Already have an account? <a href ="/sign-in">Sign In</a></label>
@@ -224,12 +287,9 @@ export default class Register extends Component {
                 <div className="form-group">
                   <button className="btn btn-primary btn-block">Sign Up</button>
                 </div>
-              
-          
-             
               </div>
             )}
-
+            <br/>
             {this.state.message && (
               <div className="form-group">
                 <div

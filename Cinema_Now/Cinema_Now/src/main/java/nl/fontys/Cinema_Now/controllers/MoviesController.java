@@ -1,15 +1,15 @@
 package nl.fontys.Cinema_Now.controllers;
 
-import nl.fontys.Cinema_Now.DTO.MovieDTO;
-import nl.fontys.Cinema_Now.Model.Movie;
-import nl.fontys.Cinema_Now.ServiceInterface.IMovieService;
+import nl.fontys.Cinema_Now.dto.MovieDTO;
+import nl.fontys.Cinema_Now.model.Enums.Format;
+import nl.fontys.Cinema_Now.model.Enums.Genre;
+import nl.fontys.Cinema_Now.serviceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Locale;
+
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -17,7 +17,7 @@ import java.util.Locale;
 public class MoviesController {
 
 
-    private IMovieService service;
+    private final IMovieService service;
 
     @Autowired
     public MoviesController(IMovieService service)
@@ -26,11 +26,10 @@ public class MoviesController {
     }
 
 
-
     @GetMapping
     @PreAuthorize("hasRole('ROLE_USER')")
     //GET at /movies
-    public ResponseEntity getAllMovies()
+    public ResponseEntity<List<MovieDTO>> getAllMovies()
     {
 
         var movies = service.getAllMovies();
@@ -47,8 +46,8 @@ public class MoviesController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity getMovieById(@PathVariable(value = "id")  String id) {
-        Movie movie = service.getMovie(id);
+    public ResponseEntity<MovieDTO> getMovieById(@PathVariable(value = "id")  String id) {
+        MovieDTO movie = service.getMovie(id);
 
         if(movie != null) {
             return ResponseEntity.ok().body(movie);
@@ -59,7 +58,7 @@ public class MoviesController {
     }
 
     @GetMapping("/genres")
-    public ResponseEntity getGenres() {
+    public ResponseEntity<List<Genre>> getGenres() {
         var genres = service.getAllGenres();
 
         if(genres != null)
@@ -73,7 +72,7 @@ public class MoviesController {
 
     }
     @GetMapping("/formats")
-    public ResponseEntity getFormats() {
+    public ResponseEntity<List<Format>> getFormats() {
         var formats = service.getAllFormats();
 
         if(formats != null)
@@ -84,14 +83,12 @@ public class MoviesController {
         {
             return ResponseEntity.notFound().build();
         }
-
     }
-
 
 //    GET at movies/action
     @GetMapping("genre/{genre}")
-    public ResponseEntity getAllMoviesBasedOnGenre(@PathVariable(value = "genre")  String genre) {
-        List<Movie> movies = service.getMoviesBasedOnGenre(genre.toLowerCase(Locale.ROOT));
+    public ResponseEntity<List<MovieDTO>> getAllMoviesBasedOnGenre(@PathVariable(value = "genre")  String genre) {
+        List<MovieDTO> movies = service.getMoviesBasedOnGenre(genre);
 
         if (movies != null) {
             return ResponseEntity.ok().body(movies);
@@ -100,34 +97,46 @@ public class MoviesController {
         }
 
     }
+    @GetMapping("/projections")
+    public ResponseEntity<List<MovieDTO>> getMoviesByProjectionDate(@RequestParam(value = "date")  String date) {
+        List<MovieDTO> movies = service.getMoviesByProjectionDate(date);
+        if (movies != null) {
+            return ResponseEntity.ok().body(movies);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
     //POST at http://localhost:8080/movie
     @PostMapping()
-    public ResponseEntity createMovie(@RequestBody MovieDTO dto) {
+    public ResponseEntity<MovieDTO> createMovie(@RequestBody MovieDTO dto) {
         if (dto == null) {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         } else {
             service.addMovie(dto);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body(dto);
         }
     }
+
     @DeleteMapping("{id}")
     //DELETE at http://localhost:XXXX/movie
-    public ResponseEntity deleteMovie(@PathVariable("id") String id) {
+    public ResponseEntity<MovieDTO> deleteMovie(@PathVariable("id") String id) {
         service.deleteMovie(id);
         return ResponseEntity.ok().build();
 
     }
     //PUT at http://localhost:XXXX/movie
     @PutMapping()
-    public ResponseEntity updateMovie(@RequestBody MovieDTO movie)
+    public ResponseEntity<MovieDTO> updateMovie(@RequestBody MovieDTO movie)
     {
         if(service.editMovieDetails(movie))
         {
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.ok().body(movie);
         }
         else
         {
-            return new ResponseEntity("Please provide a movie.",HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
     }
 }
