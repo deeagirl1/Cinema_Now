@@ -20,16 +20,18 @@ build:
       - build
       - .gradle
  
-postman_tests:
-    stage: test
-    script:
-      - cd C:\Users\lungu\AppData\Roaming\npm
-      - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
+
 test:
   stage: test
   script:
     - cd Cinema_Now/Cinema_Now
     - gradle check
+
+postman_tests:
+    stage: test
+    script:
+      - cd C:\Users\lungu\AppData\Roaming\npm
+      - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
 
 sonarqube-check:
   stage: sonarqube
