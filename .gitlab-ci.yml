@@ -28,7 +28,7 @@ test:
     - gradle check
 
 postman_tests:
-    stage: test
+    stage: postman_tests
     script:
       - cd C:\Users\lungu\AppData\Roaming\npm
       - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
