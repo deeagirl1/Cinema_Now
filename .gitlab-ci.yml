@@ -1,32 +1,31 @@
-image: gradle:alpine
- 
-# Disable the Gradle daemon for Continuous Integration servers as correctness
-# is usually a priority over speed in CI environments. Using a fresh
-# runtime for each build is more reliable since the runtime is completely
-# isolated from any previous builds.
-variables:
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
- 
+stages:
+  - build
+  - test
+  - postman_tests
+  - sonarqube
 
 build:
   stage: build
   script:
-    - cd Cinema_Now/Cinema_Now
-    - gradle check
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - build
-      - .gradle
- 
+    -  cd Cinema_Now/Cinema_Now
+    -  ./gradlew build -x test 
+    -  ./gradlew.bat --stop
+
 test:
   stage: test
   script:
-    - cd Cinema_Now/Cinema_Now
-    - gradle check
+    -  cd Cinema_Now/Cinema_Now
+    -  ./gradlew test 
+    -  ./gradlew.bat --stop
 
-sonarqube-check:
+postman_tests:
+    stage: postman_tests
+    script:
+      - cd C:\Users\lungu\AppData\Roaming\npm
+      - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
+
+sonarqube:
+  stage: sonarqube
   image: gradle:jre11-slim
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
@@ -35,7 +34,10 @@ sonarqube-check:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  script:
-    - cd Cinema_Now/Cinema_Now
-    - gradle sonarqube
-
+  script: 
+    -  cd Cinema_Now/Cinema_Now
+    -  ./gradlew sonarqube
+    -  ./gradlew.bat --stop
+  allow_failure: true
+  only:
+    - main # or the name of your main branch
