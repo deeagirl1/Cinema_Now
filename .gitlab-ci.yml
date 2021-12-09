@@ -20,6 +20,11 @@ build:
       - build
       - .gradle
  
+ postman_tests:
+    stage: test
+    script:
+      - cd C:\Users\lungu\AppData\Roaming\npm
+      - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
 test:
   stage: test
   script:
@@ -27,6 +32,7 @@ test:
     - gradle check
 
 sonarqube-check:
+  stage: sonarqube
   image: gradle:jre11-slim
   variables:
     SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
