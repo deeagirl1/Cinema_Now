@@ -30,7 +30,7 @@ cypress_tests:
     image: cypress/base:10
     script:
     # install dependencies
-    - npm ci
+    - npm install
     # start the server in the background
     - npm start
     # run Cypress tests
