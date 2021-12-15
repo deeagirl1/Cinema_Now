@@ -1,5 +1,5 @@
 beforeEach(() => {
-    cy.login("mari", "123")
+    cy.login("oanceaa", "123")
   })
 
   it('ViewComplaintsAdmin', function() {
