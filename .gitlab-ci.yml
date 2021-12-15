@@ -29,6 +29,7 @@ cypress_tests:
     stage: cypress_tests
     image: cypress/base:10
     script:
+    - cd reactapp
     # install dependencies
     - npm install
     # start the server in the background
