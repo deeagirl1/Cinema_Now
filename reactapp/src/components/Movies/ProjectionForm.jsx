@@ -1,15 +1,11 @@
-import { React, useRef  } from "react";
+import { React, useRef } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import ProjectionService from "../services/ProjectionService";
 
 const PostRoom = () => {
- 
-
   const projectionTime = useRef();
   const projectionDate = useRef();
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,13 +13,13 @@ const PostRoom = () => {
     const projectionTimeRef = projectionTime.current.value;
     const projectionDateRef = projectionDate.current.value;
 
-
     const projection = {
       date: projectionDateRef,
       time: projectionTimeRef,
     };
 
-    ProjectionService.createProjection(projection).then((response) => {
+    ProjectionService.createProjection(projection)
+      .then((response) => {
         if (response.data !== null) {
           alert("Projection added succesfully.");
         }
@@ -44,19 +40,17 @@ const PostRoom = () => {
           <Form.Control
             type="text"
             ref={projectionDate}
-
             placeholder="Write a title for the movie..."
             required
           />
         </Form.Group>
-        <br/>
+        <br />
         <Form.Group>
           <Form.Label>Projection time: </Form.Label>
           <Form.Control
             type="text"
             ref={projectionTime}
             placeholder="Write the maximum capacity of the room..."
-
             required
           />
         </Form.Group>

@@ -1,6 +1,6 @@
 {
-  "name": "reactapp",
-  "version": "0.1.0",
+  "name": "cinemanow",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.0",
@@ -26,9 +26,11 @@
     "react-icons": "^4.2.0",
     "react-moment-datepicker": "0.0.10",
     "react-notifications-component": "^3.1.0",
+    "react-qr-svg": "^2.4.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.4",
+    "react-select": "^5.2.1",
     "react-success-popup": "^1.1.2",
     "react-validation": "^3.0.7",
     "reactstrap": "^9.0.1",
@@ -42,7 +44,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cypress open",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "runHeadless": "./node_modules/.bin/cypress run --headless",
+    "runHeaded": "./node_modules/.bin/cypress run --headed --browser chrome 96"
   },
   "eslintConfig": {
     "extends": [

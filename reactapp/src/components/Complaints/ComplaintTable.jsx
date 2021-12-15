@@ -18,7 +18,7 @@ export default function ComplaintTable() {
   }, []);
 
   complaints.map((complaint) => {
-    complaint["id"] = complaint.id;
+    return complaint["id"] = complaints.id;
   });
 
   

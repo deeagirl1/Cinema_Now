@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - postman_tests
+  - cypress_tests
   - sonarqube
 
 build:
@@ -23,6 +24,12 @@ postman_tests:
     script:
       - cd C:\Users\lungu\AppData\Roaming\npm
       - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
+
+cypress_tests:
+    stage: cypress_tests
+    script:
+      - npm install
+      - npm run runHeadless
 
 sonarqube:
   stage: sonarqube

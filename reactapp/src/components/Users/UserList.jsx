@@ -1,19 +1,21 @@
 import React from "react";
 import UserItem from "./UserItem";
-function UserList(props){
+function UserList(props) {
+  const handleDelete = (id) => {
+    props.onDelete(id);
+  };
 
-    const handleDelete = (id) =>{
-        props.onDelete(id);
-    };
-
-return(
+  return (
     <ul>
-        {props.users.map((user)=>(
-            <UserItem key = {user.username} user = {user} onDelete = {handleDelete}></UserItem>
-        ))}
+      {props.users.map((user) => (
+        <UserItem
+          key={user.username}
+          user={user}
+          onDelete={handleDelete}
+        ></UserItem>
+      ))}
     </ul>
-    )
-
+  );
 }
 
 export default UserList;

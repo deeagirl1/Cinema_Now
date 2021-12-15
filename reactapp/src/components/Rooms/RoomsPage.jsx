@@ -4,8 +4,6 @@ import RoomsTable from "./RoomsTable";
 import NotFound from "../PageNotFound";
 
 function RoomPage() {
-
-
   return (
     <div>
       {AuthService.getCurrentUser() !== null &&
@@ -22,22 +20,21 @@ function RoomPage() {
             >
               <h1>Rooms</h1>
             </div>
-            <br/>
+            <br />
             <div className="container">
-            <RoomsTable></RoomsTable>
+              <RoomsTable></RoomsTable>
             </div>
           </>
         )}
 
-      {AuthService.getCurrentUser() === null && (
-           <NotFound/>
-      )}
+      {AuthService.getCurrentUser() === null && <NotFound />}
 
       {AuthService.getCurrentUser() !== null &&
         AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
-          <NotFound/>
+          <NotFound />
         )}
     </div>
-  )}
+  );
+}
 
 export default RoomPage;

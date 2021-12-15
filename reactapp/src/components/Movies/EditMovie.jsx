@@ -6,9 +6,7 @@ import RoomService from "../services/RoomService";
 import ProjectionService from "../services/ProjectionService";
 import { store } from "react-notifications-component";
 
-
 const EditMovie = () => {
-
   const notificationSuccessful = {
     title: "Successful!",
     message: "Movie edited successfully",
@@ -18,8 +16,8 @@ const EditMovie = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 2500
-    }
+      duration: 2500,
+    },
   };
   const notificationUnSuccessful = {
     title: "Something went wrong!",
@@ -30,8 +28,8 @@ const EditMovie = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 1000
-    }
+      duration: 1000,
+    },
   };
 
   const [genreItems, setGenre] = useState([]);
@@ -48,36 +46,33 @@ const EditMovie = () => {
 
   useEffect(() => {
     MoviesService.getGenres().then((response) => {
-
       setGenre(response.data);
     });
   }, []);
 
   useEffect(() => {
     MoviesService.getFormats().then((response) => {
-
       setFormats(response.data);
     });
   }, []);
 
   useEffect(() => {
     RoomService.getRooms().then((response) => {
-
       setRooms(response.data);
     });
   }, []);
 
   useEffect(() => {
     ProjectionService.getProjections().then((response) => {
-
       setProjection(response.data);
     });
   }, []);
 
-  let param = window.location.pathname;  
-  let id = param.split('/').pop();
-  
-  const [movie,setMovie] = useState(null);
+  let param = window.location.pathname;
+  let id = param.split("/").pop();
+
+  const [movie, setMovie] = useState(null);
+
   useEffect(() => {
     MoviesService.getMoviesById(id).then((response) => {
       console.log(response.data);
@@ -101,36 +96,38 @@ const EditMovie = () => {
     setSelectedRoom(JSON.parse(obj));
   };
   const handleChangeProjection = (e) => {
-    let obj = e.target.value; //format object
-    console.log(obj);
-    setSelectedProjection(JSON.parse(obj));
-  };
+    const selectedOptions = e.target.selectedOptions;
 
+    const newProjections = [];
+    for (let i = 0; i < selectedOptions.length; i++) {
+      newProjections.push(JSON.parse(selectedOptions[i].value));
+    }
+    console.log(newProjections);
+    setSelectedProjection(newProjections);
+  };
 
   const movieName = useRef();
   const movieDuration = useRef();
   const movieReleaseDate = useRef();
   const movieDescription = useRef();
   const movieDirector = useRef();
-
+  const movieProjectionRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const enteredMovieName = movieName.current.value;
-    const movieGenreRef =  selectedGenre;
+    const movieGenreRef = selectedGenre;
     const movieDurationRef = movieDuration.current.value;
     const movieReleaseDateRef = movieReleaseDate.current.value;
     const movieDescriptionRef = movieDescription.current.value;
-    const movieFormatRef =  selectedFormats;
-    const movieDirectorRef = movieDirector.current.value;
+    const movieFormatRef = selectedFormats.current.value;
+    const movieDirectorRef = movieDirector;
     const movieRoomRef = selectedRoom.id;
-    const movieProjectionRef = selectedProjection;
-    
-    // console.log(movieRoomRef);
+    const movieProjectionRef = selectedProjection.id;
 
     const movie = {
-      id : id,
+      id: id,
       name: enteredMovieName,
       genre: movieGenreRef,
       duration: movieDurationRef,
@@ -139,49 +136,40 @@ const EditMovie = () => {
       format: movieFormatRef,
       director: movieDirectorRef,
       roomId: movieRoomRef,
-      projections: [
-        {
-          id: movieProjectionRef.id,
-          date: movieProjectionRef.date,
-          time: movieProjectionRef.time
-     
-        }
-      ],
+      projections: movieProjectionRef,
     };
 
     console.log(movie);
 
-    MoviesService.editMovie(movie).then((response) => {
-      if (response.data !== null) {
+    MoviesService.editMovie(movie)
+      .then((response) => {
+        if (response.data !== null) {
+          store.addNotification({
+            ...notificationSuccessful,
+            container: "top-center",
+          });
+          window.location.reload();
+        }
+      })
+      .catch(() => {
         store.addNotification({
-          ...notificationSuccessful,
-          container: 'top-center'
-          })
-        window.location.reload();
-      }
-    })
-    .catch(() => {
-      store.addNotification({
-        ...notificationUnSuccessful,
-        container: 'top-center'
-        })
-    });
-  
-   
+          ...notificationUnSuccessful,
+          container: "top-center",
+        });
+      });
   };
 
-  
-  if(!movie) return null;
+  if (!movie) return null;
 
   return (
-    <div>
+    <div className="container">
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Title: </Form.Label>
           <Form.Control
             type="text"
             ref={movieName}
-            defaultValue = {movie.name}
+            defaultValue={movie.name}
             placeholder="Write a title for the movie..."
             required
           />
@@ -191,10 +179,12 @@ const EditMovie = () => {
           <Form.Label>Genre: </Form.Label>
           <br />
           <Form.Control as="select" onChange={handleChangeGenre} required>
-          <option value=""> -- Select a genre -- </option>
             {genreItems.map((option, index) => (
-              <option key={index}  defaultValue = {movie.genre}
-              value = {JSON.stringify(index)}>
+              <option
+                key={index}
+                defaultValue={movie.genre}
+                value={JSON.stringify(index)}
+              >
                 {option}
               </option>
             ))}
@@ -206,7 +196,7 @@ const EditMovie = () => {
           <Form.Control
             type="text"
             ref={movieReleaseDate}
-            defaultValue = {movie.releaseDate}
+            defaultValue={movie.releaseDate}
             placeholder="Select the release date..."
             required
           />
@@ -218,7 +208,7 @@ const EditMovie = () => {
           <Form.Control
             type="number"
             ref={movieDuration}
-            defaultValue = {movie.duration}
+            defaultValue={movie.duration}
             placeholder="Write the duration of the movie in minutes..."
             min="0"
             required
@@ -230,7 +220,7 @@ const EditMovie = () => {
           <Form.Control
             type="text"
             ref={movieDescription}
-            defaultValue = {movie.description}
+            defaultValue={movie.description}
             placeholder="Write the description of the movie..."
             required
           />
@@ -240,9 +230,12 @@ const EditMovie = () => {
           <Form.Label>Format: </Form.Label>
           <br />
           <Form.Control as="select" onChange={handleChangeFormat} required>
-          <option value=""> -- Select a format -- </option>
             {formatItems.map((option, index) => (
-              <option key={index}  defaultValue = {movie.format}   value = {JSON.stringify(index)}>
+              <option
+                key={index}
+                defaultValue={movie.format}
+                value={JSON.stringify(index)}
+              >
                 {option}
               </option>
             ))}
@@ -254,7 +247,7 @@ const EditMovie = () => {
           <Form.Control
             type="text"
             ref={movieDirector}
-            defaultValue = {movie.director}
+            defaultValue={movie.director}
             placeholder="Write a title..."
             required
           />
@@ -262,36 +255,40 @@ const EditMovie = () => {
         <Form.Group>
           <Form.Label>Room: </Form.Label>
           <br />
-          <select  onChange={handleChangeRoom} required id="room">
-          <option value=""> -- Select a room -- </option>
+          <Form.Control
+            as="select"
+            onChange={handleChangeRoom}
+            required
+            id="room"
+          >
             {roomItems.map((option, index) => (
-              <option
-                key={index}
-                defaultValue = {movie.room}
-                value = {JSON.stringify(option)}
-               
-              >
+              <option key={index} value={JSON.stringify(option)}>
                 {option.name}
               </option>
             ))}
-          </select>
+          </Form.Control>
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label>Projection: </Form.Label>
+          <Form.Label>Projections: </Form.Label>
           <br />
-          <select onChange={handleChangeProjection}  id="projection">
-          <option value=""> -- Select a projection -- </option>
+          <Form.Control
+            as="select"
+            multiple
+            onChange={handleChangeProjection}
+            required
+            id="projection"
+          >
             {projectionItems.map((option, index) => (
               <option
                 key={index}
-                defaultValue = {movie.projection}
-                value = {JSON.stringify(option)}
+                value={JSON.stringify(option)}
+                ref={movieProjectionRef}
               >
                 {option.date} {option.time}
               </option>
             ))}
-          </select>
+          </Form.Control>
         </Form.Group>
         <br />
         <Button variant="primary" type="submit">

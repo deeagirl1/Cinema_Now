@@ -23,7 +23,7 @@ export default function NewsTable() {
   }, []);
 
   rooms.map((room) => {
-    room["id"] = room.id;
+     room["id"] = room.id;
   });
 
   const columns = [

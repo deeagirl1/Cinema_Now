@@ -4,12 +4,11 @@ import Form from "react-bootstrap/Form";
 import MoviesService from "../services/MoviesService";
 import RoomService from "../services/RoomService";
 import ProjectionService from "../services/ProjectionService";
-import { store } from 'react-notifications-component';
+import { store } from "react-notifications-component";
 
 const PostMovie = () => {
-
   const notificationSuccessful = {
-    title: "Successful", 
+    title: "Successful",
     message: "Movie added successfully!",
     type: "success",
     insert: "top",
@@ -17,8 +16,8 @@ const PostMovie = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 2500
-    }
+      duration: 2500,
+    },
   };
   const notificationUnSuccessful = {
     title: "Something went wrong!",
@@ -29,8 +28,8 @@ const PostMovie = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 1000
-    }
+      duration: 1000,
+    },
   };
 
   const [genreItems, setGenre] = useState([]);
@@ -47,21 +46,18 @@ const PostMovie = () => {
 
   useEffect(() => {
     MoviesService.getGenres().then((response) => {
-
       setGenre(response.data);
     });
   }, []);
 
   useEffect(() => {
     MoviesService.getFormats().then((response) => {
-
       setFormats(response.data);
     });
   }, []);
 
   useEffect(() => {
     RoomService.getRooms().then((response) => {
-
       setRooms(response.data);
     });
   }, []);
@@ -99,9 +95,14 @@ const PostMovie = () => {
     setSelectedRoom(JSON.parse(obj));
   };
   const handleChangeProjection = (e) => {
-    let obj = e.target.value; //format object
-    
-    setSelectedProjection(JSON.parse(obj));
+    const selectedOptions = e.target.selectedOptions;
+
+    const newProjections = [];
+    for (let i = 0; i < selectedOptions.length; i++) {
+      newProjections.push(JSON.parse(selectedOptions[i].value));
+    }
+    console.log(newProjections);
+    setSelectedProjection(newProjections);
   };
 
   const handleSubmit = (e) => {
@@ -115,7 +116,6 @@ const PostMovie = () => {
     const movieFormatRef = selectedFormats;
     const movieDirectorRef = movieDirector.current.value;
     const movieRoomRef = selectedRoom.id;
-    console.log(movieRoomRef);
 
     const movie = {
       name: movieNameRef,
@@ -126,29 +126,28 @@ const PostMovie = () => {
       format: movieFormatRef,
       director: movieDirectorRef,
       roomId: movieRoomRef,
-      projections: [
-          selectedProjection
-      ],
+      projections: selectedProjection,
     };
 
     console.log(movie);
-    
-    MoviesService.createMovie(movie).then((response) => {
-      if (response.data !== null) {
+
+    MoviesService.createMovie(movie)
+      .then((response) => {
+        if (response.data !== null) {
+          store.addNotification({
+            ...notificationSuccessful,
+            container: "top-center",
+          });
+          window.location.reload();
+        }
+      })
+      .catch((_err) => {
         store.addNotification({
-          ...notificationSuccessful,
-          container: 'top-center'
-          })
-        window.location.reload();
-      }
-    })
-    .catch((_err) => {
-      store.addNotification({
-        ...notificationUnSuccessful,
-        container: 'top-center'
-    })
-  }
-    )}
+          ...notificationUnSuccessful,
+          container: "top-center",
+        });
+      });
+  };
 
   return (
     <div>
@@ -233,7 +232,12 @@ const PostMovie = () => {
         <Form.Group>
           <Form.Label>Room: </Form.Label>
           <br />
-          <select  onChange={handleChangeRoom} required id="room">
+          <Form.Control
+            as="select"
+            onChange={handleChangeRoom}
+            required
+            id="room"
+          >
             <option value=""> -- Select a room -- </option>
             {roomItems.map((option, index) => (
               <option
@@ -244,14 +248,19 @@ const PostMovie = () => {
                 {option.name}
               </option>
             ))}
-          </select>
+          </Form.Control>
         </Form.Group>
         <br />
         <Form.Group>
-          <Form.Label>Projection: </Form.Label>
+          <Form.Label>Projections: </Form.Label>
           <br />
-          <select onChange={handleChangeProjection} required id="projection">
-            <option value=""> -- Select projections -- </option>
+          <Form.Control
+            as="select"
+            multiple
+            onChange={handleChangeProjection}
+            required
+            id="projection"
+          >
             {projectionItems.map((option, index) => (
               <option
                 key={index}
@@ -261,7 +270,7 @@ const PostMovie = () => {
                 {option.date} {option.time}
               </option>
             ))}
-          </select>
+          </Form.Control>
         </Form.Group>
         <br />
         <Button variant="primary" type="submit">

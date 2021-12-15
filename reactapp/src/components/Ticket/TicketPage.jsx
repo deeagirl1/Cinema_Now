@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import AuthService from "../services/AuthService";
-import SignIn from '../signin_component';
-import TicketForm from './TicketForm';
+import SignIn from "../signin_component";
+import TicketForm from "./TicketForm";
 import TicketService from "../services/TicketService";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,7 @@ function TicketPage() {
     });
   }, []);
 
-
-  if (!news) return null;
+  if (!tickets) return null;
 
   return (
     <div>
@@ -35,21 +34,19 @@ function TicketPage() {
               <h1>News</h1>
             </div>
             <div className="container">
-            <TicketForm/>
+              <TicketForm />
             </div>
           </>
         )}
 
-      {AuthService.getCurrentUser() === null && (
-          <Link to="/sign-in"></Link>
-      )}
-
       {AuthService.getCurrentUser() !== null &&
         AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
           <>
-            <TicketForm/>
+            <TicketForm />
           </>
         )}
+
+      {AuthService.getCurrentUser() === null && <Link to="/sign-in"></Link>}
     </div>
   );
 }

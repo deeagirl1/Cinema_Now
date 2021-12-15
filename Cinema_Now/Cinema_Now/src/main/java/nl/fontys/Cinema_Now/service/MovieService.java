@@ -56,17 +56,7 @@ public class MovieService implements IMovieService {
             Room room = this.roomDAL.getRoomById(movie.getRoomId());
             if (room != null) {
                 entity.setRoom(room);
-                this.roomDAL.getAllRooms().remove(room);
             }
-            for (ProjectionDTO projection : movie.getProjections()
-            ) {
-                if (movie.getProjections().contains(projection)) {
-
-                    entity.getProjections().add(projectionConverter.dtoToEntity(projection));
-                }
-
-            }
-
             dal.addMovie(entity);
             return true;
         }

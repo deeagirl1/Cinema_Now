@@ -80,8 +80,6 @@ const Chat = () => {
     console.log("disconnected")
 };
 
-
- 
   // display the received data
   function onMessageReceived(data)
   {

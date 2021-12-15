@@ -6,11 +6,9 @@ import NotFound from "../PageNotFound";
 import { IconButton } from "@mui/material";
 import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
-import { Button } from "react-bootstrap";
 import MovieForm from "./MoviesForm";
-import ProjectionForm from "./ProjectionForm";
-import {Modal} from "react-bootstrap";
-import AddIcon from '@mui/icons-material/Add';
+import { Modal } from "react-bootstrap";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function MovieTable(props) {
   const [showMovie, setShowMovie] = useState(false);
@@ -20,19 +18,20 @@ export default function MovieTable(props) {
   const [movies, setMovies] = useState([]);
 
   const handleDelete = (id) => {
-    MovieService.deleteMovie(id).then((response) => {
-      if (response.data !== null) {
-       alert("Movie deleted succesfully.");
-       window.location.reload();
-      }
-    })
-    .catch(() => {
-      <div className="alert alert-danger" role="alert">
-        Houston, we have a problem! Please try again.
-      </div>;
-    });
-  }
- 
+    MovieService.deleteMovie(id)
+      .then((response) => {
+        if (response.data !== null) {
+          alert("Movie deleted succesfully.");
+          window.location.reload();
+        }
+      })
+      .catch(() => {
+        <div className="alert alert-danger" role="alert">
+          Houston, we have a problem! Please try again.
+        </div>;
+      });
+  };
+
   useEffect(() => {
     getAllMovies();
   }, []);
@@ -44,10 +43,8 @@ export default function MovieTable(props) {
   };
 
   movies.map((movie) => {
-    movie["id"] = movie.id;
+    movie["id"] = movies.id;
   });
-
-  
 
   const columns = [
     { field: "name", headerName: "Movie Name", flex: 1 },
@@ -97,8 +94,7 @@ export default function MovieTable(props) {
             <IconButton
               aria-label="edit"
               onClick={() => {
-                handleClick(0, cellValues)
-              
+                handleClick(0, cellValues);
               }}
             >
               <Edit />
@@ -107,7 +103,6 @@ export default function MovieTable(props) {
               aria-label="delete"
               onClick={() => {
                 handleClick(1, cellValues);
-          
               }}
             >
               <Delete />
@@ -121,42 +116,44 @@ export default function MovieTable(props) {
   function handleClick(mode, selected) {
     switch (mode) {
       case 0:
-          
-        window.history.pushState({}, '', "/editMovie/"+selected.row.id);
-        window.location.replace("/editMovie/"+selected.row.id);
-        {console.log(selected.row.id)}
+        window.history.pushState({}, "", "/editMovie/" + selected.row.id);
+        window.location.replace("/editMovie/" + selected.row.id);
+        {
+          console.log(selected.row.id);
+        }
         break;
 
-        case 1:
-          handleDelete(selected.row.id);
-    
-          break;
+      case 1:
+        handleDelete(selected.row.id);
+
+        break;
       default:
- 
         break;
     }
   }
-
- 
 
   if (!movies) return <NotFound />;
 
   return (
     <div style={{ height: 700, width: "flex" }}>
-
-        <>
-          <AddIcon variant="primary" onClick={handleShowMovieForm}>
-          </AddIcon>
-          <Modal show={showMovie} onHide={handleCloseMovieForm} aria-labelledby="example-modal-sizes-title-lg" size="lg">
-            <Modal.Header closeButton>
-              <Modal.Title>Movie information</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <MovieForm />
-            </Modal.Body>
-          </Modal>
-        </>
-       <br /><DataGrid
+      <>
+        <AddIcon variant="primary" onClick={handleShowMovieForm}></AddIcon>
+        <Modal
+          show={showMovie}
+          onHide={handleCloseMovieForm}
+          aria-labelledby="example-modal-sizes-title-lg"
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Movie information</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <MovieForm />
+          </Modal.Body>
+        </Modal>
+      </>
+      <br />
+      <DataGrid
         density="comfortable"
         rows={movies}
         columns={columns}
@@ -164,8 +161,8 @@ export default function MovieTable(props) {
         rowsPerPageOptions={[5]}
         disableColumnSelector
         disableMultipleSelection={true}
-        disableSelectionOnClick={true} />
-      
+        disableSelectionOnClick={true}
+      />
     </div>
   );
 }

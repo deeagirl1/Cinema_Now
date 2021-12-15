@@ -8,7 +8,7 @@ import { store } from "react-notifications-component";
 
 const NewsForm = () => {
   const notificationSuccessful = {
-    title: "Successful", 
+    title: "Successful",
     message: "Post added successfully!",
     type: "success",
     insert: "top",
@@ -16,8 +16,8 @@ const NewsForm = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 2500
-    }
+      duration: 2500,
+    },
   };
   const notificationUnSuccessful = {
     title: "Something went wrong!",
@@ -28,8 +28,8 @@ const NewsForm = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 1000
-    }
+      duration: 1000,
+    },
   };
 
   const title = useRef();
@@ -47,23 +47,22 @@ const NewsForm = () => {
     };
     console.log(newsPost);
 
-    NewsService.createNewPost(newsPost).then((response) => {
-      if(response.data !== null)
-      {
-           store.addNotification({
-          ...notificationSuccessful,
-          container: 'top-center'
-          })
-      }
-    })
-    .catch(() => {
-      store.addNotification({
-        ...notificationUnSuccessful,
-        container: 'top-center'
-        })
-    });
+    NewsService.createNewPost(newsPost)
+      .then((response) => {
+        if (response.data !== null) {
+          store.addNotification({
+            ...notificationSuccessful,
+            container: "top-center",
+          });
+        }
+      })
+      .catch(() => {
+        store.addNotification({
+          ...notificationUnSuccessful,
+          container: "top-center",
+        });
+      });
     window.location.reload();
-   
   };
 
   let menu = "";

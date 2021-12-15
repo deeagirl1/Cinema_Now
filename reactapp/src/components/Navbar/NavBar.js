@@ -10,12 +10,11 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import MovieIcon from "@mui/icons-material/Movie";
 import FeedbackIcon from "@mui/icons-material/Feedback";
 import { Chat } from "@material-ui/icons";
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
-import CallReceivedIcon from '@mui/icons-material/CallReceived';
-import PeopleIcon from '@mui/icons-material/People';
-import { Icon } from '@iconify/react';
-
+import EngineeringIcon from "@mui/icons-material/Engineering";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import CallReceivedIcon from "@mui/icons-material/CallReceived";
+import PeopleIcon from "@mui/icons-material/People";
+import { Icon } from "@iconify/react";
 
 const NavBar = () => {
   return (
@@ -34,31 +33,33 @@ const NavBar = () => {
                 <Fragment>
                   <Dropdown>
                     <Dropdown.Toggle variant="dark" id="dropdown-basic">
-                     <EngineeringIcon/> Maintaince
+                      <EngineeringIcon /> Maintaince
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                       <Dropdown.Item href="/rooms" id="rooms">
-                        <MeetingRoomIcon/> Rooms
+                        <MeetingRoomIcon /> Rooms
                       </Dropdown.Item>
                       <Dropdown.Item href="/schedule" id="movies">
-                      <MovieIcon /> Movies
+                        <MovieIcon /> Movies
                       </Dropdown.Item>
                       <Dropdown.Item href="/news" id="news">
-                      <NewspaperIcon /> News
+                        <NewspaperIcon /> News
                       </Dropdown.Item>
                       <Dropdown.Item href="/projections" id="projections">
-                      <Icon icon="mdi:projector"/> Projections
+                        <Icon icon="mdi:projector" /> Projections
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <Nav>
                     <Nav.Link href="/received-complaints">
-                     <CallReceivedIcon/> Received Complaints
+                      <CallReceivedIcon /> Received Complaints
                     </Nav.Link>
                   </Nav>
                   <Nav>
                     <Nav.Link href="/users">
-                      <PeopleIcon/>Users</Nav.Link>
+                      <PeopleIcon />
+                      Users
+                    </Nav.Link>
                   </Nav>
                 </Fragment>
               )}
@@ -137,7 +138,7 @@ const NavBar = () => {
                         My Account
                       </Dropdown.Item>
                       <Dropdown.Item href="/myTickets" id="addMovies">
-                      <Icon icon="entypo:ticket" /> My Tickets
+                        <Icon icon="entypo:ticket" /> My Tickets
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>

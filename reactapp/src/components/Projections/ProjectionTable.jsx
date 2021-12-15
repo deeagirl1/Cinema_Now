@@ -6,7 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Edit from "@material-ui/icons/Edit";
 import { DataGrid } from "@mui/x-data-grid";
 import ProjectionService from "../services/ProjectionService";
-import ProjectionForm from './ProjectionForm';
+import ProjectionForm from "./ProjectionForm";
 
 export default function NewsTable() {
   const [showProjection, setProjection] = useState(false);
@@ -23,7 +23,7 @@ export default function NewsTable() {
   }, []);
 
   projections.map((projection) => {
-    projection["id"] = projection.id;
+      projection["id"] = projection.id;
   });
 
   const columns = [
@@ -88,18 +88,23 @@ export default function NewsTable() {
 
   return (
     <>
-       <>
-      <AddIcon variant="primary" onClick={handleShowProjectionForm}>
-        Add projections
-      </AddIcon>
-      <Modal show={showProjection} onHide={handleCloseProjectionForm} aria-labelledby="example-modal-sizes-title-lg" size="lg">
-        <Modal.Header closeButton>
-          <Modal.Title>Movie information</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <ProjectionForm/>
-        </Modal.Body>
-      </Modal>
+      <>
+        <AddIcon variant="primary" onClick={handleShowProjectionForm}>
+          Add projections
+        </AddIcon>
+        <Modal
+          show={showProjection}
+          onHide={handleCloseProjectionForm}
+          aria-labelledby="example-modal-sizes-title-lg"
+          size="lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Movie information</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ProjectionForm />
+          </Modal.Body>
+        </Modal>
       </>
       <div style={{ height: 700, width: "flex" }}>
         <DataGrid

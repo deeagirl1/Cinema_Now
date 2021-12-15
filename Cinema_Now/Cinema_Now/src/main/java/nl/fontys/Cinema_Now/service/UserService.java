@@ -62,16 +62,18 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public AppUser editUser(UserDTO user) {
-        AppUser updatedAppUser = this.getUserByID(user.getId());
-        if(updatedAppUser != null) {
-            updatedAppUser.setFirstName(user.getFirstName());
-            updatedAppUser.setLastName(user.getLastName());
-            updatedAppUser.setEmail(user.getEmail());
-            updatedAppUser.setAddress(user.getAddress());
-            updatedAppUser.setUsername(user.getUsername());
+    public AppUser editUser(UserDTO user){
+        if(user != null) {
+            AppUser updatedAppUser = this.getUserByID(user.getId());
+            if (updatedAppUser != null) {
+                updatedAppUser.setFirstName(user.getFirstName());
+                updatedAppUser.setLastName(user.getLastName());
+                updatedAppUser.setEmail(user.getEmail());
+                updatedAppUser.setAddress(user.getAddress());
+                updatedAppUser.setUsername(user.getUsername());
 
-            return dal.editUser(updatedAppUser);
+                return dal.editUser(updatedAppUser);
+            }
         }
         return null;
     }

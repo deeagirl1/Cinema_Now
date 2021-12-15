@@ -1,12 +1,11 @@
-import { React, useRef  } from "react";
+import { React, useRef } from "react";
 import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import ProjectionService from "../services/ProjectionService";
 import { store } from "react-notifications-component";
 const PostProjection = () => {
- 
   const notificationSuccessful = {
-    title: "Successful", 
+    title: "Successful",
     message: "Projection added successfully!",
     type: "success",
     insert: "top",
@@ -14,8 +13,8 @@ const PostProjection = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 2500
-    }
+      duration: 2500,
+    },
   };
   const notificationUnSuccessful = {
     title: "Something went wrong!",
@@ -26,14 +25,12 @@ const PostProjection = () => {
     animationIn: ["animate__animated animate__fadeIn"],
     animationOut: ["animate__animated animate__fadeOut"],
     dismiss: {
-      duration: 1000
-    }
+      duration: 1000,
+    },
   };
 
   const projectionTime = useRef();
   const projectionDate = useRef();
-
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,25 +38,25 @@ const PostProjection = () => {
     const projectionTimeRef = projectionTime.current.value;
     const projectionDateRef = projectionDate.current.value;
 
-
     const projection = {
       date: projectionDateRef,
       time: projectionTimeRef,
     };
 
-    ProjectionService.createProjection(projection).then((response) => {
+    ProjectionService.createProjection(projection)
+      .then((response) => {
         if (response.data !== null) {
           store.addNotification({
             ...notificationSuccessful,
-            container: 'top-center'
-            })
+            container: "top-center",
+          });
         }
       })
       .catch(() => {
         store.addNotification({
           ...notificationUnSuccessful,
-          container: 'top-center'
-          })
+          container: "top-center",
+        });
       });
     window.location.reload();
   };
@@ -72,19 +69,17 @@ const PostProjection = () => {
           <Form.Control
             type="text"
             ref={projectionDate}
-
             placeholder="Write a title for the movie..."
             required
           />
         </Form.Group>
-        <br/>
+        <br />
         <Form.Group>
           <Form.Label>Projection time: </Form.Label>
           <Form.Control
             type="text"
             ref={projectionTime}
             placeholder="Write the maximum capacity of the room..."
-
             required
           />
         </Form.Group>

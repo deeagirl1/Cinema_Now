@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from "react";
-import NotFound from "../PageNotFound";
 import AuthService from "../services/AuthService";
 import MoviesService from "../services/MoviesService";
 import MovieList from "./MovieList";
@@ -7,14 +6,13 @@ import MovieTable from "./MovieTable";
 function MoviePage() {
   const [movies, setMovies] = useState(null);
 
-
   useEffect(() => {
     MoviesService.getMovies().then((response) => {
       setMovies(response.data);
     });
   }, []);
 
-  if (!movies) return <NotFound/>;
+  if (!movies) return <h1>Currently, there are no movies.</h1>;
 
   return (
     <div>
@@ -25,7 +23,6 @@ function MoviePage() {
           <MovieTable />
         )}
       {AuthService.getCurrentUser() === null && (
-
         <MovieList movies={movies}></MovieList>
       )}
 

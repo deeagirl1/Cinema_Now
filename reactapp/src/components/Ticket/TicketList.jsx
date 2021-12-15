@@ -1,19 +1,17 @@
 import React from "react";
 import TicketItem from "./TicketItem";
-function TicketList(props){
-
-    const handleDelete = (id) =>{
-        props.onDelete(id);
-    };
-
-return(
-    <ul>
-        {props.tickets.map((ticket)=>(
-            <UserItem key = {ticket.holder_id} user = {user} onDelete = {handleDelete}></UserItem>
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+function TicketList(props) {
+  return (
+    <Container sx={{ py: 1 }} maxWidth="md">
+      <Grid container spacing={5}>
+        {props.tickets.map((ticket) => (
+          <TicketItem key={ticket.id} movie={ticket}></TicketItem>
         ))}
-    </ul>
-    )
-
+      </Grid>
+    </Container>
+  );
 }
 
 export default TicketList;

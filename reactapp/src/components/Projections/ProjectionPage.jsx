@@ -20,22 +20,21 @@ function ProjectionPage() {
             >
               <h1>Projections</h1>
             </div>
-            <br/>
+            <br />
             <div className="container">
-            <ProjectionTable></ProjectionTable>
+              <ProjectionTable></ProjectionTable>
             </div>
           </>
         )}
 
-      {AuthService.getCurrentUser() === null && (
-           <NotFound/>
-      )}
+      {AuthService.getCurrentUser() === null && <NotFound />}
 
       {AuthService.getCurrentUser() !== null &&
         AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
-          <NotFound/>
+          <NotFound />
         )}
     </div>
-  )}
+  );
+}
 
 export default ProjectionPage;

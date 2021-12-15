@@ -3,7 +3,6 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import NotFound from "../PageNotFound";
 import { IconButton } from "@mui/material";
-import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import UserService from "../services/UserService";
 
@@ -62,16 +61,16 @@ export default function UserTable() {
 
   return (
     <div style={{ height: 700, width: "flex" }}>
-          <DataGrid
-            density="comfortable"
-            rows={users}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            disableColumnSelector
-            disableMultipleSelection={true}
-            disableSelectionOnClick={true}
-          />
+      <DataGrid
+        density="comfortable"
+        rows={users}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        disableColumnSelector
+        disableMultipleSelection={true}
+        disableSelectionOnClick={true}
+      />
     </div>
   );
 }

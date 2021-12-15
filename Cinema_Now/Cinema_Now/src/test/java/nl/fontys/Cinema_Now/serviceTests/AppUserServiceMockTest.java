@@ -1,19 +1,11 @@
 package nl.fontys.Cinema_Now.serviceTests;
 
-import nl.fontys.Cinema_Now.converters.NewsConverter;
 import nl.fontys.Cinema_Now.converters.UserConverter;
 import nl.fontys.Cinema_Now.dalInterfaces.IComplaintDAL;
 import nl.fontys.Cinema_Now.dalInterfaces.IProjectionDAL;
 import nl.fontys.Cinema_Now.dalInterfaces.ITicketDAL;
 import nl.fontys.Cinema_Now.dalInterfaces.IUserDAL;
-import nl.fontys.Cinema_Now.dto.NewsDTO;
-import nl.fontys.Cinema_Now.dto.UserDTO;
 import nl.fontys.Cinema_Now.model.AppUser;
-import nl.fontys.Cinema_Now.model.Complaint;
-import nl.fontys.Cinema_Now.model.Enums.TicketType;
-import nl.fontys.Cinema_Now.model.News;
-import nl.fontys.Cinema_Now.model.Ticket;
-import nl.fontys.Cinema_Now.service.NewsService;
 import nl.fontys.Cinema_Now.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +15,6 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -42,11 +33,10 @@ public class AppUserServiceMockTest {
     private IProjectionDAL projectionDAL;
 
     private UserService service;
-    private UserConverter converter = new UserConverter();
+    private final UserConverter converter = new UserConverter();
 
     @BeforeEach
-    public void setUp()
-    {
+    public void setUp() {
         service = new UserService(userDAL,converter);
         List<AppUser> appUsers = List.of(
                 new AppUser("1","Andreea","Sindrilaru","deeagirl1@gmail.com","Boschdijk 42-E",20),
@@ -114,8 +104,7 @@ public class AppUserServiceMockTest {
     }
 
     @Test
-    public void updateUserTest()
-    {
+    public void updateUserTest() {
         //act
         AppUser user =  service.getUserByID("1");
         user.setUsername("Test");

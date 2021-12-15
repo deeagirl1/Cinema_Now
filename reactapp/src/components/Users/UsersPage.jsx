@@ -47,9 +47,8 @@ function UserPage() {
               }}
             >
               <h1>Users</h1>
-              </div>
+            </div>
             <UserTable users={users} onDelete={deleteUser}></UserTable>
-        
           </>
         )}
     </div>

@@ -1,12 +1,11 @@
-import React from 'react';
-import UserPage from '../components/Users/UsersPage';
+import React from "react";
+import UserPage from "../components/Users/UsersPage";
 
 const Users = () => {
   return (
     <div className="container">
-      <UserPage/>
+      <UserPage />
     </div>
-
   );
 };
 

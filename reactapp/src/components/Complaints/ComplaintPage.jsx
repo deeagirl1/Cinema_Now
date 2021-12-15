@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import AuthService from "../services/AuthService";
 import ComplaintTable from "./ComplaintTable";
 import PostComplaint from "./PostComplaint";
