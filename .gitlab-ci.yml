@@ -30,12 +30,8 @@ cypress_tests:
     image: cypress/base:10
     script:
     - cd reactapp
-    # install dependencies
-    - npm install
-    # start the server in the background
-    - npm start
-    # run Cypress tests
-    - npm run runHeadless
+    - npx cypress run
+
 
 sonarqube:
   stage: sonarqube
