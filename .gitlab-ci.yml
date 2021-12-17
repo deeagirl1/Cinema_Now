@@ -32,6 +32,7 @@ cypress_tests:
     - cd reactapp
     - npx cypress run
 
+
 sonarqube:
   stage: sonarqube
   image: gradle:jre11-slim
