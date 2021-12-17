@@ -1,5 +1,5 @@
 beforeEach(() => {
-  cy.login("mari","123");
+  cy.login("andreea","123456");
   cy.saveLocalStorage();
 });
 

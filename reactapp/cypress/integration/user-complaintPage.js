@@ -2,7 +2,7 @@
 describe("renders the complaint page for user", ()=> {
 
   beforeEach(() => {
-    cy.login("mari","123");
+    cy.login("andreea","123456");
     cy.saveLocalStorage();
   });
   
@@ -12,7 +12,6 @@ describe("renders the complaint page for user", ()=> {
  
 it('SendComplaintUser', function() {
   cy.visit("/sign-in")
-
 
   /* ==== Generated with Cypress Studio ==== */
   cy.contains('Complaints').click();
