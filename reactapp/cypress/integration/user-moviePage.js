@@ -1,13 +1,8 @@
-beforeEach(() => {
-  cy.login("andreea","123456");
-  cy.saveLocalStorage();
-});
 
-beforeEach(() => {
-  cy.restoreLocalStorage();
-});
- 
  describe("renders the movie page", ()=> {
+  beforeEach(() => {
+    cy.login("andreea","123456");
+  });
     it("renders page correctly", ()=> {
       cy.visit("/schedule")
 
