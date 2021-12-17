@@ -44,9 +44,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cypress open",
-    "eject": "react-scripts eject",
-    "runHeadless": "./node_modules/.bin/cypress run --headless",
-    "runHeaded": "./node_modules/.bin/cypress run --headed --browser chrome 96"
+    "testHeadless": "cypress run --headless",
+    "eject": "react-scripts eject"
+  
   },
   "eslintConfig": {
     "extends": [
