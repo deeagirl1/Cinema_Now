@@ -71,6 +71,7 @@ const SignIn = () => {
           <Form.Control
             type="text"
             className="form-control"
+            id="username"
             placeholder="Enter your username"
             ref={username}
           />
@@ -79,12 +80,13 @@ const SignIn = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
+            id="password"
             placeholder="Enter your password"
             ref={password}
           />
           <br />
         </Form.Group>
-        <Button type="submit" className="btn btn-primary btn-block">
+        <Button type="submit" className="btn btn-primary btn-block"  id="submit">
           Submit
         </Button>
         <br /> <br />

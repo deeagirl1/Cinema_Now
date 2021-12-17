@@ -18,14 +18,15 @@ export default function ComplaintTable() {
   }, []);
 
   complaints.map((complaint) => {
-    return complaint["id"] = complaints.id;
+     complaint["id"] = complaint.id;
   });
 
   
 const columns = [
   { field: "title", headerName: "Title", flex: 1 },
-  { field: "description", headerName: "Description", flex: 1 },
-  { field: "postedAt", headerName: "Posted At", flex: 1 },
+  { field: "sentDate", headerName: "Sent on", flex: 1 },
+  { field: "container", headerName: "Container", flex: 1 },
+  { field: "sender", headerName: "Sender", flex: 1 },
 
   {
     field: "Actions",

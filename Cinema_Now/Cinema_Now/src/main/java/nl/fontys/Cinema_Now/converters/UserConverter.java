@@ -23,6 +23,7 @@ public class UserConverter {
         dto.setPassword(appUser.getPassword());
         dto.setLastName(appUser.getLastName());
         dto.setLoyal(appUser.isLoyal());
+        dto.setAge(appUser.getAge());
 
         for (Complaint complaint: appUser.getComplaints()) {
             if(complaint.getSender().equals(appUser))

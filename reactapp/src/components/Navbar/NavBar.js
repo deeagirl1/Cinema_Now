@@ -20,7 +20,7 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="/news">Cinema_Now</Navbar.Brand>
+        <Navbar.Brand href="/news" id ="home" >Cinema_Now</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -51,12 +51,12 @@ const NavBar = () => {
                     </Dropdown.Menu>
                   </Dropdown>
                   <Nav>
-                    <Nav.Link href="/received-complaints">
+                    <Nav.Link href="/received-complaints"  id ="receivedComplaints">
                       <CallReceivedIcon /> Received Complaints
                     </Nav.Link>
                   </Nav>
                   <Nav>
-                    <Nav.Link href="/users">
+                    <Nav.Link href="/users"  id ="users">
                       <PeopleIcon />
                       Users
                     </Nav.Link>
@@ -67,7 +67,7 @@ const NavBar = () => {
               AuthService.getCurrentUser().roles.includes("[ROLE_USER]") && (
                 <>
                   <Nav>
-                    <Nav.Link href="/news">
+                    <Nav.Link href="/news"  id ="news">
                       {" "}
                       <NewspaperIcon /> News{" "}
                     </Nav.Link>
@@ -78,13 +78,13 @@ const NavBar = () => {
                     </Nav.Link>
                   </Nav>
                   <Nav>
-                    <Nav.Link href="/complaints">
+                    <Nav.Link href="/complaints"  id ="complaints">
                       {" "}
                       <FeedbackIcon /> Complaints
                     </Nav.Link>
                   </Nav>
                   <Nav>
-                    <Nav.Link href="/chat">
+                    <Nav.Link href="/chat"  id ="chat">
                       {" "}
                       <Chat /> Chat
                     </Nav.Link>
@@ -110,14 +110,14 @@ const NavBar = () => {
           {AuthService.getCurrentUser() === null && (
             <>
               <Nav>
-                <Nav.Link href="/sign-in">
+                <Nav.Link href="/sign-in"  id ="signIn">
                   {" "}
                   Login <LoginIcon />
                 </Nav.Link>
               </Nav>
               &nbsp;&nbsp;
               <Nav>
-                <Nav.Link href="/sign-up">
+                <Nav.Link href="/sign-up"  id ="signUp">
                   {" "}
                   Register <SignUpIcon />
                 </Nav.Link>
@@ -134,15 +134,15 @@ const NavBar = () => {
                       <AccountCircleIcon /> Profile
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/profile" id="rooms">
+                      <Dropdown.Item href="/profile" id="myAcoount">
                         My Account
                       </Dropdown.Item>
-                      <Dropdown.Item href="/myTickets" id="addMovies">
+                      <Dropdown.Item href="/myTickets" id="myTickets">
                         <Icon icon="entypo:ticket" /> My Tickets
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Nav.Link href="/sign-out" alt="">
+                  <Nav.Link href="/sign-out"  id ="signOut">
                     Sign Out <SignOutIcon />
                   </Nav.Link>
                 </Nav>
@@ -157,12 +157,12 @@ const NavBar = () => {
                       <AccountCircleIcon /> Profile
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                      <Dropdown.Item href="/profile" id="rooms">
+                      <Dropdown.Item href="/profile" id="profile">
                         My Account
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
-                  <Nav.Link href="/sign-out" alt="">
+                  <Nav.Link href="/sign-out" id="signOut">
                     Sign Out <SignOutIcon />
                   </Nav.Link>
                 </Nav>

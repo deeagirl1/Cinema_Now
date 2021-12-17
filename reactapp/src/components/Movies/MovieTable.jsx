@@ -43,7 +43,7 @@ export default function MovieTable(props) {
   };
 
   movies.map((movie) => {
-    movie["id"] = movies.id;
+    movie["id"] = movie.id;
   });
 
   const columns = [

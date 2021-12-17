@@ -157,6 +157,7 @@ const PostMovie = () => {
           <Form.Control
             type="text"
             ref={movieName}
+            id="title"
             placeholder="Write a title for the movie..."
             required
           />
@@ -165,7 +166,7 @@ const PostMovie = () => {
         <Form.Group>
           <Form.Label>Genre: </Form.Label>
           <br />
-          <Form.Control as="select" onChange={handleChangeGenre} required>
+          <Form.Control as="select" onChange={handleChangeGenre} id="genre" required>
             <option value=""> -- Select a genre -- </option>
             {genreItems.map((option, index) => (
               <option key={index} value={option} ref={movieGenre}>
@@ -180,6 +181,7 @@ const PostMovie = () => {
           <Form.Control
             type="text"
             ref={movieReleaseDate}
+            id="releaseDate"
             placeholder="Select the release date..."
             required
           />
@@ -191,6 +193,7 @@ const PostMovie = () => {
           <Form.Control
             type="number"
             ref={movieDuration}
+            id="duration"
             placeholder="Write the duration of the movie in minutes..."
             min="0"
             required
@@ -201,6 +204,7 @@ const PostMovie = () => {
           <Form.Label>Description: </Form.Label>
           <Form.Control
             type="text"
+            id="description"
             ref={movieDescription}
             placeholder="Write the description of the movie..."
             required
@@ -210,7 +214,7 @@ const PostMovie = () => {
         <Form.Group>
           <Form.Label>Format: </Form.Label>
           <br />
-          <Form.Control as="select" onChange={handleChangeFormat} required>
+          <Form.Control as="select" onChange={handleChangeFormat} id="format" required>
             <option value=""> -- Select a format -- </option>
             {formatItems.map((option, index) => (
               <option key={index} value={option} ref={movieFormat}>
@@ -224,6 +228,7 @@ const PostMovie = () => {
           <Form.Label>Director: </Form.Label>
           <Form.Control
             type="text"
+            id="director"
             ref={movieDirector}
             placeholder="Write a title..."
             required
@@ -273,7 +278,7 @@ const PostMovie = () => {
           </Form.Control>
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" id="submit">
           Submit
         </Button>
       </Form>

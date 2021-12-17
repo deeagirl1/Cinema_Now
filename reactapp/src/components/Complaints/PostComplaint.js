@@ -106,6 +106,7 @@ const PostComplaint = () => {
             <Form.Control
               type="text"
               ref={title}
+              id="title"
               placeholder="Write a title..."
               required
             />
@@ -117,6 +118,7 @@ const PostComplaint = () => {
               as="textarea"
               ref={container}
               rows="3"
+              id="container"
               name="complaint"
               placeholder="Write your complaint..."
               required
@@ -125,6 +127,7 @@ const PostComplaint = () => {
           <Button
             variant="primary"
             type="submit"
+            id="submit"
             style={{ alignSelf: "center" }}
           >
             Submit

@@ -71,6 +71,7 @@ public class UserService implements IUserService {
                 updatedAppUser.setEmail(user.getEmail());
                 updatedAppUser.setAddress(user.getAddress());
                 updatedAppUser.setUsername(user.getUsername());
+                updatedAppUser.setAge(user.getAge());
 
                 return dal.editUser(updatedAppUser);
             }

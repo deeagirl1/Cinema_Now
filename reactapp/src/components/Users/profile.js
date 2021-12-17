@@ -12,9 +12,35 @@ import {
   Typography,
 } from "@mui/material";
 import SignIn from "../signin_component";
+import { store } from "react-notifications-component";
 
 const Profile = (props) => {
   const [profile, setProfile] = useState("");
+  const notificationSuccessful = {
+    title: "Successful",
+    message: "Successfully registered!",
+    type: "success",
+    insert: "top",
+    container: "top-center",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 2500,
+    },
+  };
+  const notificationUnSuccessful = {
+    title: "Something went wrong!",
+    message: "Please try again!",
+    type: "danger",
+    insert: "top",
+    container: "top-center",
+    animationIn: ["animate__animated animate__fadeIn"],
+    animationOut: ["animate__animated animate__fadeOut"],
+    dismiss: {
+      duration: 1000,
+    },
+  };
+
 
   useEffect(() => {
     UserService.getUserByUsername(AuthService.getCurrentUser().user).then(
@@ -33,14 +59,13 @@ const Profile = (props) => {
     });
   };
 
-  const handleSubmitButton = (profile) => {
+  const handleSubmitForm = (profile) => {
     UserService.editUser(profile);
-    console.log(profile);
   };
 
   return (
     <div className="container">
-      <form autoComplete="off" noValidate {...props}>
+      <form autoComplete="off" noValidate {...props} onClick={handleSubmitForm(profile)}>
         <Card {...props}>
           <CardContent>
             <Box
@@ -50,7 +75,7 @@ const Profile = (props) => {
                 flexDirection: "column",
               }}
             >
-              <Typography color="textPrimary" gutterBottom variant="h5">
+              <Typography color="textPrimary" gutterBottom variant="h5" >
                 {profile.firstName} {profile.lastName}
               </Typography>
               <Typography color="textSecondary" variant="body2">
@@ -156,7 +181,7 @@ const Profile = (props) => {
             <Button
               color="primary"
               variant="contained"
-              onClick={handleSubmitButton(profile)}
+         
             >
               Save
             </Button>

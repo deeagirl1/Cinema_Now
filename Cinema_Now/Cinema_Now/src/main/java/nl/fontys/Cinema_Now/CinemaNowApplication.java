@@ -44,9 +44,9 @@ public class CinemaNowApplication {
 			userService.saveRole(role1);
 			userService.saveRole(role2);
 
-				UserDTO user1 = new UserDTO(null,"mari","Maria","Zavaranu","123", "Str. Laleleor nr.4", "m.zavaroanu@gmail.com",false, new ArrayList<>(), new ArrayList<>());
-				UserDTO user2 = new UserDTO(null,"puyaeboss","Puya","Oancea","123","Str. Logofatul Tautu nr.4", "m.zavaroanu@gmail.com",true, new ArrayList<>(), new ArrayList<>());
-				UserDTO user3 = new UserDTO(null,"oanceaa","Maria","Oancea","123","Str. Alexandru Vlahuta", "m.zavaroanu@gmail.com", false, new ArrayList<>(), new ArrayList<>());
+				UserDTO user1 = new UserDTO(null,"mari","Maria","Zavaranu","123", "Str. Laleleor nr.4",20, "m.zavaroanu@gmail.com",false, new ArrayList<>(), new ArrayList<>());
+				UserDTO user2 = new UserDTO(null,"puyaeboss","Puya","Oancea","123","Str. Logofatul Tautu nr.4",20, "m.zavaroanu@gmail.com",true, new ArrayList<>(), new ArrayList<>());
+				UserDTO user3 = new UserDTO(null,"oanceaa","Maria","Oancea","123","Str. Alexandru Vlahuta",20, "m.zavaroanu@gmail.com", false, new ArrayList<>(), new ArrayList<>());
 
 			userService.addUser(user1);
 			userService.addUser(user2);

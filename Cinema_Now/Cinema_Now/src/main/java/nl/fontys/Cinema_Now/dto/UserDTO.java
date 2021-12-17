@@ -15,9 +15,13 @@ public class UserDTO {
     private String lastName;
     private String password;
     private String address;
+    private int age;
     private String email;
     private boolean isLoyal;
     private Collection<String> tickets;
     private Collection<String> complaints;
+
+
+
 
 }

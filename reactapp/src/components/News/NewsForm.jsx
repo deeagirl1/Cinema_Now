@@ -78,6 +78,7 @@ const NewsForm = () => {
           <Form.Control
             type="text"
             ref={title}
+            id="title"
             placeholder="Write a title..."
             required
           />
@@ -89,12 +90,12 @@ const NewsForm = () => {
             as="textarea"
             ref={description}
             rows="3"
-            name="complaint"
-            placeholder="Write your complaint..."
+            id="description"
+            placeholder="Write a description for the post..."
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit" style={{ alignSelf: "center" }}>
+        <Button variant="primary" type="submit" id="submit" style={{ alignSelf: "center" }}>
           Submit
         </Button>
       </Form>

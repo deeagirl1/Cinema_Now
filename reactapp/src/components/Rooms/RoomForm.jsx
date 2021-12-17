@@ -71,6 +71,7 @@ const PostRoom = () => {
             type="number"
             ref={roomName}
             min="0"
+            id="roomNumber"
             placeholder="Write a title for the movie..."
             required
           />
@@ -81,13 +82,14 @@ const PostRoom = () => {
           <Form.Control
             type="number"
             ref={roomCapacity}
+            id="capacity"
             placeholder="Write the maximum capacity of the room..."
             min="0"
             required
           />
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" id="submit">
           Submit
         </Button>
       </Form>

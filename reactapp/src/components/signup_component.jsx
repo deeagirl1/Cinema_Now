@@ -71,16 +71,6 @@ const vpassword = (value) => {
   }
 };
 
-// const vconfirmpassword = (value) => {
-//   if (value != vpassword) {
-//     return (
-//       <div className="alert alert-danger" role="alert">
-//         Passwords do not match.
-//       </div>
-//     );
-//   }
-// };
-
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -273,7 +263,7 @@ export default class Register extends Component {
                 </div>
                 <br />
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block">Sign Up</button>
+                  <button className="btn btn-primary btn-block" id="submit">Sign Up</button>
                 </div>
               </div>
             )}

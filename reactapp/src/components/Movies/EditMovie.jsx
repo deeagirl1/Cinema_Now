@@ -168,6 +168,7 @@ const EditMovie = () => {
           <Form.Label>Title: </Form.Label>
           <Form.Control
             type="text"
+            id="title"
             ref={movieName}
             defaultValue={movie.name}
             placeholder="Write a title for the movie..."
@@ -178,7 +179,7 @@ const EditMovie = () => {
         <Form.Group>
           <Form.Label>Genre: </Form.Label>
           <br />
-          <Form.Control as="select" onChange={handleChangeGenre} required>
+          <Form.Control as="select" onChange={handleChangeGenre} id="genre" required>
             {genreItems.map((option, index) => (
               <option
                 key={index}
@@ -195,6 +196,7 @@ const EditMovie = () => {
           <Form.Label>Release Date: </Form.Label>
           <Form.Control
             type="text"
+            id="releaseDate"
             ref={movieReleaseDate}
             defaultValue={movie.releaseDate}
             placeholder="Select the release date..."
@@ -207,6 +209,7 @@ const EditMovie = () => {
           <Form.Label>Duration: </Form.Label>
           <Form.Control
             type="number"
+            id="duration"
             ref={movieDuration}
             defaultValue={movie.duration}
             placeholder="Write the duration of the movie in minutes..."
@@ -219,6 +222,7 @@ const EditMovie = () => {
           <Form.Label>Description: </Form.Label>
           <Form.Control
             type="text"
+            id="description"
             ref={movieDescription}
             defaultValue={movie.description}
             placeholder="Write the description of the movie..."
@@ -229,7 +233,7 @@ const EditMovie = () => {
         <Form.Group>
           <Form.Label>Format: </Form.Label>
           <br />
-          <Form.Control as="select" onChange={handleChangeFormat} required>
+          <Form.Control as="select" onChange={handleChangeFormat}  id="format" required>
             {formatItems.map((option, index) => (
               <option
                 key={index}
@@ -249,6 +253,7 @@ const EditMovie = () => {
             ref={movieDirector}
             defaultValue={movie.director}
             placeholder="Write a title..."
+            id="director"
             required
           />
         </Form.Group>
@@ -291,7 +296,7 @@ const EditMovie = () => {
           </Form.Control>
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"  id="submit">
           Submit
         </Button>
       </Form>

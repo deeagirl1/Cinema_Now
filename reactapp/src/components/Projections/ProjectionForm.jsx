@@ -69,6 +69,7 @@ const PostProjection = () => {
           <Form.Control
             type="text"
             ref={projectionDate}
+            id="projectionDate"
             placeholder="Write a title for the movie..."
             required
           />
@@ -79,12 +80,13 @@ const PostProjection = () => {
           <Form.Control
             type="text"
             ref={projectionTime}
+            id="projectionTime"
             placeholder="Write the maximum capacity of the room..."
             required
           />
         </Form.Group>
         <br />
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" id="submit">
           Submit
         </Button>
       </Form>

@@ -119,7 +119,7 @@ const CreateTicket = () => {
         <Form.Group>
           <Form.Label>Ticket type: </Form.Label>
           <br />
-          <Form.Control as="select" onChange={handleTicketType} required>
+          <Form.Control as="select" onChange={handleTicketType}  id="ticketType" required>
             <option value=""> -- Select a ticket type -- </option>
             {ticketTypes.map((option, index) => (
               <option key={index} value={JSON.stringify(index)}>
@@ -135,11 +135,12 @@ const CreateTicket = () => {
             type="number"
             placeholder="Write the amount of people..."
             min="0"
+            id="amountOfPeople"
             ref={ticketAmountOfPeople}
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"  id="submit">
           Next{" "}
         </Button>
       </Form>
