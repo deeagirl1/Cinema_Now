@@ -49,8 +49,7 @@ sonarqube:
     -  ./gradlew sonarqube
     -  ./gradlew.bat --stop
   allow_failure: true
-  only:
-    - main # or the name of your main branch
+
   
   docker: 
     stage: docker
@@ -64,3 +63,7 @@ sonarqube:
     - docker build -t backend .
     - replace "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\override\test" "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\src\main\resources"
     - ./gradlew.bat --stop
+
+  only:
+    - main # or the name of your main branch
+    
