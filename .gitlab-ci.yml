@@ -52,15 +52,15 @@ sonarqube:
   only:
     - main # or the name of your main branch
   
-  docker: 
+docker: 
     stage: docker
     script: 
     - cd reactapp
     - docker build -t frontend .
-    - cd . .
+    - cd ..
     - cd Cinema_Now/Cinema_Now
-    - replace "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\override\prod" "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\src\main\resources"
+    - replace "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\override\prod\application.properties" "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\src\main\resources"
     - ./gradlew build -x test
     - docker build -t backend .
-    - replace "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\override\test" "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\src\main\resources"
+    - replace "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\override\test\application.properties" "C:\Users\lungu\Desktop\individual-track-assignment-andreea-indrilaru\Cinema_Now\Cinema_Now\src\main\resources"
     - ./gradlew.bat --stop
