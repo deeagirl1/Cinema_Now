@@ -31,6 +31,7 @@ cypress_tests:
     image: cypress/base:10
     script:
     - cd reactapp
+    - npm install
     - npx cypress run
 
 
