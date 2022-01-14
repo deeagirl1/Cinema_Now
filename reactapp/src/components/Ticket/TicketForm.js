@@ -5,34 +5,9 @@ import TicketService from "../services/TicketService";
 import MoviesService from "../services/MoviesService";
 import UserService from "../services/UserService";
 import { useLocation, useHistory } from "react-router-dom";
-import { store } from "react-notifications-component";
 import AuthService from "../services/AuthService";
 
 const CreateTicket = () => {
-  const notificationSuccessful = {
-    title: "Successful",
-    message: "Complaint sent successfully!",
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 2500,
-    },
-  };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: "Please try again!",
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
 
   const location = useLocation();
   const id = location.state.data.movieId;
@@ -44,7 +19,7 @@ const CreateTicket = () => {
   const [, setTicket] = useState("");
   const [movie, setMovie] = useState("");
   const [holder, setHolder] = useState("");
-
+ 
   const user = AuthService.getCurrentUser().user;
 
   const ticketAmountOfPeople = useRef();
@@ -74,6 +49,7 @@ const CreateTicket = () => {
     setSelectedType(obj);
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const ticketAmountOfPeopleRef = ticketAmountOfPeople.current.value;
@@ -87,28 +63,13 @@ const CreateTicket = () => {
       amountOfPeople: ticketAmountOfPeopleRef,
     };
     TicketService.createTicket(ticket)
-      .then((response) => {
-        if (response.data !== null) {
-          store.addNotification({
-            ...notificationSuccessful,
-            container: "top-center",
-          });
-        }
-      })
-      .catch(() => {
-        store.addNotification({
-          ...notificationUnSuccessful,
-          container: "top-center",
-        });
-      });
     setTicket(ticket);
     history.push("/confirmTicket", ticket);
   };
 
-  if (!holder) return null;
 
   return (
-    <div>
+    <div className="container">
       <Form onSubmit={handleSubmit}>
         <Form.Group>
           <Form.Label>Ticket details </Form.Label>
@@ -140,8 +101,9 @@ const CreateTicket = () => {
             required
           />
         </Form.Group>
+        <br/>
         <Button variant="primary" type="submit"  id="submit">
-          Next{" "}
+          Next
         </Button>
       </Form>
     </div>

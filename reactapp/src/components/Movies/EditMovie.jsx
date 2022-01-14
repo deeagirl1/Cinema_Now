@@ -4,34 +4,12 @@ import Form from "react-bootstrap/Form";
 import MoviesService from "../services/MoviesService";
 import RoomService from "../services/RoomService";
 import ProjectionService from "../services/ProjectionService";
-import { store } from "react-notifications-component";
 
 const EditMovie = () => {
-  const notificationSuccessful = {
-    title: "Successful!",
-    message: "Movie edited successfully",
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 2500,
-    },
-  };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: "Please try again!",
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
 
+  let param = window.location.pathname;
+  let id = param.split("/").pop();
+  
   const [genreItems, setGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
 
@@ -48,28 +26,21 @@ const EditMovie = () => {
     MoviesService.getGenres().then((response) => {
       setGenre(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     MoviesService.getFormats().then((response) => {
       setFormats(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     RoomService.getRooms().then((response) => {
       setRooms(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     ProjectionService.getProjections().then((response) => {
+      console.log(response.data);
       setProjection(response.data);
     });
+
   }, []);
 
-  let param = window.location.pathname;
-  let id = param.split("/").pop();
+
+
 
   const [movie, setMovie] = useState(null);
 
@@ -82,16 +53,14 @@ const EditMovie = () => {
 
   const handleChangeGenre = (e) => {
     let obj = e.target.value; //genre object
-    console.log(obj);
     setSelectedGenre(obj);
   };
   const handleChangeFormat = (e) => {
     let obj = e.target.value; //format object
-    console.log(obj);
     setSelectFormats(obj);
   };
   const handleChangeRoom = (e) => {
-    let obj = e.target.value; //format object
+    let obj = e.target.value; //room object
     console.log(obj);
     setSelectedRoom(JSON.parse(obj));
   };
@@ -121,10 +90,8 @@ const EditMovie = () => {
     const movieDurationRef = movieDuration.current.value;
     const movieReleaseDateRef = movieReleaseDate.current.value;
     const movieDescriptionRef = movieDescription.current.value;
-    const movieFormatRef = selectedFormats.current.value;
-    const movieDirectorRef = movieDirector;
-    const movieRoomRef = selectedRoom.id;
-    const movieProjectionRef = selectedProjection.id;
+    const movieFormatRef = selectedFormats;
+    const movieDirectorRef = movieDirector.current.value;
 
     const movie = {
       id: id,
@@ -135,28 +102,13 @@ const EditMovie = () => {
       description: movieDescriptionRef,
       format: movieFormatRef,
       director: movieDirectorRef,
-      roomId: movieRoomRef,
-      projections: movieProjectionRef,
+      roomId: selectedRoom.id,
+      projections: selectedProjection,
     };
 
-    console.log(movie);
 
-    MoviesService.editMovie(movie)
-      .then((response) => {
-        if (response.data !== null) {
-          store.addNotification({
-            ...notificationSuccessful,
-            container: "top-center",
-          });
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        store.addNotification({
-          ...notificationUnSuccessful,
-          container: "top-center",
-        });
-      });
+    MoviesService.editMovie(movie);
+      
   };
 
   if (!movie) return null;
@@ -184,7 +136,7 @@ const EditMovie = () => {
               <option
                 key={index}
                 defaultValue={movie.genre}
-                value={JSON.stringify(index)}
+                value={index}
               >
                 {option}
               </option>
@@ -238,7 +190,7 @@ const EditMovie = () => {
               <option
                 key={index}
                 defaultValue={movie.format}
-                value={JSON.stringify(index)}
+                value={index}
               >
                 {option}
               </option>
@@ -269,7 +221,9 @@ const EditMovie = () => {
             {roomItems.map((option, index) => (
               <option key={index} value={JSON.stringify(option)}>
                 {option.name}
+     
               </option>
+              
             ))}
           </Form.Control>
         </Form.Group>
@@ -281,7 +235,6 @@ const EditMovie = () => {
             as="select"
             multiple
             onChange={handleChangeProjection}
-            required
             id="projection"
           >
             {projectionItems.map((option, index) => (

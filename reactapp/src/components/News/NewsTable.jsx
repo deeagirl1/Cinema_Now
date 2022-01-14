@@ -23,7 +23,9 @@ export default function NewsTable() {
     });
   }, []);
 
+  // eslint-disable-next-line
   news.map((post) => {
+    // eslint-disable-next-line
      post["id"] = post.id;
   });
 

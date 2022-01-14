@@ -10,7 +10,7 @@ import Users from "./pages/users";
 import SignUp from "./pages/signup";
 import SignIn from "./pages/signin";
 import SignOut from "./pages/signout";
-import buyTicket from "./pages/buyTicket";
+import TicketPage from "./components/Ticket/TicketPage";
 import Profile from "./components/Users/profile";
 import NotFound from "./components/PageNotFound";
 import MovieList from "./components/Movies/MovieList";
@@ -36,7 +36,7 @@ function App() {
           <Route path="/sign-up" component={SignUp} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/sign-out" component={SignOut} />
-          <Route path="/buyTicket" component={buyTicket} />
+          <Route path="/buy-ticket" component={TicketPage} />
           <Route path="/ticket" component={QRCodeGenerator} />
           <Route path="/users" component={Users} />
           <Route path="/profile" component={Profile} />

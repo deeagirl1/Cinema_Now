@@ -22,7 +22,9 @@ export default function NewsTable() {
     });
   }, []);
 
+  // eslint-disable-next-line
   projections.map((projection) => {
+    // eslint-disable-next-line
       projection["id"] = projection.id;
   });
 
@@ -38,7 +40,7 @@ export default function NewsTable() {
             <IconButton
               aria-label="edit"
               onClick={() => {
-                handleClick(1, cellValues);
+                handleClick(0, cellValues);
               }}
             >
               <Edit />
@@ -46,7 +48,7 @@ export default function NewsTable() {
             <IconButton
               aria-label="delete"
               onClick={() => {
-                handleClick(2, cellValues);
+                handleClick(1, cellValues);
               }}
             >
               <Delete />
@@ -58,18 +60,7 @@ export default function NewsTable() {
   ];
 
   const handleDelete = (id) => {
-    ProjectionService.deleteProjection(id)
-      .then((response) => {
-        if (response.data !== null) {
-          alert("Projection deleted succesfully.");
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        <div className="alert alert-danger" role="alert">
-          Houston, we have a problem! Please try again.
-        </div>;
-      });
+    ProjectionService.deleteProjection(id);
   };
 
   function handleClick(mode, selected) {
@@ -99,7 +90,7 @@ export default function NewsTable() {
           size="lg"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Movie information</Modal.Title>
+            <Modal.Title>Projection information</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <ProjectionForm />

@@ -1,12 +1,8 @@
 
  describe("renders the movie page", ()=> {
-  beforeEach(() => {
-    cy.login("andreea","123456");
-  });
     it("renders page correctly", ()=> {
+      cy.login("andreea","123456");
       cy.visit("/schedule")
-
-
       /* ==== Generated with Cypress Studio ==== */
       cy.get(':nth-child(1) > .card > .card-body > .card-text > div > .btn').click();
       cy.get('#ticketType').select('1');

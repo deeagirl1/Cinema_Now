@@ -12,11 +12,11 @@ class UserService {
       headers: authHeader(),
     });
   }
-  editUser(profile) {
-    return axios.put(USERS_API_BASE_URL, profile, { headers: authHeader() });
+  async editUser(profile) {
+    return await axios.put(USERS_API_BASE_URL, profile, { headers: authHeader() });
   }
-  deleteUser(userId) {
-    return axios.delete(USERS_API_BASE_URL, userId, { headers: authHeader() });
+  async deleteUser(userId) {
+    return await axios.delete(USERS_API_BASE_URL, userId, { headers: authHeader() });
   }
 }
 

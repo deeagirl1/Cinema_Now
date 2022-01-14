@@ -10,6 +10,7 @@ public interface IMovieDAL {
     List<Movie> getAllMovies();
     boolean addMovie(Movie movie);
     boolean editMovie(Movie movie);
+    boolean editMovieWithoutPicture(Movie movie);
     boolean deleteMovie(String id);
     List<Movie> getMoviesByProjectionDate(String date);
 

@@ -18,18 +18,7 @@ export default function MovieTable(props) {
   const [movies, setMovies] = useState([]);
 
   const handleDelete = (id) => {
-    MovieService.deleteMovie(id)
-      .then((response) => {
-        if (response.data !== null) {
-          alert("Movie deleted succesfully.");
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        <div className="alert alert-danger" role="alert">
-          Houston, we have a problem! Please try again.
-        </div>;
-      });
+    MovieService.deleteMovie(id);
   };
 
   useEffect(() => {
@@ -41,8 +30,9 @@ export default function MovieTable(props) {
       setMovies(response.data);
     });
   };
-
+  // eslint-disable-next-line
   movies.map((movie) => {
+    // eslint-disable-next-line
     movie["id"] = movie.id;
   });
 
@@ -50,41 +40,6 @@ export default function MovieTable(props) {
     { field: "name", headerName: "Movie Name", flex: 1 },
     { field: "releaseDate", headerName: "Release Date", flex: 1 },
     { field: "description", headerName: "Description", flex: 1 },
-    // {
-    //   field: "projections.date",
-    //   headerName: "Dates of projection",
-    //   flex: 1,
-    //   renderCell: (cellValues) => {
-    //     return (
-    //       <div>
-    //           {movies.map((option, index) => (
-    //             <option value={JSON.stringify(option.projections.date)}>
-    //             {option.projections[index].date}
-    //           </option>
-    //         ))}
-    //       </div>
-    //     );
-    //   },
-    // },
-    // {
-    //   field: "time",
-    //   headerName: "Time",
-    //   flex: 1,
-    //   renderCell: (cellValues) => {
-    //     return (
-    //       <div>
-    //         <select as="select" required>
-    //         <option value=""> -- Select a genre -- </option>
-    //           {movies.map((option, index) => (
-    //             <option key={index} value={JSON.stringify(option)}>
-    //             {option.projections[index].time}
-    //           </option>
-    //         ))}
-    //         </select>
-    //       </div>
-    //     );
-    //         },
-    // },
     {
       field: "Actions",
       flex: 1,
@@ -118,9 +73,6 @@ export default function MovieTable(props) {
       case 0:
         window.history.pushState({}, "", "/editMovie/" + selected.row.id);
         window.location.replace("/editMovie/" + selected.row.id);
-        {
-          console.log(selected.row.id);
-        }
         break;
 
       case 1:

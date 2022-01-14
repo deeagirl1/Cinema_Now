@@ -4,34 +4,9 @@ import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import NewsService from "../services/NewsService";
 import moment from "moment";
-import { store } from "react-notifications-component";
+
 
 const NewsForm = () => {
-  const notificationSuccessful = {
-    title: "Successful",
-    message: "Post added successfully!",
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 2500,
-    },
-  };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: "Please try again!",
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
-
   const title = useRef();
   const description = useRef();
 
@@ -48,21 +23,7 @@ const NewsForm = () => {
     console.log(newsPost);
 
     NewsService.createNewPost(newsPost)
-      .then((response) => {
-        if (response.data !== null) {
-          store.addNotification({
-            ...notificationSuccessful,
-            container: "top-center",
-          });
-        }
-      })
-      .catch(() => {
-        store.addNotification({
-          ...notificationUnSuccessful,
-          container: "top-center",
-        });
-      });
-    window.location.reload();
+   
   };
 
   let menu = "";

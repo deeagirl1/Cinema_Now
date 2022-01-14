@@ -1,9 +1,9 @@
 stages:
   - build
+  - sonarqube
   - test
   - postman_tests
   - cypress_tests
-  - sonarqube
   - docker
 
 build:
@@ -24,7 +24,7 @@ postman_tests:
     stage: postman_tests
     script:
       - cd C:\Users\lungu\AppData\Roaming\npm
-      - ./newman run https://www.getpostman.com/collections/50713e214c37351c69eb
+      - ./newman run https://www.getpostman.com/collections/08e733ef0844ca478a91
 
 cypress_tests:
     stage: cypress_tests

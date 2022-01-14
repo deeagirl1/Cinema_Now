@@ -12,34 +12,9 @@ import {
   Typography,
 } from "@mui/material";
 import SignIn from "../signin_component";
-import { store } from "react-notifications-component";
 
 const Profile = (props) => {
   const [profile, setProfile] = useState("");
-  const notificationSuccessful = {
-    title: "Successful",
-    message: "Successfully registered!",
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 2500,
-    },
-  };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: "Please try again!",
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
 
 
   useEffect(() => {

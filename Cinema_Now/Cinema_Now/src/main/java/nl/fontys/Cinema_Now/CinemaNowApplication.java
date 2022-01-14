@@ -56,7 +56,8 @@ public class CinemaNowApplication {
 			userService.addRoleToUser(user2.getUsername(), role1.getName());
 			userService.addRoleToUser(user3.getUsername(), role2.getName());
 
-			NewsDTO news = new NewsDTO(null,"test","test","26/05/2021");
+			NewsDTO news = new NewsDTO(null,"Vaccine Required","Dear clients, \n" +
+					"From tomorrow, in order to enter the building, you will need to show your vaccination certificate","26/09/2021");
 			newsService.createNewPost(news);
 
 

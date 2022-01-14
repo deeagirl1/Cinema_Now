@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import img from "./pictures/img1.jpg";
 import Grid from "@mui/material/Grid";
 import { useHistory } from "react-router-dom";
+
+
 
 function MovieItem(props) {
   const history = useHistory();
@@ -11,18 +12,34 @@ function MovieItem(props) {
       movieId: props.movie.id,
       projectiondId: projectionId,
     };
+    if (isLoggedIn === true)
+    {
     history.push({
-      pathname: "/buyTicket",
+      pathname: "/buy-ticket",
       search: "?data=data",
       state: { data: data },
     });
+    }
+    else
+    {
+      history.push("/sign-in")
+    }
   };
+
+  let isLoggedIn= false;
+  let user = localStorage.getItem('user');
+  if(user !== null){
+    isLoggedIn = true; 
+  }
+  else{
+    isLoggedIn = false;
+  }
 
   return (
     <>
       <Grid item key={props.movie.name} xs={10} sm={15} md={6}>
         <Card style={{ backgroundColor: "lightGray", width: "18rem" }}>
-          <Card.Img variant="center" src={img} />
+          <Card.Img variant="center" src={props.movie.movieImage} style = {{height: "300px"}} />
           <Card.Body>
             <Card.Title>{props.movie.name}</Card.Title>
             <Card.Text>

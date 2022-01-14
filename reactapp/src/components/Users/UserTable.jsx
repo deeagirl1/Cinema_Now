@@ -2,8 +2,6 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import NotFound from "../PageNotFound";
-import { IconButton } from "@mui/material";
-import Delete from "@material-ui/icons/Delete";
 import UserService from "../services/UserService";
 
 const columns = [
@@ -11,37 +9,9 @@ const columns = [
   { field: "lastName", headerName: "Last name", flex: 1 },
   { field: "loyal", headerName: "isLoyal", flex: 1 },
   { field: "email", headerName: "Email address", flex: 1 },
-
-  {
-    field: "Actions",
-    flex: 1,
-    renderCell: (cellValues) => {
-      return (
-        <div>
-          <IconButton
-            aria-label="delete"
-            onClick={() => {
-              handleClick(0, cellValues);
-            }}
-          >
-            <Delete />
-          </IconButton>
-        </div>
-      );
-    },
-  },
 ];
 
-function handleClick(mode, selected) {
-  switch (mode) {
-    case 0:
-      window.history.pushState({}, "", "/movie/" + selected.row.id);
-      break;
-    default:
-      window.history.pushState(selected.row.id);
-      break;
-  }
-}
+
 
 export default function UserTable() {
   const [users, setUsers] = useState([]);
@@ -53,7 +23,9 @@ export default function UserTable() {
     });
   }, []);
 
+  // eslint-disable-next-line
   users.map((user) => {
+    // eslint-disable-next-line
     user["id"] = user.id;
   });
 

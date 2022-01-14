@@ -44,7 +44,14 @@ public class Movie  {
     @OneToOne
     private Room room;
 
-    @ManyToMany()
+    @Column(name = "movieImage", nullable = false)
+    private String imageName;
+
+    @Column(name = "imageData", nullable = false)
+    @Lob
+    private byte[] imageData;
+
+    @ManyToMany(cascade= {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
     private Collection<Projection> projections = new ArrayList<>();
 
     public Movie() {
@@ -131,16 +138,22 @@ public class Movie  {
         this.projections = projections;
     }
 
-    public Movie(@NotNull String name, @NotNull Genre genre, int duration, @NotNull String releaseDate, @NotNull String description, @NotNull Format format)
-   {
-
-        this.name = name;
-        this.genre = genre;
-        this.duration= duration;
-        this.releaseDate = releaseDate;
-        this.description = description;
-        this.format = format;
+    public String getImageName() {
+        return imageName;
     }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
     public Movie(String id, @NotNull String name, @NotNull Genre genre, int duration, @NotNull String releaseDate, @NotNull String description, @NotNull Format format) {
         this.id = id;
         this.name = name;
@@ -174,6 +187,35 @@ public class Movie  {
         this.director = director;
         this.room = room;
 
+    }
+
+    public Movie(String id, String name, Genre genre, int duration, String releaseDate, String description, Format format, String director, Room room, String imageName, byte[] imageData, Collection<Projection> projections) {
+        this.id = id;
+        this.name = name;
+        this.genre = genre;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.description = description;
+        this.format = format;
+        this.director = director;
+        this.room = room;
+        this.imageName = imageName;
+        this.imageData = imageData;
+        this.projections = projections;
+    }
+
+    public Movie(String name, Genre genre, int duration, String releaseDate, String description, Format format, String director, Room room, String imageName, byte[] imageData, Collection<Projection> projections) {
+        this.name = name;
+        this.genre = genre;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.description = description;
+        this.format = format;
+        this.director = director;
+        this.room = room;
+        this.imageName = imageName;
+        this.imageData = imageData;
+        this.projections = projections;
     }
 
     @Override

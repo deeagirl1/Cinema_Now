@@ -15,8 +15,11 @@ import nl.fontys.Cinema_Now.model.Movie;
 import nl.fontys.Cinema_Now.serviceInterface.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.*;
 
 @Service @Transactional
@@ -49,19 +52,28 @@ public class MovieService implements IMovieService {
     }
 
     @Override
-    public boolean addMovie(MovieDTO movie) {
-
+    public boolean addMovie(MovieDTO movie, MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(file.getOriginalFilename()));
         if (movie != null) {
-            Movie entity = converter.dtoToEntity(movie);
+            Collection<Projection> projections = new ArrayList<>();
+            for (ProjectionDTO dto: movie.getProjections()
+            ) {
+                Projection projection = projectionDAL.getProjectionById(dto.getId());
+                projections.add(projection);
+            }
+            Movie entity = converter.dtoToEntity(movie, fileName, file.getBytes());
             Room room = this.roomDAL.getRoomById(movie.getRoomId());
             if (room != null) {
                 entity.setRoom(room);
+                entity.setProjections(projections);
             }
             dal.addMovie(entity);
             return true;
         }
         return false;
     }
+
+
 
 
     @Override
@@ -97,7 +109,7 @@ public class MovieService implements IMovieService {
                     movie.getFormat(),
                     movie.getDirector(),
                     room,projections);
-            dal.editMovie(newEntity);
+            dal.editMovieWithoutPicture(newEntity);
             return true;
         }
         return false;

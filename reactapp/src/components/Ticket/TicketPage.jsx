@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from "react";
 import AuthService from "../services/AuthService";
-import SignIn from "../signin_component";
 import TicketForm from "./TicketForm";
 import TicketService from "../services/TicketService";
 import { Link } from "react-router-dom";
+import NotFound from "../PageNotFound";
+
 
 function TicketPage() {
   const [tickets, setTickets] = useState(null);
@@ -15,7 +16,7 @@ function TicketPage() {
     });
   }, []);
 
-  if (!tickets) return null;
+  if (!tickets) return <NotFound/>;
 
   return (
     <div>

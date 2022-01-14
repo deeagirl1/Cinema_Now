@@ -4,33 +4,10 @@ import Form from "react-bootstrap/Form";
 import MoviesService from "../services/MoviesService";
 import RoomService from "../services/RoomService";
 import ProjectionService from "../services/ProjectionService";
-import { store } from "react-notifications-component";
+
 
 const PostMovie = () => {
-  const notificationSuccessful = {
-    title: "Successful",
-    message: "Movie added successfully!",
-    type: "success",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 2500,
-    },
-  };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: "Please try again!",
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
+
 
   const [genreItems, setGenre] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
@@ -44,30 +21,30 @@ const PostMovie = () => {
   const [projectionItems, setProjection] = useState([]);
   const [selectedProjection, setSelectedProjection] = useState(null);
 
+  const [file,setFile] = useState(null);
+
+  const onChangeHandler=event=>{
+    setFile(event.target.files[0])
+}
+
+
   useEffect(() => {
     MoviesService.getGenres().then((response) => {
       setGenre(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     MoviesService.getFormats().then((response) => {
       setFormats(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     RoomService.getRooms().then((response) => {
       setRooms(response.data);
     });
-  }, []);
-
-  useEffect(() => {
     ProjectionService.getProjections().then((response) => {
       console.log(response.data);
       setProjection(response.data);
     });
+
   }, []);
+
 
   const movieName = useRef();
   const movieGenre = useRef();
@@ -101,7 +78,6 @@ const PostMovie = () => {
     for (let i = 0; i < selectedOptions.length; i++) {
       newProjections.push(JSON.parse(selectedOptions[i].value));
     }
-    console.log(newProjections);
     setSelectedProjection(newProjections);
   };
 
@@ -128,25 +104,12 @@ const PostMovie = () => {
       roomId: movieRoomRef,
       projections: selectedProjection,
     };
-
     console.log(movie);
 
-    MoviesService.createMovie(movie)
-      .then((response) => {
-        if (response.data !== null) {
-          store.addNotification({
-            ...notificationSuccessful,
-            container: "top-center",
-          });
-          window.location.reload();
-        }
-      })
-      .catch((_err) => {
-        store.addNotification({
-          ...notificationUnSuccessful,
-          container: "top-center",
-        });
-      });
+    var data = new FormData();
+    data.append('file', file);
+    data.append('jsonFileVo', JSON.stringify(movie));
+    MoviesService.createMovie(data);
   };
 
   return (
@@ -187,6 +150,10 @@ const PostMovie = () => {
           />
         </Form.Group>
         <br />
+        <Form.Group>
+            <label htmlFor='image'>Image</label>
+            <input type="file" id ="inputFile" name="file" accept="image/png, image/jpeg, image/jpg" onChange={onChangeHandler} required/>
+        </Form.Group>
 
         <Form.Group>
           <Form.Label>Duration: </Form.Label>

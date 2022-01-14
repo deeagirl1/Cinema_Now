@@ -14,12 +14,16 @@ import nl.fontys.Cinema_Now.model.Room;
 import nl.fontys.Cinema_Now.service.MovieService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
@@ -123,13 +127,20 @@ public class MovieServiceMockTest {
         }
 
     @Test
-    public void addMovie()  {
+    public void addMovie() throws IOException {
         //Given
         Room room = roomDAL.getRoomById("1");
+        MockMultipartFile file
+                = new MockMultipartFile(
+                "file",
+                "hello.png",
+                MediaType.IMAGE_PNG_VALUE,
+                "Hello, World!".getBytes()
+        );
         List<Projection> projections = projectionDAL.getAllProjections();
 
         MovieDTO movie = new MovieDTO("4", "Cars", Genre.ANIMATION, 180, "26/06/2021", "test", Format._4DX, "test",room.getId(),projectionConverter.entityToDto(projections));
-        service.addMovie(movie);
+        service.addMovie(movie,file);
         //then
         ArgumentCaptor<Movie> jobArgumentCaptor =
                 ArgumentCaptor.forClass(Movie.class);
@@ -150,7 +161,7 @@ public class MovieServiceMockTest {
 
         ArgumentCaptor<Movie> movieArgumentCaptor = ArgumentCaptor.forClass(Movie.class);
 
-        verify(movieDAL).editMovie(movieArgumentCaptor.capture());
+        verify(movieDAL).editMovieWithoutPicture(movieArgumentCaptor.capture());
 
         Movie captureMovie = movieArgumentCaptor.getValue();
         //assert

@@ -22,7 +22,9 @@ export default function NewsTable() {
     });
   }, []);
 
+  // eslint-disable-next-line
   rooms.map((room) => {
+    // eslint-disable-next-line
      room["id"] = room.id;
   });
 
@@ -47,6 +49,7 @@ export default function NewsTable() {
             </IconButton>
             <IconButton
               aria-label="delete"
+              id="deleteRoom"
               onClick={() => {
                 handleClick(1, cellValues);
               }}
@@ -61,17 +64,7 @@ export default function NewsTable() {
 
   const handleDelete = (id) => {
     RoomService.deleteRoom(id)
-      .then((response) => {
-        if (response.data !== null) {
-          alert("Room deleted succesfully.");
-          window.location.reload();
-        }
-      })
-      .catch(() => {
-        <div className="alert alert-danger" role="alert">
-          Houston, we have a problem! Please try again.
-        </div>;
-      });
+      
   };
 
   function handleClick(mode, selected) {
