@@ -24,7 +24,7 @@ postman_tests:
     stage: postman_tests
     script:
       - cd C:\Users\lungu\AppData\Roaming\npm
-      - ./newman run https://www.getpostman.com/collections/08e733ef0844ca478a91
+      - ./newman run https://www.getpostman.com/collections/d764558c172b9a587384
 
 cypress_tests:
     stage: cypress_tests
