@@ -4,11 +4,12 @@ import { Card } from "react-bootstrap";
 function TicketItem(props) {
   return (
     <>
+
       <Card>
         {/* <Card.Img variant="center" src="holder.js/100px180" /> */}
         <Card.Body style={{ backgroundColor: "lightGray", borderRadius: "0%" }}>
           <Card.Text>
-            {props.ticket.movieId} {props.user.lastName}
+            {props.ticket.movieId}
             <br />
             <br />
             {props.ticket.price} {props.ticket.type}

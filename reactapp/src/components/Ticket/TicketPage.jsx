@@ -19,7 +19,7 @@ function TicketPage() {
   if (!tickets) return <NotFound/>;
 
   return (
-    <div>
+    <div className="container">
       {AuthService.getCurrentUser() !== null &&
         AuthService.getCurrentUser().roles.includes("[ROLE_ADMIN]") && (
           <>

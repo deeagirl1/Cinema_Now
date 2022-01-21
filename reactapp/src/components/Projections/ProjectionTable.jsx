@@ -3,7 +3,6 @@ import Delete from "@material-ui/icons/Delete";
 import { IconButton } from "@mui/material";
 import { Modal } from "react-bootstrap";
 import AddIcon from "@mui/icons-material/Add";
-import Edit from "@material-ui/icons/Edit";
 import { DataGrid } from "@mui/x-data-grid";
 import ProjectionService from "../services/ProjectionService";
 import ProjectionForm from "./ProjectionForm";
@@ -37,14 +36,6 @@ export default function NewsTable() {
       renderCell: (cellValues) => {
         return (
           <div>
-            <IconButton
-              aria-label="edit"
-              onClick={() => {
-                handleClick(0, cellValues);
-              }}
-            >
-              <Edit />
-            </IconButton>
             <IconButton
               aria-label="delete"
               onClick={() => {

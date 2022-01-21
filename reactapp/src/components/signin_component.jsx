@@ -24,18 +24,6 @@ const SignIn = () => {
       duration: 1000,
     },
   };
-  const notificationUnSuccessful = {
-    title: "Something went wrong!",
-    message: { msg },
-    type: "danger",
-    insert: "top",
-    container: "top-center",
-    animationIn: ["animate__animated animate__fadeIn"],
-    animationOut: ["animate__animated animate__fadeOut"],
-    dismiss: {
-      duration: 1000,
-    },
-  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -52,12 +40,7 @@ const SignIn = () => {
           History.push("/");
           window.location.reload();
         })
-        .catch((_err) => {
-          setMsg(_err);
-          store.addNotification({
-            ...notificationUnSuccessful,
-            container: "top-center",
-          });
+        .catch(err=>{setMsg("Something went wrong! Please try again!");
         });
     }
   };
@@ -72,6 +55,7 @@ const SignIn = () => {
             type="text"
             className="form-control"
             id="username"
+            required
             placeholder="Enter your username"
             ref={username}
           />
@@ -81,6 +65,7 @@ const SignIn = () => {
           <Form.Control
             type="password"
             id="password"
+            required
             placeholder="Enter your password"
             ref={password}
           />
@@ -90,6 +75,8 @@ const SignIn = () => {
           Submit
         </Button>
         <br /> <br />
+        <Form.Label>{msg}</Form.Label>
+        <br /> <br />
         <Form.Label className="forgot-password text-right">
           Forgot <a href="/reset-password">password?</a>
         </Form.Label>
@@ -98,6 +85,7 @@ const SignIn = () => {
           Don't have an account? <a href="/sign-up">Register now!</a>
         </Form.Label>
       </Form>
+
     </>
   );
 };

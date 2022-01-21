@@ -2,7 +2,6 @@ import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
-import Edit from "@material-ui/icons/Edit";
 import Delete from "@material-ui/icons/Delete";
 import NewsService from "../services/NewsService";
 import { Modal } from "react-bootstrap";
@@ -40,14 +39,6 @@ export default function NewsTable() {
       renderCell: (cellValues) => {
         return (
           <div>
-            <IconButton
-              aria-label="edit"
-              onClick={() => {
-                handleClick(0, cellValues);
-              }}
-            >
-              <Edit />
-            </IconButton>
             <IconButton
               aria-label="delete"
               onClick={() => {

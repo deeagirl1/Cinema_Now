@@ -5,7 +5,6 @@ import { IconButton } from "@mui/material";
 import { Modal } from "react-bootstrap";
 import RoomForm from "./RoomForm";
 import AddIcon from "@mui/icons-material/Add";
-import Edit from "@material-ui/icons/Edit";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function NewsTable() {
@@ -31,7 +30,7 @@ export default function NewsTable() {
   const columns = [
     { field: "name", headerName: "Title", flex: 1 },
     { field: "capacity", headerName: "Description", flex: 1 },
-    { field: "capacity", headerName: "NrOfTickets", flex: 1 },
+    { field: "capacity", headerName: "Capacity", flex: 1 },
 
     {
       field: "Actions",
@@ -39,14 +38,6 @@ export default function NewsTable() {
       renderCell: (cellValues) => {
         return (
           <div>
-            <IconButton
-              aria-label="edit"
-              onClick={() => {
-                handleClick(0, cellValues);
-              }}
-            >
-              <Edit />
-            </IconButton>
             <IconButton
               aria-label="delete"
               id="deleteRoom"

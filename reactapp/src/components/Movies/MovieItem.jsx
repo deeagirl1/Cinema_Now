@@ -38,16 +38,19 @@ function MovieItem(props) {
   return (
     <>
       <Grid item key={props.movie.name} xs={10} sm={15} md={6}>
-        <Card style={{ backgroundColor: "lightGray", width: "18rem" }}>
-          <Card.Img variant="center" src={props.movie.movieImage} style = {{height: "300px"}} />
+        <Card style={{ backgroundColor: "lightGray", width: "19rem" }}>
+          <Card.Img variant="center" src={props.movie.movieImage} style = {{height: "400px"}} />
           <Card.Body>
             <Card.Title>{props.movie.name}</Card.Title>
             <Card.Text>
               {props.movie.description}
               <br />
               <br />
-              Genre: {props.movie.genre} | Duration: {props.movie.duration}{" "}
-              minutes | Format: {props.movie.format}
+              Genre: {props.movie.genre} 
+              <br/>
+              Duration: {props.movie.duration} minutes 
+              <br/>
+               Format: {props.movie.format}
               <br />
               <br />
               Release date: {props.movie.releaseDate}
@@ -57,14 +60,14 @@ function MovieItem(props) {
               <br />
               <div>
                 {props.movie.projections.map((projection) => (
-                  <Button
+                  <><br /><Button
                     variant="primary"
                     onClick={() => {
                       handleClick(projection.id);
-                    }}
+                    } }
                   >
                     {projection.date} {projection.time}
-                  </Button>
+                  </Button><br /></>
                 ))}
               </div>
             </Card.Text>
